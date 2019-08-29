@@ -39,8 +39,6 @@
                 <Bundle-Version>${project.version}</Bundle-Version>
 	            <Export-Package>
 	               de.mhus.lib.mongo.*;version=${project.version},
-	               dev.morphia.*;version=${mongo.morphia.version},
-	               relocated.morphia.*;version=${mongo.morphia.version},
 	            </Export-Package>
 	            <Import-Package>
 		            javax.persistence.*;resolution:=optional,
