@@ -52,6 +52,7 @@
   </developers>
 
     <modules>
+      <module>mongo-morphia</module>
       <module>mongo-xdb</module>
     </modules>
 

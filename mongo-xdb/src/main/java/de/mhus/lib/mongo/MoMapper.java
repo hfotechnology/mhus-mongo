@@ -16,7 +16,6 @@ import dev.morphia.annotations.Property;
 import dev.morphia.annotations.Reference;
 import dev.morphia.annotations.Serialized;
 import dev.morphia.mapping.CustomMapper;
-import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.cache.EntityCache;

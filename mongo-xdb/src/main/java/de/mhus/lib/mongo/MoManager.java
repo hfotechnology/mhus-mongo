@@ -50,7 +50,6 @@ import de.mhus.lib.sql.DbConnection;
 import dev.morphia.Datastore;
 import dev.morphia.FindAndModifyOptions;
 import dev.morphia.Morphia;
-import dev.morphia.annotations.Id;
 import dev.morphia.annotations.NotSaved;
 import dev.morphia.annotations.Property;
 import dev.morphia.annotations.Reference;
