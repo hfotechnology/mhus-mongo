@@ -165,7 +165,7 @@ public class DefaultCreator implements ObjectFactory {
     private <T> Class<T> getClass(final DBObject dbObj) {
         // see if there is a className value
         Class c = null;
-        if (dbObj.containsField(options.getDiscriminatorField())) {
+        if (options != null && dbObj.containsField(options.getDiscriminatorField())) {
             final String className = (String) dbObj.get(options.getDiscriminatorField());
             // try to Class.forName(className) as defined in the dbObject first,
             // otherwise return the entityClass

@@ -43,7 +43,7 @@ import de.mhus.lib.xdb.XdbType;
 import de.mhus.osgi.api.xdb.XdbApi;
 import dev.morphia.annotations.Id;
 
-@Component(properties="xdb.type=mo")
+@Component(property="xdb.type=mo")
 public class MoXdbApiImpl implements XdbApi {
 
 	@Override
