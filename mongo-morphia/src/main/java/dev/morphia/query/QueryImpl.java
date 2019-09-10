@@ -397,10 +397,6 @@ public class QueryImpl<T> implements CriteriaContainer, Query<T> {
         final String prop = parts[0].trim();
         final FilterOperator op = (parts.length == 2) ? translate(parts[1]) : FilterOperator.EQUAL;
 
-        // TODO hack
-        if (value != null && (value instanceof UUID))
-            value = MoUtil.toObjectId((UUID)value);
-        
         add(new FieldCriteria(this, prop, op, value));
 
         return this;
