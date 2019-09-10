@@ -32,6 +32,7 @@ public class MoMapper extends Mapper {
         getOptions().setReferenceMapper(createReferenceMapper());
         getOptions().setEmbeddedMapper(createEmbeddedMapper());
         getOptions().setDefaultMapper(createCustomMapper());
+        getConverters().addConverter(new MoUuidConverter());
 
     }
     

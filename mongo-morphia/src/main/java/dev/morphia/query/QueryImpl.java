@@ -13,6 +13,7 @@ import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.DBCollectionFindOptions;
 import dev.morphia.Datastore;
 import dev.morphia.Key;
+import dev.morphia.MoUtil;
 import dev.morphia.annotations.Entity;
 import dev.morphia.internal.PathTarget;
 import dev.morphia.mapping.MappedClass;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static com.mongodb.CursorType.NonTailable;
@@ -384,7 +386,7 @@ public class QueryImpl<T> implements CriteriaContainer, Query<T> {
     }
 
     @Override
-    public Query<T> filter(final String condition, final Object value) {
+    public Query<T> filter(final String condition, Object value) {
         final String[] parts = condition.trim().split(" ");
         if (parts.length < 1 || parts.length > 6) {
             throw new IllegalArgumentException("'" + condition + "' is not a legal filter condition");
@@ -393,6 +395,10 @@ public class QueryImpl<T> implements CriteriaContainer, Query<T> {
         final String prop = parts[0].trim();
         final FilterOperator op = (parts.length == 2) ? translate(parts[1]) : FilterOperator.EQUAL;
 
+        // TODO hack
+        if (value != null && (value instanceof UUID))
+            value = MoUtil.toObjectId((UUID)value);
+        
         add(new FieldCriteria(this, prop, op, value));
 
         return this;

@@ -25,6 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bson.types.ObjectId;
 
@@ -73,6 +74,7 @@ public class MoManager extends MJmx implements MoHandler {
 		this.client = client;
 		this.schema = schema;
 		initDatabase();
+		
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -108,7 +110,13 @@ public class MoManager extends MJmx implements MoHandler {
 	
 	public <T> T getObject(Class<T> clazz, Object ... keys) throws MException {
 		if (keys == null || keys.length != 1 || keys[0] == null) return null;
-		return datastore.get(clazz, new ObjectId(String.valueOf(keys[0])));
+		ObjectId id = null;
+		if (keys[0].toString().contains("-"))
+	        id = MoUtil.toObjectId(UUID.fromString(String.valueOf(keys[0])));
+		else
+		    id = new ObjectId(String.valueOf(keys[0]));
+		return datastore.get(clazz, id);
+		// return datastore.find(clazz, "_id", id);
 	}
 	
 	public <T> Query<T> createQuery(Class<T> clazz) {

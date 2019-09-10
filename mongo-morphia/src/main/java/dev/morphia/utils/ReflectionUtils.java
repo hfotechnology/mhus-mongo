@@ -381,7 +381,7 @@ public final class ReflectionUtils {
      */
     public static boolean isPropertyType(final Class type) {
         return type != null && (isPrimitiveLike(type) || type == DBRef.class || type == Pattern.class
-                                || type == CodeWScope.class || type == UUID.class || type == Key.class
+                                || type == CodeWScope.class || type == UUID.class || type == ObjectId.class || type == Key.class
                                 || type == DBObject.class || type == BasicDBObject.class);
 
     }
@@ -398,7 +398,7 @@ public final class ReflectionUtils {
                                 || type == Integer.class || type == int.class || type == Long.class || type == long.class
                                 || type == Double.class || type == double.class || type == float.class || type == Float.class
                                 || type == Boolean.class || type == boolean.class || type == Byte.class || type == byte.class
-                                || type == Date.class || type == Locale.class || type == Class.class || type == UUID.class
+                                || type == Date.class || type == Locale.class || type == Class.class || type == UUID.class || type == ObjectId.class
                                 || type == URI.class || type.isEnum());
 
     }

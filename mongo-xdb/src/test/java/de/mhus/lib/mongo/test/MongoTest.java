@@ -15,6 +15,8 @@ import de.bwaldvogel.mongo.backend.memory.MemoryBackend;
 import de.mhus.lib.errors.MException;
 import de.mhus.lib.mongo.MoManager;
 import de.mhus.lib.mongo.MoUtil;
+import dev.morphia.query.Query;
+import dev.morphia.query.internal.MorphiaCursor;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -67,6 +69,61 @@ public class MongoTest {
         
         assertNotNull(elmer.getId());
         
+        final Employee bugs = new Employee("Bugs Bunny", 60000.0);
+        manager.save(bugs);
+        
+        assertNotNull(bugs.getId());
+
+        System.out.println("Created: " + elmer);
+        System.out.println("ObjectId: " + MoUtil.toObjectId(elmer.getId()));
+        
+        // get all
+        {
+            Query<Employee> q = manager.createQuery(Employee.class);
+            int cnt = 0;
+            try (MorphiaCursor<Employee> res = q.find()) {
+                while (res.hasNext()) {
+                    Employee next = res.next();
+                    System.out.println("Found 1: " + next);
+                    cnt++;
+                }
+            }
+            assertEquals(2, cnt);
+        }
+        // get one
+        {
+            Query<Employee> q = manager.createQuery(Employee.class);
+            ObjectId id = MoUtil.toObjectId(elmer.getId());
+            System.out.println("Search: " + id);
+            q.field("_id").equal(id);
+            int cnt = 0;
+            try (MorphiaCursor<Employee> res = q.find()) {
+                while (res.hasNext()) {
+                    Employee next = res.next();
+                    System.out.println("Found 2: " + next);
+                }
+                cnt++;
+            }
+            assertEquals(1, cnt);
+        }
+        // get one
+        {
+            Query<Employee> q = manager.createQuery(Employee.class);
+            String id = "Elmer Fudd";
+            System.out.println("Search: " + id);
+            q.field("name").equal(id);
+            int cnt = 0;
+            try (MorphiaCursor<Employee> res = q.find()) {
+                while (res.hasNext()) {
+                    Employee next = res.next();
+                    System.out.println("Found 3: " + next);
+                }
+                cnt++;
+            }
+            assertEquals(1, cnt);
+        }
+        
+        // select by id
         Employee elmer2 = manager.getObject(Employee.class, elmer.getId());
         assertNotNull(elmer2);
         assertNotNull(elmer2.getId());

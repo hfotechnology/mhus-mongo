@@ -72,4 +72,8 @@ public class Employee implements Persistable {
     @DbPersistent
     private Double salary;
     
+    @Override
+    public String toString() {
+        return id + " " + name;
+    }
 }

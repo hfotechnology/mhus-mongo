@@ -1,8 +1,12 @@
 package dev.morphia.converters;
 
 import com.mongodb.DBObject;
+
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import dev.morphia.MoUtil;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MapperOptions;
@@ -13,6 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -121,8 +126,14 @@ public abstract class Converters {
     public void fromDBObject(final DBObject dbObj, final MappedField mf, final Object targetEntity) {
         final Object object = mf.getDbObjectValue(dbObj);
         if (object != null) {
-            final TypeConverter enc = getEncoder(mf);
-            final Object decodedValue = enc.decode(mf.getType(), object, mf);
+            final TypeConverter enc = getEncoder(object, mf);
+            Object decodedValue = enc.decode(mf.getType(), object, mf);
+            
+            //TODO this is a hack
+            if (decodedValue != null && decodedValue instanceof ObjectId && mf.getType() == UUID.class) {
+                decodedValue = MoUtil.toUUID((ObjectId) decodedValue);
+            }
+            
             try {
                 mf.setFieldValue(targetEntity, decodedValue);
             } catch (IllegalArgumentException e) {
