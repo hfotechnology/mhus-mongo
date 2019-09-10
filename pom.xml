@@ -54,6 +54,8 @@
     <modules>
       <module>mongo-morphia</module>
       <module>mongo-xdb</module>
+      <module>mongo-karaf-api</module>
+      <module>mongo-karaf-impl</module>
     </modules>
 
 </project>

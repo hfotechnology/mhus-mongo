@@ -95,7 +95,15 @@ public class MoManager extends MJmx implements MoHandler {
         schema.initMapper(mapper);
         return mapper;
     }
-	    	
+	
+	public MongoClient getMongoClient() {
+	    return client;
+	}
+	
+	public Morphia getMorphia() {
+	    return  morhia;
+	}
+
 	public <T> T getObject(Class<T> clazz, Object ... keys) throws MException {
 		if (keys == null || keys.length != 1 || keys[0] == null) return null;
 		ObjectId id = null;
@@ -109,7 +117,7 @@ public class MoManager extends MJmx implements MoHandler {
 		return ret;
 		// return datastore.find(clazz, "_id", id);
 	}
-	
+		
     public <T> Query<T> createQuery(Class<T> clazz) {
 		return datastore.createQuery(clazz);
 	}
