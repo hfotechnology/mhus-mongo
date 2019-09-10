@@ -60,7 +60,6 @@ import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
 import dev.morphia.query.UpdateResults;
 
-@SuppressWarnings("deprecation")
 public class MoManager extends MJmx implements MoHandler {
 
 	private MongoClient client;

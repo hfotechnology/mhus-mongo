@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import org.bson.types.ObjectId;
 
-import dev.morphia.converters.ObjectIdConverter;
 import dev.morphia.converters.SimpleValueConverter;
 import dev.morphia.converters.TypeConverter;
 import dev.morphia.mapping.MappedField;

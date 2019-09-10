@@ -21,7 +21,6 @@ import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.cache.EntityCache;
 import dev.morphia.mapping.experimental.MorphiaReference;
 
-@SuppressWarnings("deprecation")
 public class MoMapper extends Mapper {
 
     private MoManager moManager;
