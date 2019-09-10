@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mongodb.DBObject;
 
+import de.mhus.lib.adb.DbMetadata;
 import de.mhus.lib.annotations.adb.DbIndex;
 import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.annotations.adb.DbPrimaryKey;
@@ -78,7 +79,6 @@ public class MappedClass {
     /**
      * Annotations interesting for life-cycle events
      */
-    @SuppressWarnings("unchecked")
     private static final List<Class<? extends Annotation>> LIFECYCLE_ANNOTATIONS = asList(PrePersist.class,
                                                                                           PreSave.class,
                                                                                           PreLoad.class,
@@ -247,7 +247,7 @@ public class MappedClass {
      * @param mapper  the Mapper to use
      * @return dbObj
      */
-    @SuppressWarnings({"WMI", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     public DBObject callLifecycleMethods(final Class<? extends Annotation> event, final Object entity, final DBObject dbObj,
                                          final Mapper mapper) {
         final List<ClassMethodPair> methodPairs = getLifecycleMethods((Class<Annotation>) event);
@@ -517,7 +517,6 @@ public class MappedClass {
      * Validates this MappedClass
      * @param mapper the Mapper to use for validation
      */
-    @SuppressWarnings("deprecation")
     public void validate(final Mapper mapper) {
         new MappingValidator(mapper.getOptions().getObjectFactory()).validate(mapper, this);
     }
@@ -562,7 +561,7 @@ public class MappedClass {
                 }
             }
         }
-
+        
         update();
 
         for (final java.lang.reflect.Field field : ReflectionUtils.getDeclaredAndInheritedFields(clazz, true)) {
@@ -651,6 +650,16 @@ public class MappedClass {
     }
 
     private boolean isIgnorable(final java.lang.reflect.Field field, final int fieldMods, final Mapper mapper) {
+        
+        // Ignore all if not has a annotation
+        boolean found = false;
+        for (Class<? extends Annotation> anno : INTERESTING_ANNOTATIONS)
+            if (field.getAnnotation(anno) != null) {
+                found = true;
+                break;
+            }
+        if (!found) return true;
+        
         return field.isAnnotationPresent(Transient.class)
                || Modifier.isTransient(fieldMods)
                || field.isSynthetic() && Modifier.isTransient(fieldMods)

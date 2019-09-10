@@ -32,6 +32,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.MongoClient;
 
 import de.mhus.lib.adb.DbComfortableObject;
+import de.mhus.lib.adb.DbObject;
 import de.mhus.lib.adb.Persistable;
 import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.annotations.adb.DbPrimaryKey;
@@ -94,19 +95,7 @@ public class MoManager extends MJmx implements MoHandler {
         schema.initMapper(mapper);
         return mapper;
     }
-
-	public void save(Object obj) {
-		datastore.save(obj);
-		if (obj instanceof DbComfortableObject)
-			((DbComfortableObject)obj).doInit(this, null, true);
-	}
-	
-	public void delete(Object obj) {
-		datastore.delete(obj);
-		if (obj instanceof DbComfortableObject)
-			((DbComfortableObject)obj).doInit(null, null, false);
-	}
-	
+	    	
 	public <T> T getObject(Class<T> clazz, Object ... keys) throws MException {
 		if (keys == null || keys.length != 1 || keys[0] == null) return null;
 		ObjectId id = null;
@@ -114,19 +103,24 @@ public class MoManager extends MJmx implements MoHandler {
 	        id = MoUtil.toObjectId(UUID.fromString(String.valueOf(keys[0])));
 		else
 		    id = new ObjectId(String.valueOf(keys[0]));
-		return datastore.get(clazz, id);
+		T ret = datastore.get(clazz, id);
+        if (ret instanceof DbObject)
+            ((DbObject)ret).doPostLoad(null);
+		return ret;
 		// return datastore.find(clazz, "_id", id);
 	}
 	
-	public <T> Query<T> createQuery(Class<T> clazz) {
+    public <T> Query<T> createQuery(Class<T> clazz) {
 		return datastore.createQuery(clazz);
 	}
 		
 	// ----
 	
 	@Override
-	public void saveObject(DbConnection con, String registryName, Object dbComfortableObject) throws MException {
-		save(dbComfortableObject);
+	public void saveObject(DbConnection con, String registryName, Object obj) throws MException {
+        if (obj instanceof DbObject)
+            ((DbObject)obj).doPreSave(con);
+        datastore.save(obj);
 	}
 
 	@Override
@@ -164,7 +158,11 @@ public class MoManager extends MJmx implements MoHandler {
 
 	@Override
 	public void deleteObject(DbConnection con, String registryName, Object obj) throws MException {
-		delete(obj);
+        if (obj instanceof DbObject)
+            ((DbObject)obj).doPreDelete(con);
+        datastore.delete(obj);
+        if (obj instanceof DbObject)
+            ((DbObject)obj).doPostDelete(con);
 	}
 
 	@Override
@@ -180,7 +178,11 @@ public class MoManager extends MJmx implements MoHandler {
 				break;
 			}
 		
-		save(obj);
+        if (obj instanceof DbObject)
+            ((DbObject)obj).doPreCreate(con);
+        datastore.save(obj);
+        if (obj instanceof DbObject)
+            ((DbObject)obj).doPostCreate(con);
 	}
 
 	// -----

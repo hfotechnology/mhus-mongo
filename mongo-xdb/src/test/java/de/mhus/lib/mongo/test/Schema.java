@@ -10,6 +10,7 @@ public class Schema extends MoSchema {
     @Override
     public void findObjectTypes(List<Class<? extends Persistable>> list) {
         list.add(Employee.class);
+        list.add(MoMetadata.class);
     }
 
     @Override

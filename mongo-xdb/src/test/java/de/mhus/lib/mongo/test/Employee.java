@@ -1,6 +1,7 @@
 package de.mhus.lib.mongo.test;
 
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -64,6 +65,7 @@ public class Employee implements Persistable {
 
     @DbPrimaryKey
     private UUID id;
+    @DbPersistent
     private String name;
     @Reference
     private Employee manager;
@@ -71,9 +73,16 @@ public class Employee implements Persistable {
     private List<Employee> directReports = new LinkedList<Employee>();
     @DbPersistent
     private Double salary;
+    @DbPersistent
+    private HashMap<String, String> values = new HashMap<>();
     
     @Override
     public String toString() {
         return id + " " + name;
     }
+
+    public HashMap<String, String> getValues() {
+        return values;
+    }
+
 }

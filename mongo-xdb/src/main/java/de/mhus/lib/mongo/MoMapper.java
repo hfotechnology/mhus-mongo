@@ -32,7 +32,7 @@ public class MoMapper extends Mapper {
         getOptions().setEmbeddedMapper(createEmbeddedMapper());
         getOptions().setDefaultMapper(createCustomMapper());
         getConverters().addConverter(new MoUuidConverter());
-
+//        addInterceptor(new MoEntityInterceptor());
     }
     
     @Override
@@ -118,45 +118,45 @@ public class MoMapper extends Mapper {
     
     private CustomMapper createEmbeddedMapper() {
         MoCustomMapper m = new MoCustomMapper(getOptions().getEmbeddedMapper());
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
-        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
-        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
+//        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
+//        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
         return m;
     }
 
     private CustomMapper createReferenceMapper() {
         MoCustomMapper m = new MoCustomMapper(getOptions().getReferenceMapper());
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
-        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
-        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
+//        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
+//        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
         return m;
     }
 
     protected CustomMapper createValueMapper() {
         MoCustomMapper m = new MoCustomMapper(getOptions().getValueMapper());
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
-        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
-        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
+//        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
+//        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
         return m;
     }
 
     protected CustomMapper createCustomMapper() {
         MoCustomMapper m = new MoCustomMapper(getOptions().getDefaultMapper());
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
-        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
-        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
-        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.persistent");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.manager");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.con");
+//        m.getIgnoreName().add("de.mhus.lib.adb.DbComfortableObject.registryName");
+//        m.getIgnoreName().add("de.mhus.lib.core.lang.MObject.nls");
+//        m.getIgnoreName().add("de.mhus.lib.core.MLog.log");
         return m;
     }
     

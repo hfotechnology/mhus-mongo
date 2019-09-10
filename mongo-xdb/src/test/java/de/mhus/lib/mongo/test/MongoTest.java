@@ -65,12 +65,12 @@ public class MongoTest {
         
         // sample from http://mongodb.github.io/morphia/1.3/getting-started/quick-tour/
         final Employee elmer = new Employee("Elmer Fudd", 50000.0);
-        manager.save(elmer);
+        manager.saveObject(null, null, elmer);
         
         assertNotNull(elmer.getId());
         
         final Employee bugs = new Employee("Bugs Bunny", 60000.0);
-        manager.save(bugs);
+        manager.saveObject(null, null, bugs);
         
         assertNotNull(bugs.getId());
 
@@ -131,15 +131,51 @@ public class MongoTest {
         
         
         final Employee daffy = new Employee("Daffy Duck", 40000.0);
-        manager.save(daffy);
+        manager.saveObject(null, null, daffy);
 
         final Employee pepe = new Employee("Pepé Le Pew", 25000.0);
-        manager.save(pepe);
+        manager.saveObject(null, null, pepe);
 
         elmer.getDirectReports().add(daffy);
         elmer.getDirectReports().add(pepe);
 
-        manager.save(elmer);
+        manager.saveObject(null, null, elmer);
+        
+        // test dynamic values
+        
+        elmer.getValues().put("color", "white");
+        manager.saveObject(null, null, elmer);
+        
+        // search
+        // get one
+        {
+            Query<Employee> q = manager.createQuery(Employee.class);
+            q.field("values.color").equal("white");
+            int cnt = 0;
+            try (MorphiaCursor<Employee> res = q.find()) {
+                while (res.hasNext()) {
+                    Employee next = res.next();
+                    System.out.println("Found 4: " + next);
+                }
+                cnt++;
+            }
+            assertEquals(1, cnt);
+        }
+        
+        
+        // test DbMetadata
+        
+        MoMetadata asterix = manager.inject(new MoMetadata("Asterix"));
+        asterix.save();
+        
+        assertNotNull(asterix.getId());
+        
+        MoMetadata obelix = manager.inject(new MoMetadata("Obelix"));
+        obelix.save();
+        
+        assertNotNull(obelix.getId());
+               
+        
         
     }
     
