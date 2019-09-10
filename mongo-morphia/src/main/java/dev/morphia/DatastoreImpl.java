@@ -73,9 +73,9 @@ import dev.morphia.utils.Assert;
  * A generic (type-safe) wrapper around mongodb collections
  *
  * @morphia.internal
- * @deprecated This is an internal implementation of a published API.  No public alternative planned.
+ *  This is an internal implementation of a published API.  No public alternative planned.
  */
-@Deprecated
+
 public class DatastoreImpl implements AdvancedDatastore {
     private static final Logger LOG = LoggerFactory.getLogger(DatastoreImpl.class);
 
@@ -96,10 +96,10 @@ public class DatastoreImpl implements AdvancedDatastore {
      * @param morphia     the Morphia instance
      * @param mongoClient the connection to the MongoDB instance
      * @param dbName      the name of the database for this data store.
-     * @deprecated This is not meant to be directly instantiated by end user code.  Use
+     *  This is not meant to be directly instantiated by end user code.  Use
      * {@link Morphia#createDatastore(MongoClient, Mapper, String)}
      */
-    @Deprecated
+    
     public DatastoreImpl(final Morphia morphia, final MongoClient mongoClient, final String dbName) {
         this(morphia, morphia.getMapper(), mongoClient, dbName);
     }
@@ -111,10 +111,10 @@ public class DatastoreImpl implements AdvancedDatastore {
      * @param mapper      an initialised Mapper
      * @param mongoClient the connection to the MongoDB instance
      * @param dbName      the name of the database for this data store.
-     * @deprecated This is not meant to be directly instantiated by end user code.  Use
+     *  This is not meant to be directly instantiated by end user code.  Use
      * {@link Morphia#createDatastore(MongoClient, Mapper, String)}
      */
-    @Deprecated
+    
     public DatastoreImpl(final Morphia morphia, final Mapper mapper, final MongoClient mongoClient, final String dbName) {
         this(morphia, mapper, mongoClient, mongoClient.getDatabase(dbName));
     }
@@ -137,9 +137,9 @@ public class DatastoreImpl implements AdvancedDatastore {
      *
      * @param database the new database to use for operations
      * @return the new Datastore instance
-     * @deprecated use {@link Morphia#createDatastore(MongoClient, Mapper, String)}
+     *  use {@link Morphia#createDatastore(MongoClient, Mapper, String)}
      */
-    @Deprecated
+    
     public DatastoreImpl copy(final String database) {
         return new DatastoreImpl(morphia, mapper, mongoClient, database);
     }
@@ -317,14 +317,14 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T, V> Query<T> find(final Class<T> clazz, final String property, final V value) {
         final Query<T> query = createQuery(clazz);
         return query.filter(property, value);
     }
 
     @Override
-    @Deprecated
+    
     public <T, V> Query<T> find(final Class<T> clazz, final String property, final V value, final int offset, final int size) {
         final Query<T> query = createQuery(clazz);
         query.offset(offset);
@@ -391,7 +391,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> T findAndModify(final Query<T> query, final UpdateOperations<T> operations, final boolean oldVersion) {
         return findAndModify(query, operations, new FindAndModifyOptions()
                                                     .returnNew(!oldVersion)
@@ -399,7 +399,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> T findAndModify(final Query<T> query, final UpdateOperations<T> operations, final boolean oldVersion,
                                final boolean createIfMissing) {
         return findAndModify(query, operations, new FindAndModifyOptions()
@@ -487,9 +487,9 @@ public class DatastoreImpl implements AdvancedDatastore {
     /**
      * @param obj the value to search with
      * @return the DBCollection
-     * @deprecated this is an internal method.  no replacement is planned.
+     *  this is an internal method.  no replacement is planned.
      */
-    @Deprecated
+    
     public DBCollection getCollection(final Object obj) {
         if (obj == null) {
             return null;
@@ -554,7 +554,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     // use mapper instead.
     public <T> Key<T> getKey(final T entity) {
         return mapper.getKey(entity);
@@ -595,7 +595,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> MapreduceResults<T> mapReduce(final MapreduceType type, final Query query, final String map, final String reduce,
                                              final String finalize, final Map<String, Object> scopeFields, final Class<T> outputType) {
 
@@ -624,7 +624,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> MapreduceResults<T> mapReduce(final MapreduceType type, final Query query, final Class<T> outputType,
                                              final MapReduceCommand baseCommand) {
 
@@ -747,7 +747,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> Iterable<Key<T>> save(final T... entities) {
         return save(asList(entities), new InsertOptions());
     }
@@ -758,7 +758,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> Key<T> save(final T entity, final WriteConcern wc) {
         return save(entity, new InsertOptions()
                                 .writeConcern(wc));
@@ -812,7 +812,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults update(final Query<T> query, final UpdateOperations<T> operations, final boolean createIfMissing) {
         return update(query, operations, new UpdateOptions()
                                              .upsert(createIfMissing)
@@ -821,7 +821,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults update(final Query<T> query, final UpdateOperations<T> operations, final boolean createIfMissing,
                                     final WriteConcern wc) {
         return update(query, operations, new UpdateOptions()
@@ -831,13 +831,13 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults updateFirst(final Query<T> query, final UpdateOperations<T> operations) {
         return update(query, operations, new UpdateOptions());
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults updateFirst(final Query<T> query, final UpdateOperations<T> operations, final boolean createIfMissing) {
         return update(query, operations, new UpdateOptions()
                                              .upsert(createIfMissing));
@@ -845,7 +845,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults updateFirst(final Query<T> query, final UpdateOperations<T> operations, final boolean createIfMissing,
                                          final WriteConcern wc) {
         return update(query, operations, new UpdateOptions()
@@ -854,7 +854,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> UpdateResults updateFirst(final Query<T> query, final T entity, final boolean createIfMissing) {
         if (getMapper().getMappedClass(entity).getMappedVersionField() != null) {
             throw new UnsupportedOperationException("updateFirst() is not supported with versioned entities");
@@ -927,19 +927,19 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T, V> WriteResult delete(final String kind, final Class<T> clazz, final V id, final WriteConcern wc) {
         return delete(find(kind, clazz).filter("_id", id), new DeleteOptions().writeConcern(wc));
     }
 
     @Override
-    @Deprecated
+    
     public <T> void ensureIndex(final Class<T> type, final String fields) {
         ensureIndex(type, null, fields, false, false);
     }
 
     @Override
-    @Deprecated
+    
     public <T> void ensureIndex(final Class<T> clazz, final String name, final String fields, final boolean unique,
                                 final boolean dropDupsOnCreate) {
         MappedClass mappedClass = getMapper().getMappedClass(clazz);
@@ -969,13 +969,13 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> void ensureIndex(final String collection, final Class<T> type, final String fields) {
         ensureIndex(collection, type, null, fields, false, false);
     }
 
     @Override
-    @Deprecated
+    
     public <T> void ensureIndex(final String collection, final Class<T> clazz, final String name, final String fields, final boolean unique,
                                 final boolean dropDupsOnCreate) {
         if (dropDupsOnCreate) {
@@ -1080,7 +1080,7 @@ public class DatastoreImpl implements AdvancedDatastore {
     }
 
     @Override
-    @Deprecated
+    
     public <T> Iterable<Key<T>> insert(final T... entities) {
         return insert(asList(entities));
     }
@@ -1210,7 +1210,7 @@ public class DatastoreImpl implements AdvancedDatastore {
         return getDB().getCollection(kind);
     }
 
-    @Deprecated
+    
     protected Object getId(final Object entity) {
         return mapper.getId(entity);
     }

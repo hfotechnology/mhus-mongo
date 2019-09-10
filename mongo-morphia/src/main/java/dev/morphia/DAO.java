@@ -11,9 +11,9 @@ import dev.morphia.dao.BasicDAO;
  *
  * @param <T> the entity type
  * @param <K> the key type
- * @deprecated use dev.morphia.dao.BasicDAO
+ *  use dev.morphia.dao.BasicDAO
  */
-@Deprecated
+
 public class DAO<T, K> extends BasicDAO<T, K> {
     /**
      * @param entityClass the type to use with this DAO

@@ -146,14 +146,14 @@ public class FieldEndImpl<T extends CriteriaContainer> implements FieldEnd<T> {
     }
 
     @Override
-    @Deprecated
+    
     public T doesNotHaveThisElement(final Object val) {
         Assert.parametersNotNull("val", val);
         return addCriteria(ELEMENT_MATCH, val, true);
     }
 
     @Override
-    @Deprecated
+    
     public T hasThisElement(final Object val) {
         Assert.parametersNotNull("val", val);
         return addCriteria(ELEMENT_MATCH, val, not);

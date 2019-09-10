@@ -74,9 +74,9 @@ public class Accumulator implements AggregationElement {
 
     /**
      * @return the value for this accumulator
-     * @deprecated use {@link #getValue()}
+     *  use {@link #getValue()}
      */
-    @Deprecated
+    
     public Object getField() {
         return getValue();
     }

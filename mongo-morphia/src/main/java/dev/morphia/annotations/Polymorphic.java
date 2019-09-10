@@ -32,12 +32,12 @@ import java.lang.annotation.Target;
  * object.
  *
  * @author Olafur Gauti Gudmundsson
- * @deprecated Currently unused
+ *  Currently unused
  */
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
-@Deprecated
+
 public @interface Polymorphic {
 }

@@ -35,10 +35,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @param value must be >= 0.  A value of 0 indicates the server default.
      * @return this
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#batchSize(int)
      */
-    @Deprecated
+    
     Query<T> batchSize(int value);
 
     /**
@@ -56,10 +56,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param comment the comment to add
      * @return the Query to enable chaining of commands
      * @see FindOptions#modifier(String, Object)
-     * @deprecated use the methods that accept Options directly. This can be replicated with {@code options.modifier("$comment", comment)}
+     *  use the methods that accept Options directly. This can be replicated with {@code options.modifier("$comment", comment)}
      * @mongodb.driver.manual reference/operator/meta/comment $comment
      */
-    @Deprecated
+    
     Query<T> comment(String comment);
 
     /**
@@ -74,20 +74,20 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Disables cursor timeout on server.
      *
      * @return this
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#noCursorTimeout(boolean)
      */
-    @Deprecated
+    
     Query<T> disableCursorTimeout();
 
     /**
      * Disable snapshotted mode (default mode). This will be faster but changes made during the cursor may cause duplicates.
      *
      * @return this
-     * @deprecated use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$snapshot", false)}
+     *  use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$snapshot", false)}
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> disableSnapshotMode();
 
     /**
@@ -101,10 +101,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Enables cursor timeout on server.
      *
      * @return this
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#noCursorTimeout(boolean)
      */
-    @Deprecated
+    
     Query<T> enableCursorTimeout();
 
     /**
@@ -112,10 +112,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * compatible with order/sort and hint.
      *
      * @return this
-     * @deprecated use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$snapshot", true)}
+     *  use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$snapshot", true)}
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> enableSnapshotMode();
 
     /**
@@ -186,69 +186,69 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
     /**
      * @return the batch size
      * @see #batchSize(int)
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#batchSize(int)
      */
-    @Deprecated
+    
     int getBatchSize();
 
     /**
      * @return the collection this query targets
      *
-     * @deprecated This is an internal method and subject to change or removal.  Do not use.
+     *  This is an internal method and subject to change or removal.  Do not use.
      * @morphia.internal
      */
-    @Deprecated
+    
     DBCollection getCollection();
 
     /**
      * @return the entity {@link Class}.
-     * @deprecated
+     * 
      * @morphia.internal
      */
-    @Deprecated
+    
     Class<T> getEntityClass();
 
     /**
      * @return the Mongo fields {@link DBObject}.
-     * @deprecated
+     * 
      * @morphia.internal
      */
-    @Deprecated
+    
     DBObject getFieldsObject();
 
     /**
      * @return the limit
      * @see #limit(int)
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#limit(int)
      */
-    @Deprecated
+    
     int getLimit();
 
     /**
      * @return the offset.
      * @see #offset(int)
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#getSkip()
      */
-    @Deprecated
+    
     int getOffset();
 
     /**
      * @return the Mongo query {@link DBObject}.
-     * @deprecated
+     * 
      * @morphia.internal
      */
-    @Deprecated
+    
     DBObject getQueryObject();
 
     /**
      * @return the Mongo sort {@link DBObject}.
-     * @deprecated
+     * 
      * @morphia.internal
      */
-    @Deprecated
+    
     DBObject getSortObject();
 
     /**
@@ -256,10 +256,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @param idxName the index name to hint
      * @return this
-     * @deprecated use the methods that accept Options directly. This can be replicated with {@code options.modifier("$hint", idxName)}
+     *  use the methods that accept Options directly. This can be replicated with {@code options.modifier("$hint", idxName)}
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> hintIndex(String idxName);
 
     /**
@@ -268,10 +268,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param value must be >= 0.  A value of 0 indicates no limit.  For values < 0, use {@link FindOptions#batchSize(int)} which
      *              is the preferred method
      * @return this
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#limit(int)
      */
-    @Deprecated
+    
     Query<T> limit(int value);
 
     /**
@@ -282,11 +282,11 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param lowerBound The inclusive lower bound.
      * @return this
      * @mongodb.driver.manual reference/operator/meta/min/ $min
-     * @deprecated use the methods that accept Options directly.  This can be replicated using
+     *  use the methods that accept Options directly.  This can be replicated using
      * {@code options.modifier("$min", new Document(...)) }
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> lowerIndexBound(DBObject lowerBound);
 
     /**
@@ -295,10 +295,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param value must be > 0.  A value < 0 indicates no limit
      * @return this
      * @mongodb.driver.manual reference/operator/meta/maxScan/#op._S_maxScan $maxScan
-     * @deprecated use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$maxScan", value) }
+     *  use the methods that accept Options directly.  This can be replicated using {@code options.modifier("$maxScan", value) }
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> maxScan(int value);
 
     /**
@@ -307,10 +307,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param maxTime     must be > 0.  A value < 0 indicates no limit
      * @param maxTimeUnit the unit of time to use
      * @return this
-     * @deprecated use the methods that accept Options directly. This can be replicated using {@code options.maxTime(value, unit) }
+     *  use the methods that accept Options directly. This can be replicated using {@code options.maxTime(value, unit) }
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> maxTime(long maxTime, TimeUnit maxTimeUnit);
 
     /**
@@ -318,10 +318,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @param value must be >= 0
      * @return this
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#skip(int)
      */
-    @Deprecated
+    
     Query<T> offset(int value);
 
     /**
@@ -344,9 +344,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @param sort the sort order to apply
      * @return this
-     * @deprecated use {@link #order(Sort...)}
+     *  use {@link #order(Sort...)}
      */
-    @Deprecated
+    
     Query<T> order(String sort);
 
     /**
@@ -404,12 +404,12 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @return this
      * @see ReadPreference#secondary()
      * @see ReadPreference#secondaryPreferred()
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#readPreference(ReadPreference)
      * @see ReadPreference#secondary()
      * @see ReadPreference#secondaryPreferred()
      */
-    @Deprecated
+    
     Query<T> queryNonPrimary();
 
     /**
@@ -417,12 +417,12 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @return this
      * @see ReadPreference#primary()
-     * @deprecated use the methods that accept Options directly.
+     *  use the methods that accept Options directly.
      * @see FindOptions#readPreference(ReadPreference)
      * @see ReadPreference#primary()
      * @see ReadPreference#primaryPreferred()
      */
-    @Deprecated
+    
     Query<T> queryPrimaryOnly();
 
     /**
@@ -438,9 +438,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param include true if the fields should be included in the results.  false to exclude them.
      * @param fields  the fields in question
      * @return this
-     * @deprecated use {@link #project(String, boolean)} instead
+     *  use {@link #project(String, boolean)} instead
      */
-    @Deprecated
+    
     Query<T> retrievedFields(boolean include, String... fields);
 
     /**
@@ -449,10 +449,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @return the Query to enable chaining of commands
      * @mongodb.driver.manual reference/operator/meta/returnKey/#op._S_returnKey $returnKey
-     * @deprecated use the methods that accept Options directly. This can be replicated using {@code options.modifier("$returnKey", true) }
+     *  use the methods that accept Options directly. This can be replicated using {@code options.modifier("$returnKey", true) }
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> returnKey();
 
     /**
@@ -482,11 +482,11 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param upperBound The exclusive upper bound.
      * @return this
      * @mongodb.driver.manual reference/operator/meta/max/ $max
-     * @deprecated use the methods that accept Options directly.  This can be replicated using
+     *  use the methods that accept Options directly.  This can be replicated using
      * {@code options.modifier("$max", new Document(...)) }
      * @see FindOptions#modifier(String, Object)
      */
-    @Deprecated
+    
     Query<T> upperIndexBound(DBObject upperBound);
 
     /**
@@ -495,10 +495,10 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param readPref the ReadPreference to use
      * @return this
      * @see ReadPreference
-     * @deprecated use the methods that accept Options directly
+     *  use the methods that accept Options directly
      * @see FindOptions#readPreference(ReadPreference)
      */
-    @Deprecated
+    
     Query<T> useReadPreference(ReadPreference readPref);
 
     /**
@@ -521,9 +521,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Execute the query and get the results (as a {@code List<Key<T>>})  This method is provided as a convenience;
      *
      * @return returns a List of the keys of the documents returned by a query
-     * @deprecated use {@link #keys()}
+     *  use {@link #keys()}
      */
-    @Deprecated
+    
     List<Key<T>> asKeyList();
 
     /**
@@ -532,9 +532,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return returns a List of the keys of the documents returned by a query
      * @since 1.3
-     * @deprecated use {@link #keys(FindOptions)}
+     *  use {@link #keys(FindOptions)}
      */
-    @Deprecated
+    
     List<Key<T>> asKeyList(FindOptions options);
 
     /**
@@ -557,9 +557,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Execute the query and get the results.
      *
      * @return returns a List of the documents returned by a query
-     * @deprecated use {@link #find(FindOptions)}
+     *  use {@link #find(FindOptions)}
      */
-    @Deprecated
+    
     List<T> asList();
 
     /**
@@ -568,18 +568,18 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return returns a List of the documents returned by a query
      * @since 1.3
-     * @deprecated use {@link #find(FindOptions)}
+     *  use {@link #find(FindOptions)}
      */
-    @Deprecated
+    
     List<T> asList(FindOptions options);
 
     /**
      * Count the total number of values in the result, ignoring limit and offset
      *
      * @return the count
-     * @deprecated use {@link #count()} instead
+     *  use {@link #count()} instead
      */
-    @Deprecated
+    
     long countAll();
 
     /**
@@ -603,9 +603,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Execute the query and get the results.
      *
      * @return an Iterator of the results
-     * @deprecated use {@link #find(FindOptions)} instead
+     *  use {@link #find(FindOptions)} instead
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> fetch();
 
     /**
@@ -614,9 +614,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return an Iterator of the results
      * @since 1.3
-     * @deprecated use {@link #find(FindOptions)} instead
+     *  use {@link #find(FindOptions)} instead
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> fetch(FindOptions options);
 
     /**
@@ -644,9 +644,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * data).
      *
      * @return an Iterator of the empty entities
-     * @deprecated use {@link #keys()} instead
+     *  use {@link #keys()} instead
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> fetchEmptyEntities();
 
     /**
@@ -656,9 +656,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return an Iterator of the empty entities
      * @since 1.3
-     * @deprecated use {@link #keys(FindOptions)} instead
+     *  use {@link #keys(FindOptions)} instead
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> fetchEmptyEntities(FindOptions options);
 
     /**
@@ -666,9 +666,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @return the Key Iterator
      * @see #fetchEmptyEntities
-     * @deprecated use {@link #keys()}
+     *  use {@link #keys()}
      */
-    @Deprecated
+    
     MorphiaKeyIterator<T> fetchKeys();
 
     /**
@@ -677,9 +677,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return the Key Iterator
      * @since 1.3
-     * @deprecated use {@link #keys(FindOptions)}
+     *  use {@link #keys(FindOptions)}
      */
-    @Deprecated
+    
     MorphiaKeyIterator<T> fetchKeys(FindOptions options);
 
     /**
@@ -696,9 +696,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * Gets the first entity in the result set.  Obeys the {@link Query} offset value.
      *
      * @return the only instance in the result, or null if the result set is empty.
-     * @deprecated use {@link #first()}
+     *  use {@link #first()}
      */
-    @Deprecated
+    
     T get();
 
     /**
@@ -707,18 +707,18 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return the only instance in the result, or null if the result set is empty.
      * @since 1.3
-     * @deprecated use {@link #first(FindOptions)}
+     *  use {@link #first(FindOptions)}
      */
-    @Deprecated
+    
     T get(FindOptions options);
 
     /**
      * Get the key of the first entity in the result set.  Obeys the {@link Query} offset value.
      *
      * @return the key of the first instance in the result, or null if the result set is empty.
-     * @deprecated use {@link #first()} instead
+     *  use {@link #first()} instead
      */
-    @Deprecated
+    
     Key<T> getKey();
 
     /**
@@ -727,9 +727,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param options the options to apply to the find operation
      * @return the key of the first instance in the result, or null if the result set is empty.
      * @since 1.3
-     * @deprecated use {@link #first()} instead
+     *  use {@link #first()} instead
      */
-    @Deprecated
+    
     Key<T> getKey(FindOptions options);
 
     /**
@@ -737,9 +737,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      *
      * @return an Iterator.
      * @see #tail(boolean)
-     * @deprecated set the CursorType on {@link FindOptions} and use {@link #find(FindOptions)} instead
+     *  set the CursorType on {@link FindOptions} and use {@link #find(FindOptions)} instead
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> tail();
 
     /**
@@ -750,9 +750,9 @@ public interface Query<T> extends QueryResults<T>, MongoIterable<T> {
      * @param awaitData passes the awaitData to the cursor
      * @return an Iterator.
      * @see Bytes#QUERYOPTION_AWAITDATA
-     * @deprecated set the CursorType on {@link FindOptions}  and use {@link #find(FindOptions)} instead. This can be replicated using
+     *  set the CursorType on {@link FindOptions}  and use {@link #find(FindOptions)} instead. This can be replicated using
      * {@code findOptions.cursorType (awaitData ? TailableAwait : Tailable)}
      */
-    @Deprecated
+    
     MorphiaIterator<T, T> tail(boolean awaitData);
 }

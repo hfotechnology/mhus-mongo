@@ -11,7 +11,7 @@ import dev.morphia.mapping.cache.EntityCache;
 
 /**
  * @morphia.internal
- * @deprecated
+ * 
  */
 class ValueMapper implements CustomMapper {
     @Override

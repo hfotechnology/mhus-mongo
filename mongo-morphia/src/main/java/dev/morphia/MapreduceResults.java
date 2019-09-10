@@ -20,11 +20,11 @@ import dev.morphia.query.Query;
  * Stores the results of a map reduce operation
  *
  * @param <T> the type of the results
- * @deprecated This feature will not be supported in 2.0
+ *  This feature will not be supported in 2.0
  */
 @NotSaved
 @SuppressWarnings("deprecation")
-@Deprecated
+
 public class MapreduceResults<T> implements Iterable<T> {
     private static final Logger LOG = LoggerFactory.getLogger(MapreduceResults.class);
     private final Stats counts = new Stats();
@@ -78,7 +78,7 @@ public class MapreduceResults<T> implements Iterable<T> {
     /**
      * @return will always return null
      */
-    @Deprecated
+    
     public String getError() {
         LOG.warn("MapreduceResults.getError() will always return null.");
         return null;
@@ -98,9 +98,9 @@ public class MapreduceResults<T> implements Iterable<T> {
 
     /**
      * @return the type of the operation
-     * @deprecated use {@link #getOutputType()} instead
+     *  use {@link #getOutputType()} instead
      */
-    @Deprecated
+    
     public MapreduceType getType() {
         if (outputType == OutputType.REDUCE) {
             return MapreduceType.REDUCE;
@@ -114,7 +114,7 @@ public class MapreduceResults<T> implements Iterable<T> {
 
     }
 
-    @Deprecated
+    
     void setType(final MapreduceType type) {
         this.outputType = type.toOutputType();
     }
@@ -140,7 +140,7 @@ public class MapreduceResults<T> implements Iterable<T> {
     /**
      * @return will always return true
      */
-    @Deprecated
+    
     public boolean isOk() {
         LOG.warn("MapreduceResults.isOk() will always return true.");
         return true;

@@ -138,9 +138,9 @@ public interface FieldEnd<T> {
      * @return T
      * @mongodb.driver.manual reference/operator/query/elemMatch/ $elemMatch
      * @see MapperOptions
-     * @deprecated use {@link #elemMatch(Query)} instead
+     *  use {@link #elemMatch(Query)} instead
      */
-    @Deprecated
+    
     T hasThisElement(Object val);
 
     /**
@@ -159,10 +159,10 @@ public interface FieldEnd<T> {
      * @param val the value to check against
      * @return T
      * @mongodb.driver.manual reference/operator/query/elemMatch/ $elemMatch
-     * @deprecated use {@link #elemMatch(Query)} instead
+     *  use {@link #elemMatch(Query)} instead
      * @see MapperOptions
      */
-    @Deprecated
+    
     T doesNotHaveThisElement(Object val);
 
     /**
@@ -289,9 +289,9 @@ public interface FieldEnd<T> {
      * @param maxDistance the radius, in meters, to find the results inside
      * @return T
      * @mongodb.driver.manual reference/operator/query/near/ $near
-     * @deprecated use {@link #near(Point, Double, Double)}
+     *  use {@link #near(Point, Double, Double)}
      */
-    @Deprecated
+    
     T near(Point point, int maxDistance);
 
     /**

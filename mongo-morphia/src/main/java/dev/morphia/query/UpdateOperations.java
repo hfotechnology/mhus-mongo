@@ -19,9 +19,9 @@ public interface UpdateOperations<T> {
      * @param value the value to add
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
-     * @deprecated use {@link #addToSet(String, Object)} instead
+     *  use {@link #addToSet(String, Object)} instead
      */
-    @Deprecated
+    
     UpdateOperations<T> add(String field, Object value);
 
     /**
@@ -33,9 +33,9 @@ public interface UpdateOperations<T> {
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
      * @mongodb.driver.manual reference/operator/update/push/ $push
-     * @deprecated use {@link #push(String, Object)} if addDups is false or {@link #addToSet(String, Object)} instead
+     *  use {@link #push(String, Object)} if addDups is false or {@link #addToSet(String, Object)} instead
      */
-    @Deprecated
+    
     UpdateOperations<T> add(String field, Object value, boolean addDups);
 
     /**
@@ -47,9 +47,9 @@ public interface UpdateOperations<T> {
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
      * @mongodb.driver.manual reference/operator/update/push/ $push
-     * @deprecated use {@link #push(String, List)} if addDups is false or {@link #addToSet(String, List)}
+     *  use {@link #push(String, List)} if addDups is false or {@link #addToSet(String, List)}
      */
-    @Deprecated
+    
     UpdateOperations<T> addAll(String field, List<?> values, boolean addDups);
 
     /**
@@ -142,9 +142,9 @@ public interface UpdateOperations<T> {
      *
      * @return this
      * @mongodb.driver.manual reference/operator/update/isolated/ $isolated
-     * @deprecated this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
+     *  this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
      */
-    @Deprecated
+    
     UpdateOperations<T> isolated();
 
     /**
@@ -152,9 +152,9 @@ public interface UpdateOperations<T> {
      *
      * @mongodb.driver.manual reference/operator/update/isolated/ $isolated
      * @since 1.3
-     * @deprecated this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
+     *  this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
      */
-    @Deprecated
+    
     boolean isIsolated();
 
     /**

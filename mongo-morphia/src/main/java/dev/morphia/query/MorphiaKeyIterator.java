@@ -13,9 +13,9 @@ import dev.morphia.mapping.Mapper;
  *
  * @param <T> the entity type
  * @author Scott Hernandez
- * @deprecated this is being replaced by {@link MongoCursor}
+ *  this is being replaced by {@link MongoCursor}
  */
-@Deprecated
+
 public class MorphiaKeyIterator<T> extends MorphiaIterator<T, Key<T>> {
     /**
      * Create

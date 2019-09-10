@@ -145,7 +145,7 @@ final class IndexHelper {
         return indexes;
     }
 
-    @Deprecated
+    
     private List<Index> collectNestedIndexes(final MappedClass mc, final List<MappedClass> parentMCs) {
         List<Index> list = new ArrayList<Index>();
         for (final MappedField mf : mc.getPersistenceFields()) {

@@ -25,21 +25,21 @@ import dev.morphia.query.UpdateResults;
  * @param <K> the type of the key
  * @author Olafur Gauti Gudmundsson
  * @author Scott Hernandez
- * @deprecated This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
+ *  This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
  */
-@Deprecated
+
 @SuppressWarnings({"WeakerAccess", "deprecation", "unused"})
 public class BasicDAO<T, K> implements DAO<T, K> {
     //CHECKSTYLE:OFF
     /**
-     * @deprecated use {@link #getEntityClass()}
+     *  use {@link #getEntityClass()}
      */
-    @Deprecated
+    
     protected Class<T> entityClazz;
     /**
-     * @deprecated use {@link #getDatastore()}
+     *  use {@link #getDatastore()}
      */
-    @Deprecated
+    
     protected dev.morphia.DatastoreImpl ds;
     //CHECKSTYLE:ON
 
@@ -250,18 +250,18 @@ public class BasicDAO<T, K> implements DAO<T, K> {
 
     /**
      * @return the Datastore used by this DAO
-     * @deprecated use {@link #getDatastore()}
+     *  use {@link #getDatastore()}
      */
-    @Deprecated
+    
     public dev.morphia.DatastoreImpl getDs() {
         return ds;
     }
 
     /**
      * @return the entity class
-     * @deprecated use {@link #getEntityClass()} instead
+     *  use {@link #getEntityClass()} instead
      */
-    @Deprecated
+    
     public Class<T> getEntityClazz() {
         return entityClazz;
     }

@@ -28,9 +28,9 @@ import dev.morphia.Datastore;
  *
  * @author uwe schaefer
  * @see LazyProxyFactory
- * @deprecated DatastoreProviders are no longer necessary
+ *  DatastoreProviders are no longer necessary
  */
-@Deprecated
+
 public interface DatastoreProvider extends Serializable {
     /**
      * @return the Datastore

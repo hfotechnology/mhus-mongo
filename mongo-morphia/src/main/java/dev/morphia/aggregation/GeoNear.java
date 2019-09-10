@@ -171,10 +171,10 @@ public final class GeoNear {
      * query.
      *
      * @return true if returning only unique documents
-     * @deprecated since version MongoDB 2.6: Geospatial queries no longer return duplicate results. The $uniqueDocs operator has no impact
+     *  since version MongoDB 2.6: Geospatial queries no longer return duplicate results. The $uniqueDocs operator has no impact
      * on results.
      */
-    @Deprecated
+    
     public Boolean getUniqueDocuments() {
         return uniqueDocuments;
     }
@@ -328,10 +328,10 @@ public final class GeoNear {
          * @param uniqueDocuments true if only unique documents are required in the return value
          * @return this builder
          * @see <a href="http://docs.mongodb.org/master/reference/operator/query/uniqueDocs/#op._S_uniqueDocs">uniqueDocs</a>
-         * @deprecated Deprecated since server version 2.6: Geospatial queries no longer return duplicate results. The $uniqueDocs operator
+         *  Deprecated since server version 2.6: Geospatial queries no longer return duplicate results. The $uniqueDocs operator
          * has no impact on results.
          */
-        @Deprecated
+        
         public GeoNearBuilder setUniqueDocuments(final Boolean uniqueDocuments) {
             this.uniqueDocuments = uniqueDocuments;
             return this;

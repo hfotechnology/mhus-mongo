@@ -70,17 +70,17 @@ import dev.morphia.query.ValidationException;
 
 /**
  * @morphia.internal
- * @deprecated this class will be internalized in 2.0
+ *  this class will be internalized in 2.0
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-@Deprecated
+
 public class Mapper {
     /**
      * The @{@link dev.morphia.annotations.Id} field name that is stored with mongodb.
      *
-     * @deprecated use "_id" directly
+     *  use "_id" directly
      */
-    @Deprecated
+    
     public static final String ID_KEY = "_id";
 
     /**
@@ -94,9 +94,9 @@ public class Mapper {
      * Special field used by morphia to support various possibly loading issues; will be replaced when discriminators are implemented to
      * support polymorphism
      *
-     * @deprecated
+     * 
      */
-    @Deprecated
+    
     public static final String CLASS_NAME_FIELDNAME = "className";
 
     protected static final Logger LOG = LoggerFactory.getLogger(Mapper.class);
@@ -193,9 +193,9 @@ public class Mapper {
      * @param cache       the EntityCache to use
      * @return the new entity
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
-    @Deprecated
+    
     public <T> T fromDBObject(final Datastore datastore, final Class<T> entityClass, final DBObject dbObject, final EntityCache cache) {
         if (dbObject == null) {
             return null;
@@ -230,9 +230,9 @@ public class Mapper {
      * @param <T>       the type of the referenced entity
      * @return the entity
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
-    @Deprecated
+    
     <T> T fromDBObject(final Datastore datastore, final DBObject dbObject) {
         if (dbObject.containsField(opts.getDiscriminatorField())) {
             T entity = opts.getObjectFactory().createInstance(null, dbObject);
@@ -255,9 +255,9 @@ public class Mapper {
      * @param cache     the EntityCache to use
      * @return the entity
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
-    @Deprecated
+    
     public <T> T fromDb(final Datastore datastore, final DBObject dbObject, final T entity, final EntityCache cache) {
         //hack to bypass things and just read the value.
         if (entity instanceof MappedField) {
@@ -318,9 +318,9 @@ public class Mapper {
      * @param collection the collection name
      * @return the Class mapped to this collection name
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
-    @Deprecated
+    
     public Class<?> getClassFromCollection(final String collection) {
         final Set<MappedClass> mcs = mappedClassesByCollection.get(collection);
         if (mcs == null || mcs.isEmpty()) {
@@ -340,9 +340,9 @@ public class Mapper {
      * @param object the object to process
      * @return the collection name
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
-    @Deprecated
+    
     public String getCollectionName(final Object object) {
         if (object == null) {
             throw new IllegalArgumentException();
@@ -388,7 +388,7 @@ public class Mapper {
     /**
      * @return the cache of instances
      * @morphia.internal
-     * @deprecated no replacement is planned
+     *  no replacement is planned
      */
     public Map<Class, Object> getInstanceCache() {
         return instanceCache;

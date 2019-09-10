@@ -65,7 +65,7 @@ import dev.morphia.utils.ReflectionUtils;
 
 /**
  * @morphia.internal
- * @deprecated
+ * 
  */
 @SuppressWarnings("unchecked")
 public class MappedField {
@@ -438,9 +438,9 @@ public class MappedField {
      *
      * @param ann the annotation to add
      * @return ann the annotation
-     * @deprecated unused
+     *  unused
      */
-    @Deprecated
+    
     public Annotation putAnnotation(final Annotation ann) {
         Annotation put = foundAnnotations.put(ann.getClass(), ann);
         discoverNames();

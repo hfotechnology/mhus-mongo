@@ -19,9 +19,9 @@ import dev.morphia.query.UpdateResults;
  *
  * @param <T> The Java type serviced by this DAO
  * @param <K> The Key type used by the entity
- * @deprecated This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
+ *  This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
  */
-@Deprecated
+
 public interface DAO<T, K> {
     /**
      * @return the total count
@@ -207,9 +207,9 @@ public interface DAO<T, K> {
     /**
      * @return the collection mapped by the entity class
      * @see #getEntityClass()
-     * @deprecated the return type for this method will change in 2.0
+     *  the return type for this method will change in 2.0
      */
-    @Deprecated
+    
     DBCollection getCollection();
 
     /**

@@ -36,9 +36,9 @@ public class MapperOptions {
      *
      * @see #builder()
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public MapperOptions() {
     }
 
@@ -48,9 +48,9 @@ public class MapperOptions {
      * @param options the MapperOptions to copy
      * @see #builder(MapperOptions)
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public MapperOptions(final MapperOptions options) {
         ignoreFinals = options.isIgnoreFinals();
         storeNulls = options.isStoreNulls();
@@ -97,18 +97,18 @@ public class MapperOptions {
      *
      * @param cacheFactory the factory
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setCacheFactory(final EntityCacheFactory cacheFactory) {
         this.cacheFactory = cacheFactory;
     }
 
     /**
      * @return the DatastoreProvider Morphia should use
-     * @deprecated unused
+     *  unused
      */
-    @Deprecated
+    
     public DatastoreProvider getDatastoreProvider() {
         return null;
     }
@@ -117,9 +117,9 @@ public class MapperOptions {
      * Sets the DatastoreProvider Morphia should use
      *
      * @param unused the DatastoreProvider to use
-     * @deprecated unused
+     *  unused
      */
-    @Deprecated
+    
     public void setDatastoreProvider(final DatastoreProvider unused) {
         LOG.warn("DatastoreProviders are no longer needed or used.");
     }
@@ -136,9 +136,9 @@ public class MapperOptions {
      *
      * @param pDefaultMapper the mapper to use
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setDefaultMapper(final CustomMapper pDefaultMapper) {
         defaultMapper = pDefaultMapper;
     }
@@ -155,9 +155,9 @@ public class MapperOptions {
      *
      * @param pEmbeddedMapper the mapper to use
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setEmbeddedMapper(final CustomMapper pEmbeddedMapper) {
         embeddedMapper = pEmbeddedMapper;
     }
@@ -178,9 +178,9 @@ public class MapperOptions {
      *
      * @param objectFactory the factory to use
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setObjectFactory(final ObjectFactory objectFactory) {
         this.objectFactory = objectFactory;
     }
@@ -199,9 +199,9 @@ public class MapperOptions {
      * @param pReferenceMapper the mapper to use
      * @see Reference
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setReferenceMapper(final CustomMapper pReferenceMapper) {
         referenceMapper = pReferenceMapper;
     }
@@ -218,18 +218,18 @@ public class MapperOptions {
      *
      * @param pValueMapper the mapper to use
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setValueMapper(final CustomMapper pValueMapper) {
         valueMapper = pValueMapper;
     }
 
     /**
      * @return true if Morphia should ignore transient fields
-     * @deprecated this is actually the default and proper behavior.  this setting is redundant
+     *  this is actually the default and proper behavior.  this setting is redundant
      */
-    @Deprecated
+    
     public boolean isActLikeSerializer() {
         return true;
     }
@@ -238,9 +238,9 @@ public class MapperOptions {
      * Instructs Morphia to follow JDK serialization semantics and ignore values marked up with the transient keyword
      *
      * @param ignored true if Morphia should ignore transient fields
-     * @deprecated this is actually the default and proper behavior.  this setting is redundant
+     *  this is actually the default and proper behavior.  this setting is redundant
      */
-    @Deprecated
+    
     public void setActLikeSerializer(final boolean ignored) {
     }
 
@@ -256,9 +256,9 @@ public class MapperOptions {
      *
      * @param cacheClassLookups true if the lookup results should be cached
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setCacheClassLookups(final boolean cacheClassLookups) {
         this.cacheClassLookups = cacheClassLookups;
     }
@@ -275,9 +275,9 @@ public class MapperOptions {
      *
      * @param ignoreFinals true if Morphia should ignore final fields
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setIgnoreFinals(final boolean ignoreFinals) {
         this.ignoreFinals = ignoreFinals;
     }
@@ -294,9 +294,9 @@ public class MapperOptions {
      *
      * @param storeEmpties true if Morphia should store empty values for lists/maps/sets/arrays
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setStoreEmpties(final boolean storeEmpties) {
         this.storeEmpties = storeEmpties;
     }
@@ -313,9 +313,9 @@ public class MapperOptions {
      *
      * @param storeNulls true if Morphia should store null values
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setStoreNulls(final boolean storeNulls) {
         this.storeNulls = storeNulls;
     }
@@ -332,9 +332,9 @@ public class MapperOptions {
      *
      * @param useLowerCaseCollectionNames true if Morphia should use lower case values when calculating collection names
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setUseLowerCaseCollectionNames(final boolean useLowerCaseCollectionNames) {
         this.useLowerCaseCollectionNames = useLowerCaseCollectionNames;
     }
@@ -359,9 +359,9 @@ public class MapperOptions {
      *
      * @param mapSubPackages true if Morphia should map classes from the sub-packages as well
      * @see Builder
-     * @deprecated use the Builder instead
+     *  use the Builder instead
      */
-    @Deprecated
+    
     public void setMapSubPackages(final boolean mapSubPackages) {
         this.mapSubPackages = mapSubPackages;
     }
@@ -393,11 +393,11 @@ public class MapperOptions {
      * This is used to determine how Java 8 dates and times are stored in the database.
      *
      * @param dateStorage the storage scheme to use for dates
-     * @deprecated This will be removed in 2.0.  It is intended to bridge the gap when correcting the storage of data/time values in the
+     *  This will be removed in 2.0.  It is intended to bridge the gap when correcting the storage of data/time values in the
      * database.  {@link DateStorage#UTC} should be used and will be the default in 2.0.  In 1.5 it is {@link DateStorage#SYSTEM_DEFAULT}
      * for backwards compatibility.
      */
-    @Deprecated
+    
     public void setDateStorage(final DateStorage dateStorage) {
         this.dateStorage = dateStorage;
     }
@@ -460,9 +460,9 @@ public class MapperOptions {
          *
          * @param actLikeSerializer unused
          * @return this
-         * @deprecated
+         * 
          */
-        @Deprecated
+        
         public Builder actLikeSerializer(final boolean actLikeSerializer) {
             return this;
         }
@@ -587,11 +587,11 @@ public class MapperOptions {
         /**
          * @param dateStorage the storage format to use for dates
          * @return this
-         * @deprecated This will be removed in 2.0.  It is intended to bridge the gap when correcting the storage of data/time values in the
+         *  This will be removed in 2.0.  It is intended to bridge the gap when correcting the storage of data/time values in the
          * database.  {@link DateStorage#UTC} should be used and will be the default in 2.0.  In 1.5 it is
          * {@link DateStorage#SYSTEM_DEFAULT} for backwards compatibility.
          */
-        @Deprecated
+        
         public Builder dateForm(final DateStorage dateStorage) {
             this.dateStorage = dateStorage;
             return this;

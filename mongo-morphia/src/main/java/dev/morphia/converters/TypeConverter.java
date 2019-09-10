@@ -81,18 +81,18 @@ public abstract class TypeConverter {
 
     /**
      * @return an array of supported convertable types
-     * @deprecated use #getSupportedTypes()
+     *  use #getSupportedTypes()
      */
-    @Deprecated
+    
     public Class[] getSupportTypes() {
         return copy(supportedTypes);
     }
 
     /**
      * @param supportTypes the types this converter supports
-     * @deprecated use #setSupportedTypes(Class[])
+     *  use #setSupportedTypes(Class[])
      */
-    @Deprecated
+    
     public void setSupportTypes(final Class[] supportTypes) {
         this.supportedTypes = copy(supportTypes);
     }

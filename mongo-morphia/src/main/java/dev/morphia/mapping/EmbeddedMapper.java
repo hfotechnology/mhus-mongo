@@ -20,7 +20,7 @@ import dev.morphia.utils.ReflectionUtils;
 
 /**
  * @morphia.internal
- * @deprecated
+ * 
  */
 class EmbeddedMapper implements CustomMapper {
     static boolean shouldSaveClassName(final Object rawVal, final Object convertedVal, final MappedField mf) {

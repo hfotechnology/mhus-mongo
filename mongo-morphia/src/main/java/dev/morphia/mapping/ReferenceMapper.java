@@ -33,9 +33,9 @@ import dev.morphia.utils.ReflectionUtils;
 
 /**
  * @morphia.internal
- * @deprecated
+ * 
  */
-@Deprecated
+
 @SuppressWarnings({"unchecked", "rawtypes"})
 class ReferenceMapper implements CustomMapper {
     public static final Logger LOG = LoggerFactory.getLogger(ReferenceMapper.class);

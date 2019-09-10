@@ -51,7 +51,7 @@ public @interface Entity {
     /**
      * @return When true, instructs Morphia to not include when serializing an entity to mongodb.
      */
-    //@Deprecated //to be replaced. This is a temp hack until polymorphism and discriminators are implemented
+    // //to be replaced. This is a temp hack until polymorphism and discriminators are implemented
     boolean noClassnameStored() default false;
 
     /**

@@ -35,9 +35,9 @@ import dev.morphia.utils.Assert;
  *
  * @param <T> the type of the output
  * @since 1.3
- * @deprecated This feature will not be supported in 2.0
+ *  This feature will not be supported in 2.0
  */
-@Deprecated
+
 public class MapReduceOptions<T> {
     private String outputDB;
     private String outputCollection;

@@ -18,9 +18,9 @@ import dev.morphia.mapping.cache.EntityCache;
  * @param <V> the type of the values returned
  * @author Scott Hernandez
  * @see MorphiaKeyIterator
- * @deprecated this is being replaced by {@link MongoCursor}
+ *  this is being replaced by {@link MongoCursor}
  */
-@Deprecated
+
 public class MorphiaIterator<T, V> implements Iterable<V>, Iterator<V> {
     private final Iterator<DBObject> wrapped;
     private final Mapper mapper;

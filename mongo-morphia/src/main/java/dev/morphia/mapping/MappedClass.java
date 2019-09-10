@@ -64,9 +64,9 @@ import dev.morphia.utils.ReflectionUtils;
 
 /**
  * @morphia.internal
- * @deprecated
+ * 
  */
-@Deprecated
+
 public class MappedClass {
     private static final Logger LOG = LoggerFactory.getLogger(MappedClass.class);
     /**

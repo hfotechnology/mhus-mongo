@@ -51,9 +51,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param collection the collection to query
      * @param clazz      the class of objects to be returned
      * @return Query for the specified class clazz
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Query<T> createQuery(String collection, Class<T> clazz);
 
     /**
@@ -70,9 +70,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param clazz      the class of objects to be returned
      * @param q          the query which will be passed to a {@link dev.morphia.query.QueryFactory}
      * @return Query for the specified class clazz
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Query<T> createQuery(String collection, Class<T> clazz, DBObject q);
 
     /**
@@ -119,9 +119,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <V>   is the type of the ID, for example ObjectId
      * @return the result of this delete operation.
      * @morphia.inline
-     * @deprecated use {@link #find(String, Class)} and {@link #delete(Query)} instead
+     *  use {@link #find(String, Class)} and {@link #delete(Query)} instead
      */
-    @Deprecated
+    
     <T, V> WriteResult delete(String kind, Class<T> clazz, V id);
 
     /**
@@ -140,9 +140,9 @@ public interface AdvancedDatastore extends Datastore {
      * @return the result of this delete operation.
      * @morphia.inline
      * @since 1.3
-     * @deprecated use {@link #find(String, Class)} and {@link #delete(Query, DeleteOptions)} instead
+     *  use {@link #find(String, Class)} and {@link #delete(Query, DeleteOptions)} instead
      */
-    @Deprecated
+    
     <T, V> WriteResult delete(String kind, Class<T> clazz, V id, DeleteOptions options);
 
     /**
@@ -159,9 +159,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>   the entity type
      * @param <V>   is the type of the ID, for example ObjectId
      * @return the result of this delete operation.
-     * @deprecated use {@link #find(String, Class)} and {@link #delete(Query, DeleteOptions)} instead
+     *  use {@link #find(String, Class)} and {@link #delete(Query, DeleteOptions)} instead
      */
-    @Deprecated
+    
     <T, V> WriteResult delete(String kind, Class<T> clazz, V id, WriteConcern wc);
 
     /**
@@ -174,10 +174,10 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>        the type to index
      * @see MongoCollection#createIndex(org.bson.conversions.Bson, com.mongodb.client.model.IndexOptions)
      * @see #ensureIndexes(String, Class)
-     * @deprecated This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
+     *  This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
      * methods in the Java driver itself.
      */
-    @Deprecated
+    
     <T> void ensureIndex(String collection, Class<T> clazz, String fields);
 
     /**
@@ -194,10 +194,10 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>              the type to index
      * @see MongoCollection#createIndex(org.bson.conversions.Bson, com.mongodb.client.model.IndexOptions)
      * @see #ensureIndexes(String, Class)
-     * @deprecated This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
+     *  This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
      * methods in the Java driver itself.
      */
-    @Deprecated
+    
     <T> void ensureIndex(String collection, Class<T> clazz, String name,
                          String fields, boolean unique, boolean dropDupsOnCreate);
 
@@ -208,9 +208,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param collection the collection to update
      * @param clazz      the class from which to get the index definitions
      * @param <T>        the type to index
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> void ensureIndexes(String collection, Class<T> clazz);
 
     /**
@@ -221,9 +221,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param clazz      the class from which to get the index definitions
      * @param background if true, the index will be built in the background.  If false, the method will block until the index is created.
      * @param <T>        the type to index
-     * @deprecated use {@link #ensureIndexes(String, Class)} instead and specify background true or false in the annotations
+     *  use {@link #ensureIndexes(String, Class)} instead and specify background true or false in the annotations
      */
-    @Deprecated
+    
     <T> void ensureIndexes(String collection, Class<T> clazz, boolean background);
 
     /**
@@ -235,9 +235,9 @@ public interface AdvancedDatastore extends Datastore {
      * @return the key if the entity exists
      * @morphia.inline
      * @see #exists(Object)
-     * @deprecated use {@link Query#first()} instead
+     *  use {@link Query#first()} instead
      */
-    @Deprecated
+    
     Key<?> exists(Object keyOrEntity, ReadPreference readPreference);
 
     /**
@@ -247,9 +247,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param clazz      the class to use for mapping the results
      * @param <T>        the type to query
      * @return the query
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Query<T> find(String collection, Class<T> clazz);
 
     /**
@@ -266,9 +266,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <V>        the type to filter value
      * @return the query
      * @morphia.inline
-     * @deprecated use {@link #find(String, Class)} and apply the options to the {@link com.mongodb.client.model.FindOptions} parameter
+     *  use {@link #find(String, Class)} and apply the options to the {@link com.mongodb.client.model.FindOptions} parameter
      */
-    @Deprecated
+    
     <T, V> Query<T> find(String collection, Class<T> clazz, String property, V value, int offset, int size);
 
     /**
@@ -279,9 +279,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>   the type to fetch
      * @return the entity referenced in the DBRef.  May be null.
      * @morphia.inline
-     * @deprecated use {@link #find(Class)} instead
+     *  use {@link #find(Class)} instead
      */
-    @Deprecated
+    
     <T> T get(Class<T> clazz, DBRef ref);
 
     /**
@@ -294,9 +294,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <V>        the type of the ID
      * @return the entity with the id.  May be null.
      * @morphia.inline
-     * @deprecated use {@link #find(String, Class)} instead
+     *  use {@link #find(String, Class)} instead
      */
-    @Deprecated
+    
     <T, V> T get(String collection, Class<T> clazz, V id);
 
     /**
@@ -305,9 +305,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param collection the collection to count
      * @return the collection size
      * @morphia.inline
-     * @deprecated use {@link Query#count()} instead
+     *  use {@link Query#count()} instead
      */
-    @Deprecated
+    
     long getCount(String collection);
 
     /**
@@ -328,9 +328,9 @@ public interface AdvancedDatastore extends Datastore {
      * @return the new key of the inserted entity
      * @morphia.inline
      * @see WriteConcern
-     * @deprecated use {@link #insert(Object, InsertOptions)}
+     *  use {@link #insert(Object, InsertOptions)}
      */
-    @Deprecated
+    
     <T> Key<T> insert(T entity, WriteConcern wc);
 
     /**
@@ -352,9 +352,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param entity     the entity to insert
      * @param <T>        the type of the entity
      * @return the new key of the inserted entity
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Key<T> insert(String collection, T entity);
 
     /**
@@ -367,9 +367,9 @@ public interface AdvancedDatastore extends Datastore {
      * @return the new key of the inserted entity
      * @morphia.inline
      * @since 1.3
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Key<T> insert(String collection, T entity, InsertOptions options);
 
     /**
@@ -379,9 +379,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>      the type of the entity
      * @return the new keys of the inserted entities
      * @morphia.inline
-     * @deprecated use {@link #insert(Iterable)} instead
+     *  use {@link #insert(Iterable)} instead
      */
-    @Deprecated
+    
     <T> Iterable<Key<T>> insert(T... entities);
 
     /**
@@ -400,9 +400,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param wc       the WriteConcern to use when inserting
      * @param <T>      the type of the entity
      * @return the new keys of the inserted entities
-     * @deprecated use {@link #insert(Iterable, InsertOptions)}
+     *  use {@link #insert(Iterable, InsertOptions)}
      */
-    @Deprecated
+    
     <T> Iterable<Key<T>> insert(Iterable<T> entities, WriteConcern wc);
 
     /**
@@ -424,9 +424,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param entities   the entities to insert
      * @param <T>        the type of the entity
      * @return the new keys of the inserted entities
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Iterable<Key<T>> insert(String collection, Iterable<T> entities);
 
     /**
@@ -438,9 +438,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>        the type of the entity
      * @return the new keys of the inserted entities
      * @see WriteConcern
-     * @deprecated use {@link #insert(String, Iterable, InsertOptions)} instead
+     *  use {@link #insert(String, Iterable, InsertOptions)} instead
      */
-    @Deprecated
+    
     <T> Iterable<Key<T>> insert(String collection, Iterable<T> entities, WriteConcern wc);
 
     /**
@@ -452,9 +452,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param <T>        the type of the entity
      * @return the new keys of the inserted entities
      * @since 1.3
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Iterable<Key<T>> insert(String collection, Iterable<T> entities, InsertOptions options);
 
     /**
@@ -474,9 +474,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param entity     the entity to save
      * @param <T>        the type of the entity
      * @return the new key of the inserted entity
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Key<T> save(String collection, T entity);
 
     /**
@@ -487,9 +487,9 @@ public interface AdvancedDatastore extends Datastore {
      * @param wc         the WriteConcern to use when inserting
      * @param <T>        the type of the entity
      * @return the new key of the inserted entity
-     * @deprecated use {@link #save(String, Object, InsertOptions)} instead
+     *  use {@link #save(String, Object, InsertOptions)} instead
      */
-    @Deprecated
+    
     <T> Key<T> save(String collection, T entity, WriteConcern wc);
 
     /**
@@ -500,8 +500,8 @@ public interface AdvancedDatastore extends Datastore {
      * @param options    the options to apply to the save operation
      * @param <T>        the type of the entity
      * @return the new key of the inserted entity
-     * @deprecated this feature is being removed.  no replacement is planned.  see issue #1331
+     *  this feature is being removed.  no replacement is planned.  see issue #1331
      */
-    @Deprecated
+    
     <T> Key<T> save(String collection, T entity, InsertOptions options);
 }

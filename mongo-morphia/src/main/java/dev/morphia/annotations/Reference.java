@@ -37,9 +37,9 @@ public @interface Reference {
     /**
      * @return the concrete class to instantiate.
      *
-     * @deprecated unimplemented
+     *  unimplemented
      */
-    @Deprecated Class<?> concreteClass() default Object.class;
+     Class<?> concreteClass() default Object.class;
 
     /**
      * @return whether only _id should be stored versus storing a DBRef
