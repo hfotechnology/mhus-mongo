@@ -1,11 +1,11 @@
 package dev.morphia.query;
 
 
+import java.util.Map;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
-
-import java.util.Map;
 
 /**
  * Geospatial specific FieldCriteria logic

@@ -1,12 +1,12 @@
 package dev.morphia.utils;
 
 
-import org.bson.BSONObject;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.bson.BSONObject;
 
 
 /**

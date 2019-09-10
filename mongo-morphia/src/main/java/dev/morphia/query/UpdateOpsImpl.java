@@ -1,11 +1,8 @@
 package dev.morphia.query;
 
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import dev.morphia.internal.PathTarget;
-import dev.morphia.mapping.MappedField;
-import dev.morphia.mapping.Mapper;
+import static dev.morphia.utils.ReflectionUtils.iterToList;
+import static java.util.Collections.singletonList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +10,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Collections.singletonList;
-import static dev.morphia.utils.ReflectionUtils.iterToList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import dev.morphia.internal.PathTarget;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.mapping.Mapper;
 
 
 /**

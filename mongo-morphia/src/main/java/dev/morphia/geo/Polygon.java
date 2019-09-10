@@ -1,12 +1,12 @@
 package dev.morphia.geo;
 
-import com.mongodb.client.model.geojson.PolygonCoordinates;
-import com.mongodb.client.model.geojson.Position;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.mongodb.client.model.geojson.PolygonCoordinates;
+import com.mongodb.client.model.geojson.Position;
 
 /**
  * This class represents either a simple polygon enclosing an area, or a more complex polygon that contains both an exterior boundary and

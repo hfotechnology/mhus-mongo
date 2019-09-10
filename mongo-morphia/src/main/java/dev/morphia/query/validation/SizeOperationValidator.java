@@ -1,13 +1,13 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.mapping.MappedField;
-import dev.morphia.query.FilterOperator;
+import static dev.morphia.query.FilterOperator.SIZE;
+import static dev.morphia.query.validation.ValueClassValidator.valueIsClassOrSubclassOf;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
-import static dev.morphia.query.FilterOperator.SIZE;
-import static dev.morphia.query.validation.ValueClassValidator.valueIsClassOrSubclassOf;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.query.FilterOperator;
 
 /**
  * Checks if the value can have the {@code FilterOperator.ALL} operator applied to it.  Since this class does not need state, and the

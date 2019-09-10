@@ -1,6 +1,9 @@
 package dev.morphia.mapping.validation.classrules;
 
 
+import java.util.List;
+import java.util.Set;
+
 import dev.morphia.annotations.Version;
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
@@ -8,9 +11,6 @@ import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.validation.ClassConstraint;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
-
-import java.util.List;
-import java.util.Set;
 
 
 /**

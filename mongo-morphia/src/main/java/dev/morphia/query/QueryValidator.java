@@ -1,5 +1,7 @@
 package dev.morphia.query;
 
+import java.util.List;
+
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.query.validation.AllOperationValidator;
@@ -19,8 +21,6 @@ import dev.morphia.query.validation.NotInOperationValidator;
 import dev.morphia.query.validation.PatternValueValidator;
 import dev.morphia.query.validation.SizeOperationValidator;
 import dev.morphia.query.validation.ValidationFailure;
-
-import java.util.List;
 
 final class QueryValidator {
     private QueryValidator() {

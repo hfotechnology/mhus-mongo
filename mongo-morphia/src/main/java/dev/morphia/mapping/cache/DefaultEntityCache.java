@@ -1,13 +1,13 @@
 package dev.morphia.mapping.cache;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dev.morphia.Key;
 import dev.morphia.mapping.lazy.LazyFeatureDependencies;
 import dev.morphia.mapping.lazy.proxy.ProxyHelper;
 import relocated.morphia.org.apache.commons.collections.ReferenceMap;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**

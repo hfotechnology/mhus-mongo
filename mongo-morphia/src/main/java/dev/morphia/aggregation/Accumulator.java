@@ -16,11 +16,11 @@
 
 package dev.morphia.aggregation;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 /**
  * Defines an accumulator for use in an aggregation pipeline.

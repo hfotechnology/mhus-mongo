@@ -16,10 +16,10 @@
 
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-
 import java.util.Currency;
 import java.util.Locale;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * @author Adam Dispenza, (adam@dispenza.org)

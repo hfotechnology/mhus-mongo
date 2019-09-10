@@ -17,21 +17,34 @@
 package dev.morphia.mapping;
 
 
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mongodb.DBObject;
 
 import de.mhus.lib.annotations.adb.DbIndex;
 import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.annotations.adb.DbPrimaryKey;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import dev.morphia.EntityInterceptor;
 import dev.morphia.annotations.Converters;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.EntityListeners;
 import dev.morphia.annotations.Field;
-import dev.morphia.annotations.Id;
 import dev.morphia.annotations.IndexOptions;
 import dev.morphia.annotations.Indexes;
 import dev.morphia.annotations.PostLoad;
@@ -47,20 +60,6 @@ import dev.morphia.annotations.Validation;
 import dev.morphia.annotations.Version;
 import dev.morphia.mapping.validation.MappingValidator;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
 
 
 /**

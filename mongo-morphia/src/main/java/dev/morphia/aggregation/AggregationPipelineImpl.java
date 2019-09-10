@@ -1,5 +1,12 @@
 package dev.morphia.aggregation;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mongodb.AggregationOptions;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -8,20 +15,15 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.ReadPreference;
 import com.mongodb.client.model.UnwindOptions;
-import dev.morphia.query.BucketAutoOptions;
-import dev.morphia.query.BucketOptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import dev.morphia.geo.GeometryShapeConverter;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
+import dev.morphia.query.BucketAutoOptions;
+import dev.morphia.query.BucketOptions;
 import dev.morphia.query.Query;
 import dev.morphia.query.Sort;
 import dev.morphia.query.internal.MorphiaCursor;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Implementation of an AggregationPipeline.

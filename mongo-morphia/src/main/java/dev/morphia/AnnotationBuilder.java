@@ -16,14 +16,14 @@
 
 package dev.morphia;
 
-import dev.morphia.mapping.MappingException;
+import static java.lang.String.format;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.String.format;
+import dev.morphia.mapping.MappingException;
 
 abstract class AnnotationBuilder<T extends Annotation> implements Annotation {
     private final Map<String, Object> values = new HashMap<String, Object>();

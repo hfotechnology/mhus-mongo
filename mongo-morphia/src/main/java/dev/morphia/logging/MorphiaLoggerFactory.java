@@ -1,9 +1,9 @@
 package dev.morphia.logging;
 
-import dev.morphia.logging.jdk.JDKLoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import dev.morphia.logging.jdk.JDKLoggerFactory;
 
 /**
  * Morphia's logging factory that can return either an slf4j LoggerFactory or a JDK LoggerFactory.

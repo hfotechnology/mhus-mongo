@@ -1,6 +1,10 @@
 package dev.morphia.mapping.validation.fieldrules;
 
 
+import static java.lang.String.format;
+
+import java.util.Set;
+
 import dev.morphia.ObjectFactory;
 import dev.morphia.annotations.Version;
 import dev.morphia.mapping.MappedClass;
@@ -8,10 +12,6 @@ import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
-
-import java.util.Set;
-
-import static java.lang.String.format;
 
 
 /**

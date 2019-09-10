@@ -1,7 +1,12 @@
 package dev.morphia.mapping.validation.classrules;
 
 
-import dev.morphia.annotations.Id;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashSet;
+import java.util.Set;
+
+import de.mhus.lib.annotations.adb.DbPrimaryKey;
 import dev.morphia.annotations.Reference;
 import dev.morphia.annotations.Transient;
 import dev.morphia.mapping.MappedClass;
@@ -10,13 +15,6 @@ import dev.morphia.mapping.validation.ClassConstraint;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.HashSet;
-import java.util.Set;
-
-import de.mhus.lib.annotations.adb.DbPrimaryKey;
 
 
 /**

@@ -1,10 +1,10 @@
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * @author Uwe Schaefer, (us@thomas-daily.de)

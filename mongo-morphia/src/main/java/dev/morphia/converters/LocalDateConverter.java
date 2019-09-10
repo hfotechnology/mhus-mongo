@@ -16,12 +16,12 @@
 
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-import dev.morphia.mapping.Mapper;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+
+import dev.morphia.mapping.MappedField;
+import dev.morphia.mapping.Mapper;
 
 /**
  * Provides a converter for {@link LocalDate} converting the value to the Date at the start of that day.

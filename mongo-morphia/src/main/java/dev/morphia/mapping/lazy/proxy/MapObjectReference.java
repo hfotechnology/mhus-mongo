@@ -1,12 +1,12 @@
 package dev.morphia.mapping.lazy.proxy;
 
 
-import dev.morphia.Datastore;
-import dev.morphia.Key;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import dev.morphia.Datastore;
+import dev.morphia.Key;
 
 
 /**

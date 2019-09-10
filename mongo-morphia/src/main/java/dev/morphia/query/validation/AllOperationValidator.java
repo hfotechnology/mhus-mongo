@@ -1,13 +1,13 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.mapping.MappedField;
-import dev.morphia.query.FilterOperator;
+import static dev.morphia.query.FilterOperator.ALL;
+import static dev.morphia.query.validation.CollectionTypeValidator.typeIsIterableOrArrayOrMap;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
-import static dev.morphia.query.FilterOperator.ALL;
-import static dev.morphia.query.validation.CollectionTypeValidator.typeIsIterableOrArrayOrMap;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.query.FilterOperator;
 
 /**
  * Validates a query that uses the FilterOperator.ALL operator.

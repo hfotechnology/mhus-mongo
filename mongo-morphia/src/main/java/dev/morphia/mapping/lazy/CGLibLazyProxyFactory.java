@@ -1,21 +1,22 @@
 package dev.morphia.mapping.lazy;
 
 
-import com.thoughtworks.proxy.factory.CglibProxyFactory;
-import com.thoughtworks.proxy.toys.delegate.DelegationMode;
-import com.thoughtworks.proxy.toys.dispatch.Dispatching;
-import dev.morphia.Datastore;
-import dev.morphia.Key;
-import dev.morphia.mapping.lazy.proxy.ProxiedEntityReference;
-import dev.morphia.mapping.lazy.proxy.ProxiedEntityReferenceList;
-import dev.morphia.mapping.lazy.proxy.ProxiedEntityReferenceMap;
-import dev.morphia.mapping.lazy.proxy.CollectionObjectReference;
-import dev.morphia.mapping.lazy.proxy.EntityObjectReference;
-import dev.morphia.mapping.lazy.proxy.MapObjectReference;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+
+import com.thoughtworks.proxy.factory.CglibProxyFactory;
+import com.thoughtworks.proxy.toys.delegate.DelegationMode;
+import com.thoughtworks.proxy.toys.dispatch.Dispatching;
+
+import dev.morphia.Datastore;
+import dev.morphia.Key;
+import dev.morphia.mapping.lazy.proxy.CollectionObjectReference;
+import dev.morphia.mapping.lazy.proxy.EntityObjectReference;
+import dev.morphia.mapping.lazy.proxy.MapObjectReference;
+import dev.morphia.mapping.lazy.proxy.ProxiedEntityReference;
+import dev.morphia.mapping.lazy.proxy.ProxiedEntityReferenceList;
+import dev.morphia.mapping.lazy.proxy.ProxiedEntityReferenceMap;
 
 
 /**

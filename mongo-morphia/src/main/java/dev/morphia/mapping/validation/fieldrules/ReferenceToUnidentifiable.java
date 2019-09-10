@@ -1,7 +1,9 @@
 package dev.morphia.mapping.validation.fieldrules;
 
 
-import dev.morphia.annotations.Id;
+import java.util.Set;
+
+import de.mhus.lib.annotations.adb.DbPrimaryKey;
 import dev.morphia.annotations.Reference;
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
@@ -9,10 +11,6 @@ import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MappingException;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
-
-import java.util.Set;
-
-import de.mhus.lib.annotations.adb.DbPrimaryKey;
 
 
 /**

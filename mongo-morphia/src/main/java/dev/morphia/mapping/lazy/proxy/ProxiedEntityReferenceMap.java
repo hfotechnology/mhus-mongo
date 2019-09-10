@@ -1,9 +1,9 @@
 package dev.morphia.mapping.lazy.proxy;
 
 
-import dev.morphia.Key;
-
 import java.util.Map;
+
+import dev.morphia.Key;
 
 
 /**

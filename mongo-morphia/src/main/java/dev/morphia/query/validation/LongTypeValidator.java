@@ -1,8 +1,8 @@
 package dev.morphia.query.validation;
 
-import java.util.List;
-
 import static java.lang.String.format;
+
+import java.util.List;
 
 /**
  * Checks the type of the value if the type of the field is a Long or long.

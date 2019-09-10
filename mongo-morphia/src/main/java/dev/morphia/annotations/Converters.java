@@ -17,14 +17,14 @@
 
 package dev.morphia.annotations;
 
-import dev.morphia.converters.TypeConverter;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import dev.morphia.converters.TypeConverter;
 
 /**
  * Declares converters required for this entity/class; converters are registered globally at time of the meta-data discovery.

@@ -1,12 +1,13 @@
 package dev.morphia;
 
-import com.mongodb.DBObject;
-import dev.morphia.mapping.MappedField;
-import dev.morphia.mapping.Mapper;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.mongodb.DBObject;
+
+import dev.morphia.mapping.MappedField;
+import dev.morphia.mapping.Mapper;
 
 /**
  * The ObjectFactory is used by morphia to create instances of classes which can be customized to fit a particular applications needs.

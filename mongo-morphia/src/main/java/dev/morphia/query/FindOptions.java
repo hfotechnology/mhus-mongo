@@ -16,14 +16,14 @@
 
 package dev.morphia.query;
 
+import java.util.concurrent.TimeUnit;
+
 import com.mongodb.CursorType;
 import com.mongodb.DBObject;
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.DBCollectionFindOptions;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * The options to apply to a find operation (also commonly referred to as a query).

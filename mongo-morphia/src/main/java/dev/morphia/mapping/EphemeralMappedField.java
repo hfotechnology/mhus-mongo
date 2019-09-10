@@ -1,15 +1,16 @@
 package dev.morphia.mapping;
 
-import com.mongodb.DBObject;
-import dev.morphia.annotations.Embedded;
-import dev.morphia.utils.ReflectionUtils;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.mongodb.DBObject;
+
+import dev.morphia.annotations.Embedded;
+import dev.morphia.utils.ReflectionUtils;
 
 /**
  * This is a MappedField facade that allows us to convert and collect values to be gathered back in to a Map or Collection, e.g., rather

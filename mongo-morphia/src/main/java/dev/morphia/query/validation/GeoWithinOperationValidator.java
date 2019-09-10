@@ -1,15 +1,16 @@
 package dev.morphia.query.validation;
 
-import com.mongodb.DBObject;
-import dev.morphia.mapping.MappedField;
-import dev.morphia.query.FilterOperator;
-
-import java.util.List;
-
-import static java.lang.String.format;
 import static dev.morphia.query.FilterOperator.GEO_WITHIN;
 import static dev.morphia.query.validation.MappedFieldTypeValidator.isArrayOfNumbers;
 import static dev.morphia.query.validation.MappedFieldTypeValidator.isIterableOfNumbers;
+import static java.lang.String.format;
+
+import java.util.List;
+
+import com.mongodb.DBObject;
+
+import dev.morphia.mapping.MappedField;
+import dev.morphia.query.FilterOperator;
 
 /**
  * Supports validation for queries using the {@code FilterOperator.GEO_WITHIN} operator.

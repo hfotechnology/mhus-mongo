@@ -1,9 +1,9 @@
 package dev.morphia.query;
 
 
-import com.mongodb.WriteResult;
-
 import static java.lang.String.format;
+
+import com.mongodb.WriteResult;
 
 /**
  * This class holds various metrics about the results of an update operation.

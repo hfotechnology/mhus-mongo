@@ -1,9 +1,9 @@
 package dev.morphia.query.validation;
 
+import static java.lang.String.format;
+
 import java.util.List;
 import java.util.regex.Pattern;
-
-import static java.lang.String.format;
 
 /**
  * Validates query values that are Pattern to check the field type is a String.

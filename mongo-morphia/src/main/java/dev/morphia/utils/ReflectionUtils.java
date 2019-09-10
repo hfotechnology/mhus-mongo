@@ -15,18 +15,6 @@
 package dev.morphia.utils;
 
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.DBRef;
-import dev.morphia.Key;
-import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Entity;
-import dev.morphia.mapping.MappingException;
-import org.bson.types.CodeWScope;
-import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,6 +46,20 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.regex.Pattern;
+
+import org.bson.types.CodeWScope;
+import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.DBRef;
+
+import dev.morphia.Key;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.mapping.MappingException;
 
 
 /**

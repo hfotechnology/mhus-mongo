@@ -1,9 +1,9 @@
 package dev.morphia.query.validation;
 
+import java.util.List;
+
 import dev.morphia.mapping.MappedField;
 import dev.morphia.query.FilterOperator;
-
-import java.util.List;
 
 /**
  * Extend this abstract class to provide a way of validating part of a query that contains a {@code FilterOperator}. Currently all

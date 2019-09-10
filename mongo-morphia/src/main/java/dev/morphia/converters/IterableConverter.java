@@ -1,11 +1,7 @@
 package dev.morphia.converters;
 
 
-import com.mongodb.DBObject;
-import dev.morphia.ObjectFactory;
-import dev.morphia.mapping.EphemeralMappedField;
-import dev.morphia.mapping.MappedField;
-import dev.morphia.utils.ReflectionUtils;
+import static java.lang.String.format;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,7 +9,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static java.lang.String.format;
+import com.mongodb.DBObject;
+
+import dev.morphia.ObjectFactory;
+import dev.morphia.mapping.EphemeralMappedField;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.utils.ReflectionUtils;
 
 
 /**

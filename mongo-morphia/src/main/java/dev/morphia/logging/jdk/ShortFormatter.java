@@ -1,15 +1,15 @@
 package dev.morphia.logging.jdk;
 
 
-import dev.morphia.logging.Logger;
-import dev.morphia.logging.MorphiaLoggerFactory;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
+
+import dev.morphia.logging.Logger;
+import dev.morphia.logging.MorphiaLoggerFactory;
 
 /**
  * A formatter providing a short format

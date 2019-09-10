@@ -16,8 +16,31 @@
 
 package dev.morphia;
 
+import static dev.morphia.AnnotationBuilder.toMap;
+import static dev.morphia.internal.MorphiaUtils.join;
+import static dev.morphia.utils.IndexType.fromValue;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.bson.BsonDocument;
+import org.bson.BsonDocumentWriter;
+import org.bson.Document;
+import org.bson.codecs.Encoder;
+import org.bson.codecs.EncoderContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
 import dev.morphia.annotations.Collation;
 import dev.morphia.annotations.Field;
 import dev.morphia.annotations.Index;
@@ -33,27 +56,6 @@ import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MappingException;
 import dev.morphia.utils.IndexType;
-import org.bson.BsonDocument;
-import org.bson.BsonDocumentWriter;
-import org.bson.Document;
-import org.bson.codecs.Encoder;
-import org.bson.codecs.EncoderContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import static dev.morphia.AnnotationBuilder.toMap;
-import static dev.morphia.internal.MorphiaUtils.join;
-import static dev.morphia.utils.IndexType.fromValue;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 
 final class IndexHelper {
     private static final Logger LOG = LoggerFactory.getLogger(IndexHelper.class);

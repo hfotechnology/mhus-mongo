@@ -1,10 +1,10 @@
 package dev.morphia.mapping.lazy.proxy;
 
 
-import dev.morphia.Key;
-
 import java.util.Collection;
 import java.util.List;
+
+import dev.morphia.Key;
 
 
 /**

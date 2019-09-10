@@ -1,18 +1,16 @@
 package dev.morphia.mapping.validation.classrules;
 
 
-import dev.morphia.annotations.Id;
+import java.util.List;
+import java.util.Set;
+
+import de.mhus.lib.annotations.adb.DbPrimaryKey;
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.validation.ClassConstraint;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
-
-import java.util.List;
-import java.util.Set;
-
-import de.mhus.lib.annotations.adb.DbPrimaryKey;
 
 
 /**

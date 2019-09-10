@@ -16,11 +16,12 @@
 
 package dev.morphia.converters;
 
-import org.bson.types.Decimal128;
-import dev.morphia.mapping.MappedField;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
+import org.bson.types.Decimal128;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * This provides a conversion to/from BigDecimal in applications using the Decimal128 type introduced in the 3.4.0 release of MongoDB.  This

@@ -1,9 +1,9 @@
 package dev.morphia.converters;
 
+import static java.lang.String.format;
+
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
-
-import static java.lang.String.format;
 
 /**
  * Defines a bundle of converters that will delegate to the DefaultConverters for unknown types but provides a chance to override the

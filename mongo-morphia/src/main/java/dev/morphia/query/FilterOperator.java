@@ -1,9 +1,9 @@
 package dev.morphia.query;
 
+import static java.lang.String.format;
+
 import java.util.Arrays;
 import java.util.List;
-
-import static java.lang.String.format;
 
 /**
  * @author Scott Hernandez

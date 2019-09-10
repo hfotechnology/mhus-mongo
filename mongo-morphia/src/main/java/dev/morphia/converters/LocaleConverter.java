@@ -1,8 +1,8 @@
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-
 import java.util.Locale;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * Converts a Locale to/from a valid database structure.

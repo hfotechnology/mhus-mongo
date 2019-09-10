@@ -1,9 +1,9 @@
 package dev.morphia.converters;
 
 
-import dev.morphia.mapping.MappedField;
-
 import java.net.URI;
+
+import dev.morphia.mapping.MappedField;
 
 
 /**

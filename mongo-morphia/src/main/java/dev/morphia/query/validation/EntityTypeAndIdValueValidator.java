@@ -1,11 +1,11 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.mapping.MappedClass;
-import dev.morphia.mapping.MappedField;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
+import dev.morphia.mapping.MappedClass;
+import dev.morphia.mapping.MappedField;
 
 /**
  * Checks the class of the value against the type of the ID for the type.

@@ -16,18 +16,19 @@
 
 package dev.morphia;
 
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import com.mongodb.DBCollection;
 import com.mongodb.MapReduceCommand;
 import com.mongodb.MapReduceCommand.OutputType;
 import com.mongodb.ReadPreference;
 import com.mongodb.client.model.Collation;
+
 import dev.morphia.mapping.Mapper;
 import dev.morphia.query.Query;
 import dev.morphia.query.QueryException;
 import dev.morphia.utils.Assert;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * This defines options that can be applied to a mapreduce job

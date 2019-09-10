@@ -1,13 +1,14 @@
 package dev.morphia.mapping;
 
-import dev.morphia.DatastoreImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.time.ZoneId.of;
+import static java.time.ZoneId.systemDefault;
 
 import java.time.ZoneId;
 
-import static java.time.ZoneId.of;
-import static java.time.ZoneId.systemDefault;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dev.morphia.DatastoreImpl;
 
 /**
  * This enum is used to determine how Java 8 dates and times are stored in the database.

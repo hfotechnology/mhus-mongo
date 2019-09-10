@@ -1,10 +1,10 @@
 package dev.morphia.mapping.validation;
 
 
+import java.util.Set;
+
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.Mapper;
-
-import java.util.Set;
 
 
 /**

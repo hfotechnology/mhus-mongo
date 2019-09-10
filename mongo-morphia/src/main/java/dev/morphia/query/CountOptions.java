@@ -16,6 +16,10 @@
 
 package dev.morphia.query;
 
+import static com.mongodb.assertions.Assertions.notNull;
+
+import java.util.concurrent.TimeUnit;
+
 /*
  * Copyright 2016 MongoDB, Inc.
  *
@@ -36,10 +40,6 @@ import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.DBCollectionCountOptions;
-
-import java.util.concurrent.TimeUnit;
-
-import static com.mongodb.assertions.Assertions.notNull;
 
 /**
  * The options for a count operation.

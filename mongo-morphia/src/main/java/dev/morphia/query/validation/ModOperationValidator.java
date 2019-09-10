@@ -1,14 +1,14 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.mapping.MappedField;
-import dev.morphia.query.FilterOperator;
-import dev.morphia.utils.ReflectionUtils;
+import static dev.morphia.query.FilterOperator.MOD;
+import static java.lang.String.format;
 
 import java.lang.reflect.Array;
 import java.util.List;
 
-import static java.lang.String.format;
-import static dev.morphia.query.FilterOperator.MOD;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.query.FilterOperator;
+import dev.morphia.utils.ReflectionUtils;
 
 
 /**

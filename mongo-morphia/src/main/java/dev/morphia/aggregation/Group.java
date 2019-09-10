@@ -1,9 +1,9 @@
 package dev.morphia.aggregation;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * Defines a group pipeline stage.

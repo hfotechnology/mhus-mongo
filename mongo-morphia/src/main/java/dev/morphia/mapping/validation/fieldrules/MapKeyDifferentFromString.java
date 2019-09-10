@@ -1,7 +1,9 @@
 package dev.morphia.mapping.validation.fieldrules;
 
 
-import org.bson.types.ObjectId;
+import java.util.Set;
+import java.util.UUID;
+
 import dev.morphia.annotations.Serialized;
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
@@ -9,9 +11,6 @@ import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.validation.ConstraintViolation;
 import dev.morphia.mapping.validation.ConstraintViolation.Level;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.util.Set;
-import java.util.UUID;
 
 
 /**

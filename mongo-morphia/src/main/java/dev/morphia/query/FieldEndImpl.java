@@ -1,18 +1,6 @@
 package dev.morphia.query;
 
 
-import dev.morphia.geo.CoordinateReferenceSystem;
-import dev.morphia.geo.Geometry;
-import dev.morphia.geo.MultiPolygon;
-import dev.morphia.geo.Point;
-import dev.morphia.geo.Polygon;
-import dev.morphia.utils.Assert;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import static dev.morphia.query.FilterOperator.ALL;
 import static dev.morphia.query.FilterOperator.ELEMENT_MATCH;
 import static dev.morphia.query.FilterOperator.EQUAL;
@@ -34,6 +22,19 @@ import static dev.morphia.query.FilterOperator.TYPE;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.regex.Pattern.compile;
 import static java.util.regex.Pattern.quote;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dev.morphia.geo.CoordinateReferenceSystem;
+import dev.morphia.geo.Geometry;
+import dev.morphia.geo.MultiPolygon;
+import dev.morphia.geo.Point;
+import dev.morphia.geo.Polygon;
+import dev.morphia.utils.Assert;
 
 /**
  * Represents a document field in a query and presents the operations available to querying against that field.  This is an internal

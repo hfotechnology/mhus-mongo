@@ -16,13 +16,13 @@
 
 package dev.morphia.query.internal;
 
+import static com.mongodb.assertions.Assertions.notNull;
+
 import com.mongodb.Function;
 import com.mongodb.ServerAddress;
 import com.mongodb.ServerCursor;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.lang.Nullable;
-
-import static com.mongodb.assertions.Assertions.notNull;
 
 /**
  * Copied from the Java driver

@@ -1,19 +1,21 @@
 package dev.morphia.query;
 
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
 import dev.morphia.internal.PathTarget;
 import dev.morphia.mapping.MappedClass;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Defines a Criteria against a field

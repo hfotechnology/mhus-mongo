@@ -16,14 +16,14 @@
 
 package dev.morphia;
 
+import static com.mongodb.assertions.Assertions.notNull;
+
+import java.util.concurrent.TimeUnit;
+
 import com.mongodb.DBObject;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.DBCollectionFindAndModifyOptions;
-
-import java.util.concurrent.TimeUnit;
-
-import static com.mongodb.assertions.Assertions.notNull;
 
 /**
  * The options for find and modify operations.

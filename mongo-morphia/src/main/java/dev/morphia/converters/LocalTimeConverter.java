@@ -16,9 +16,9 @@
 
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-
 import java.time.LocalTime;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * Provides a converter for {@link LocalTime} and convert it to its numeric form of milliseconds since midnight.

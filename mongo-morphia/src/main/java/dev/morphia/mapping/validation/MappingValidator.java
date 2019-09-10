@@ -1,7 +1,18 @@
 package dev.morphia.mapping.validation;
 
+import static java.lang.String.format;
+import static java.util.Collections.singletonList;
+import static java.util.Collections.sort;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import dev.morphia.ObjectFactory;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Property;
@@ -26,16 +37,6 @@ import dev.morphia.mapping.validation.fieldrules.MapNotSerializable;
 import dev.morphia.mapping.validation.fieldrules.MisplacedProperty;
 import dev.morphia.mapping.validation.fieldrules.ReferenceToUnidentifiable;
 import dev.morphia.mapping.validation.fieldrules.VersionMisuse;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import static java.lang.String.format;
-import static java.util.Collections.singletonList;
-import static java.util.Collections.sort;
 
 
 /**

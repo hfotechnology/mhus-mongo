@@ -16,13 +16,13 @@
 
 package dev.morphia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dev.morphia.annotations.Field;
 import dev.morphia.annotations.Index;
 import dev.morphia.annotations.IndexOptions;
 import dev.morphia.utils.IndexType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 class IndexBuilder extends AnnotationBuilder<Index> implements Index {

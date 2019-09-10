@@ -1,15 +1,16 @@
 package dev.morphia.query;
 
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.client.MongoCursor;
+
 import dev.morphia.Datastore;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.cache.EntityCache;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 
 /**

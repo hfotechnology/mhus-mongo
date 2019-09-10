@@ -1,14 +1,14 @@
 package dev.morphia.mapping.lazy.proxy;
 
-import dev.morphia.Datastore;
-import dev.morphia.Key;
+import static java.lang.String.format;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static java.lang.String.format;
+import dev.morphia.Datastore;
+import dev.morphia.Key;
 
 /**
  * A list of proxied elements

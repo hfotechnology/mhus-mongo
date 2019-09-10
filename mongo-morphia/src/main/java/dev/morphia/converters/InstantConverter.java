@@ -16,10 +16,10 @@
 
 package dev.morphia.converters;
 
-import dev.morphia.mapping.MappedField;
-
 import java.time.Instant;
 import java.util.Date;
+
+import dev.morphia.mapping.MappedField;
 
 /**
  * This converter will take a {@link Instant} and convert it to a java.util.Date instance.

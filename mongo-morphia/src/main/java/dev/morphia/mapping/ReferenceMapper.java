@@ -1,9 +1,18 @@
 package dev.morphia.mapping;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.DBRef;
+
 import dev.morphia.Datastore;
 import dev.morphia.Key;
 import dev.morphia.annotations.Reference;
@@ -21,13 +30,6 @@ import dev.morphia.utils.IterHelper;
 import dev.morphia.utils.IterHelper.IterCallback;
 import dev.morphia.utils.IterHelper.MapIterCallback;
 import dev.morphia.utils.ReflectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @morphia.internal

@@ -1,15 +1,15 @@
 package dev.morphia.mapping.lazy;
 
 
+import java.lang.reflect.Method;
+
 import com.thoughtworks.proxy.ProxyFactory;
 import com.thoughtworks.proxy.kit.ObjectReference;
 import com.thoughtworks.proxy.toys.delegate.DelegationMode;
 import com.thoughtworks.proxy.toys.hotswap.HotSwappingInvoker;
 
-import dev.morphia.mapping.lazy.proxy.EntityObjectReference;
 import dev.morphia.annotations.IdGetter;
-
-import java.lang.reflect.Method;
+import dev.morphia.mapping.lazy.proxy.EntityObjectReference;
 
 
 class NonFinalizingHotSwappingInvoker<T> extends HotSwappingInvoker<T> {

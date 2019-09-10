@@ -1,13 +1,14 @@
 package dev.morphia.mapping.lazy.proxy;
 
 
-import com.thoughtworks.proxy.kit.ObjectReference;
-import dev.morphia.Datastore;
-import dev.morphia.Key;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import com.thoughtworks.proxy.kit.ObjectReference;
+
+import dev.morphia.Datastore;
+import dev.morphia.Key;
 
 
 /**

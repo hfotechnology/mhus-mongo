@@ -1,10 +1,10 @@
 package dev.morphia.mapping.validation.classrules;
 
 
-import dev.morphia.mapping.MappedField;
-
 import java.util.Arrays;
 import java.util.List;
+
+import dev.morphia.mapping.MappedField;
 
 
 /**

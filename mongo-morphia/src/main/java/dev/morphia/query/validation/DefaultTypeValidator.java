@@ -1,8 +1,8 @@
 package dev.morphia.query.validation;
 
-import java.util.List;
-
 import static java.lang.String.format;
+
+import java.util.List;
 
 /**
  * This is a fall-through validator that looks at the type and at the class of the value and figures out if they're similar enough to be

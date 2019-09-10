@@ -1,14 +1,16 @@
 package dev.morphia.query;
 
+import static dev.morphia.query.FilterOperator.NEAR;
+
+import org.bson.Document;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+
 import dev.morphia.geo.CoordinateReferenceSystem;
 import dev.morphia.geo.Geometry;
 import dev.morphia.geo.GeometryQueryConverter;
 import dev.morphia.geo.NamedCoordinateReferenceSystemConverter;
-import org.bson.Document;
-
-import static dev.morphia.query.FilterOperator.NEAR;
 
 /**
  * Creates queries for GeoJson geo queries on MongoDB. These queries generally require MongoDB 2.4 and above, and usually work on 2d sphere

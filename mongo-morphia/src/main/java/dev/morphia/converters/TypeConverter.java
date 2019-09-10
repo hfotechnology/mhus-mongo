@@ -1,9 +1,9 @@
 package dev.morphia.converters;
 
+import java.util.Arrays;
+
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
-
-import java.util.Arrays;
 
 /**
  * @author Uwe Schaefer, (us@thomas-daily.de)

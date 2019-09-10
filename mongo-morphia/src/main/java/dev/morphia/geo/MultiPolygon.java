@@ -1,10 +1,10 @@
 package dev.morphia.geo;
 
-import com.mongodb.client.model.geojson.PolygonCoordinates;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.mongodb.client.model.geojson.PolygonCoordinates;
 
 /**
  * This class represents a set of polygons, which will saved into MongoDB as per the <a href="http://geojson.org/geojson-spec

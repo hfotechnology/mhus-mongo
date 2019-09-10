@@ -17,9 +17,9 @@
 package dev.morphia.mapping.lazy;
 
 
-import dev.morphia.Datastore;
-
 import java.io.Serializable;
+
+import dev.morphia.Datastore;
 
 
 /**

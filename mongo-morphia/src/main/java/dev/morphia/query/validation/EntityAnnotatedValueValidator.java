@@ -1,11 +1,11 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.Key;
-import dev.morphia.annotations.Entity;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
+import dev.morphia.Key;
+import dev.morphia.annotations.Entity;
 
 /**
  * Ensures that a Class is annotated with @Entity.

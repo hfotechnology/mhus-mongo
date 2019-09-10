@@ -16,13 +16,13 @@
 
 package dev.morphia.query.internal;
 
+import java.util.Collection;
+
 import com.mongodb.Block;
 import com.mongodb.Function;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoIterable;
 import com.mongodb.lang.Nullable;
-
-import java.util.Collection;
 
 /**
  * Copied from the Java driver

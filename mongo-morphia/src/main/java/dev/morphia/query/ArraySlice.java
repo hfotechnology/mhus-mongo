@@ -16,10 +16,10 @@
 
 package dev.morphia.query;
 
+import java.util.Arrays;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-
-import java.util.Arrays;
 
 /**
  * Defines array slicing options for query projections.

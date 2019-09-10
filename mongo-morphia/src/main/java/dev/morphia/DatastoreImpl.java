@@ -1,5 +1,27 @@
 package dev.morphia;
 
+import static com.mongodb.BasicDBObject.parse;
+import static com.mongodb.BasicDBObjectBuilder.start;
+import static com.mongodb.DBCollection.ID_FIELD_NAME;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.bson.codecs.configuration.CodecRegistries;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.CommandResult;
 import com.mongodb.DB;
@@ -21,6 +43,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.DBCollectionUpdateOptions;
 import com.mongodb.client.model.ValidationOptions;
+
 import dev.morphia.aggregation.AggregationPipeline;
 import dev.morphia.aggregation.AggregationPipelineImpl;
 import dev.morphia.annotations.CappedAt;
@@ -45,27 +68,6 @@ import dev.morphia.query.UpdateOperations;
 import dev.morphia.query.UpdateOpsImpl;
 import dev.morphia.query.UpdateResults;
 import dev.morphia.utils.Assert;
-import org.bson.codecs.configuration.CodecRegistries;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import static com.mongodb.BasicDBObject.parse;
-import static com.mongodb.BasicDBObjectBuilder.start;
-import static com.mongodb.DBCollection.ID_FIELD_NAME;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 
 /**
  * A generic (type-safe) wrapper around mongodb collections

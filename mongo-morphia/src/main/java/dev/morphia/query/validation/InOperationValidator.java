@@ -1,13 +1,13 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.mapping.MappedField;
-import dev.morphia.query.FilterOperator;
+import static dev.morphia.query.FilterOperator.IN;
+import static dev.morphia.query.validation.CollectionTypeValidator.typeIsIterableOrArrayOrMap;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
-import static dev.morphia.query.FilterOperator.IN;
-import static dev.morphia.query.validation.CollectionTypeValidator.typeIsIterableOrArrayOrMap;
+import dev.morphia.mapping.MappedField;
+import dev.morphia.query.FilterOperator;
 
 /**
  * Checks if the value can have the {@code FilterOperator.IN} operator applied to it.

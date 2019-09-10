@@ -1,6 +1,7 @@
 package dev.morphia.geo;
 
 import com.mongodb.BasicDBObject;
+
 import dev.morphia.converters.SimpleValueConverter;
 import dev.morphia.converters.TypeConverter;
 import dev.morphia.mapping.MappedField;

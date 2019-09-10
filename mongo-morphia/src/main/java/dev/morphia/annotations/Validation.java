@@ -18,8 +18,8 @@
 package dev.morphia.annotations;
 
 
-import com.mongodb.client.model.ValidationAction;
-import com.mongodb.client.model.ValidationLevel;
+import static com.mongodb.client.model.ValidationAction.ERROR;
+import static com.mongodb.client.model.ValidationLevel.STRICT;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -28,8 +28,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static com.mongodb.client.model.ValidationAction.ERROR;
-import static com.mongodb.client.model.ValidationLevel.STRICT;
+import com.mongodb.client.model.ValidationAction;
+import com.mongodb.client.model.ValidationLevel;
 
 
 /**

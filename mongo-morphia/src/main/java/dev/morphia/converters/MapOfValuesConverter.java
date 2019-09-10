@@ -1,12 +1,12 @@
 package dev.morphia.converters;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import dev.morphia.mapping.MappedField;
 import dev.morphia.utils.IterHelper;
 import dev.morphia.utils.IterHelper.MapIterCallback;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author Uwe Schaefer, (us@thomas-daily.de)

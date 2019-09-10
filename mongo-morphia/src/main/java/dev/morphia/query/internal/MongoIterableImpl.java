@@ -16,6 +16,10 @@
 
 package dev.morphia.query.internal;
 
+import static com.mongodb.assertions.Assertions.notNull;
+
+import java.util.Collection;
+
 import com.mongodb.Block;
 import com.mongodb.Function;
 import com.mongodb.ReadConcern;
@@ -28,10 +32,6 @@ import com.mongodb.client.internal.OperationExecutor;
 import com.mongodb.lang.Nullable;
 import com.mongodb.operation.BatchCursor;
 import com.mongodb.operation.ReadOperation;
-
-import java.util.Collection;
-
-import static com.mongodb.assertions.Assertions.notNull;
 
 /**
  * Copied from the Java driver

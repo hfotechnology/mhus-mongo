@@ -1,8 +1,8 @@
 package dev.morphia.query.validation;
 
-import java.util.List;
-
 import static java.lang.String.format;
+
+import java.util.List;
 
 /**
  * If the Type is some sort of integer-compatible field (see {@code getTypeClasses}) then this validator will check if the value is of the

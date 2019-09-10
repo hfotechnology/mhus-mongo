@@ -1,21 +1,22 @@
 package dev.morphia.geo;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import dev.morphia.converters.SimpleValueConverter;
-import dev.morphia.converters.TypeConverter;
-import dev.morphia.mapping.MappedField;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static dev.morphia.geo.GeoJsonType.LINE_STRING;
 import static dev.morphia.geo.GeoJsonType.MULTI_LINE_STRING;
 import static dev.morphia.geo.GeoJsonType.MULTI_POINT;
 import static dev.morphia.geo.GeoJsonType.MULTI_POLYGON;
 import static dev.morphia.geo.GeoJsonType.POINT;
 import static dev.morphia.geo.GeoJsonType.POLYGON;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import dev.morphia.converters.SimpleValueConverter;
+import dev.morphia.converters.TypeConverter;
+import dev.morphia.mapping.MappedField;
 
 /**
  * Converter that understands most Geometry instances are effectively just lists of either other geometry objects or double coordinates.

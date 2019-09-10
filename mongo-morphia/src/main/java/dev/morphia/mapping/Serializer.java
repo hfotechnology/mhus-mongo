@@ -1,8 +1,6 @@
 package dev.morphia.mapping;
 
 
-import org.bson.types.Binary;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import org.bson.types.Binary;
 
 
 /**

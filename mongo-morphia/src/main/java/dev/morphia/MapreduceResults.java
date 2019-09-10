@@ -1,18 +1,20 @@
 package dev.morphia;
 
 
-import com.mongodb.MapReduceCommand.OutputType;
-import com.mongodb.MapReduceOutput;
+import java.util.Iterator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mongodb.MapReduceCommand.OutputType;
+import com.mongodb.MapReduceOutput;
+
 import dev.morphia.annotations.NotSaved;
 import dev.morphia.annotations.Transient;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MappingException;
 import dev.morphia.mapping.cache.EntityCache;
 import dev.morphia.query.Query;
-
-import java.util.Iterator;
 
 /**
  * Stores the results of a map reduce operation

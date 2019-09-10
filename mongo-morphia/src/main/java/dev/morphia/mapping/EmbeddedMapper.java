@@ -1,14 +1,5 @@
 package dev.morphia.mapping;
 
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import dev.morphia.Datastore;
-import dev.morphia.mapping.cache.EntityCache;
-import dev.morphia.utils.IterHelper;
-import dev.morphia.utils.IterHelper.MapIterCallback;
-import dev.morphia.utils.ReflectionUtils;
-
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -16,6 +7,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import dev.morphia.Datastore;
+import dev.morphia.mapping.cache.EntityCache;
+import dev.morphia.utils.IterHelper;
+import dev.morphia.utils.IterHelper.MapIterCallback;
+import dev.morphia.utils.ReflectionUtils;
 
 /**
  * @morphia.internal

@@ -1,11 +1,11 @@
 package dev.morphia.mapping.lazy;
 
 
-import dev.morphia.Datastore;
-import dev.morphia.Key;
-
 import java.util.Collection;
 import java.util.Map;
+
+import dev.morphia.Datastore;
+import dev.morphia.Key;
 
 
 /**

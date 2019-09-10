@@ -1,9 +1,7 @@
 package dev.morphia.query;
 
 
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import static dev.morphia.query.CriteriaJoin.AND;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static dev.morphia.query.CriteriaJoin.AND;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 /**
  * Defines a container of Criteria and a join method.

@@ -1,10 +1,10 @@
 package dev.morphia.query.validation;
 
-import dev.morphia.Key;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static java.lang.String.format;
+import dev.morphia.Key;
 
 /**
  * This makes sure that the field type and the Key type match.

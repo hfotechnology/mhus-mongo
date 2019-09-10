@@ -1,9 +1,10 @@
 package dev.morphia.query;
 
 
+import org.bson.types.CodeWScope;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import org.bson.types.CodeWScope;
 
 /**
  * Creates a Criteria for a $where clause.

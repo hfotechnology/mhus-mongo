@@ -1,10 +1,10 @@
 package dev.morphia.mapping.lazy.proxy;
 
 
+import static java.lang.String.format;
+
 import dev.morphia.Datastore;
 import dev.morphia.Key;
-
-import static java.lang.String.format;
 
 
 /**

@@ -1,13 +1,14 @@
 package dev.morphia.mapping;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dev.morphia.ObjectFactory;
 import dev.morphia.annotations.Reference;
 import dev.morphia.mapping.cache.DefaultEntityCacheFactory;
 import dev.morphia.mapping.cache.EntityCacheFactory;
 import dev.morphia.mapping.lazy.DatastoreProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Options to control mapping behavior.

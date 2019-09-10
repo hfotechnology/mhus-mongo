@@ -1,8 +1,8 @@
 package dev.morphia.query.validation;
 
-import java.util.List;
-
 import static java.lang.String.format;
+
+import java.util.List;
 
 /**
  * Validation for fields of Double/double type.  Allows numbers that could be compared against double as the values.

@@ -1,11 +1,12 @@
 package dev.morphia.query;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import dev.morphia.aggregation.Accumulator;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import dev.morphia.aggregation.Accumulator;
 
 /**
  * The options for a bucket auto stage of aggregation pipeline.

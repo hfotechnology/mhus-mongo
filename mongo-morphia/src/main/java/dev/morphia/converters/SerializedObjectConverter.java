@@ -1,15 +1,16 @@
 package dev.morphia.converters;
 
 
+import static java.lang.String.format;
+
+import java.io.IOException;
+
 import org.bson.types.Binary;
+
 import dev.morphia.annotations.Serialized;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.MappingException;
 import dev.morphia.mapping.Serializer;
-
-import java.io.IOException;
-
-import static java.lang.String.format;
 
 
 /**

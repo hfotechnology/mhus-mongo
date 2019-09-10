@@ -15,21 +15,23 @@
 package dev.morphia;
 
 
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MappingException;
 import dev.morphia.mapping.cache.EntityCache;
 import dev.morphia.utils.ReflectionUtils;
-
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import java.util.Collections;
-import java.util.Set;
 
 
 /**

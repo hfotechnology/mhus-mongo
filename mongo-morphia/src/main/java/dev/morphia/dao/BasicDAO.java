@@ -1,9 +1,15 @@
 package dev.morphia.dao;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
+
 import dev.morphia.Datastore;
 import dev.morphia.InsertOptions;
 import dev.morphia.Key;
@@ -13,11 +19,6 @@ import dev.morphia.query.FindOptions;
 import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
 import dev.morphia.query.UpdateResults;
-
-import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @param <T> the type of the entity
