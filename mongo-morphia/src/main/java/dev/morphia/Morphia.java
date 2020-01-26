@@ -1,21 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package dev.morphia;
-
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -35,7 +31,6 @@ import dev.morphia.mapping.MappingException;
 import dev.morphia.mapping.cache.EntityCache;
 import dev.morphia.utils.ReflectionUtils;
 
-
 /**
  * @author Olafur Gauti Gudmundsson
  * @author Scott Hernandez
@@ -44,9 +39,7 @@ public class Morphia {
     private static final Logger LOG = LoggerFactory.getLogger(Morphia.class);
     private final Mapper mapper;
 
-    /**
-     * Creates a Morphia instance with a default Mapper and an empty class set.
-     */
+    /** Creates a Morphia instance with a default Mapper and an empty class set. */
     public Morphia() {
         this(new Mapper(), Collections.<Class>emptySet());
     }
@@ -54,7 +47,7 @@ public class Morphia {
     /**
      * Creates a Morphia instance with the given Mapper and class set.
      *
-     * @param mapper       the Mapper to use
+     * @param mapper the Mapper to use
      * @param classesToMap the classes to map
      */
     public Morphia(final Mapper mapper, final Set<Class> classesToMap) {
@@ -86,7 +79,7 @@ public class Morphia {
      * It is best to use a Mongo singleton instance here.
      *
      * @param mongoClient the representations of the connection to a MongoDB instance
-     * @param dbName      the name of the database
+     * @param dbName the name of the database
      * @return a Datastore that you can use to interact with MongoDB
      */
     @SuppressWarnings("deprecation")
@@ -98,43 +91,53 @@ public class Morphia {
      * Creates a new Datastore for interacting with MongoDB using POJOs
      *
      * @param mongoClient the representations of the connection to a MongoDB instance
-     * @param mapper      a pre-configured Mapper for your POJOs
-     * @param dbName      the name of the database
+     * @param mapper a pre-configured Mapper for your POJOs
+     * @param dbName the name of the database
      * @return a Datastore that you can use to interact with MongoDB
      */
     @SuppressWarnings("deprecation")
-    public Datastore createDatastore(final MongoClient mongoClient, final Mapper mapper, final String dbName) {
+    public Datastore createDatastore(
+            final MongoClient mongoClient, final Mapper mapper, final String dbName) {
         return new DatastoreImpl(this, mapper, mongoClient, dbName);
     }
 
     /**
-     * Creates an entity and populates its state based on the dbObject given.  This method is primarily an internal method.  Reliance on
-     * this method may break your application in future releases.
+     * Creates an entity and populates its state based on the dbObject given. This method is
+     * primarily an internal method. Reliance on this method may break your application in future
+     * releases.
      *
-     * @param <T>         type of the entity
-     * @param datastore   the Datastore to use when fetching this reference
+     * @param <T> type of the entity
+     * @param datastore the Datastore to use when fetching this reference
      * @param entityClass type to create
-     * @param dbObject    the object state to use
+     * @param dbObject the object state to use
      * @return the newly created and populated entity
      */
-    public <T> T fromDBObject(final Datastore datastore, final Class<T> entityClass, final DBObject dbObject) {
+    public <T> T fromDBObject(
+            final Datastore datastore, final Class<T> entityClass, final DBObject dbObject) {
         return fromDBObject(datastore, entityClass, dbObject, mapper.createEntityCache());
     }
 
     /**
-     * Creates an entity and populates its state based on the dbObject given.  This method is primarily an internal method.  Reliance on
-     * this method may break your application in future releases.
+     * Creates an entity and populates its state based on the dbObject given. This method is
+     * primarily an internal method. Reliance on this method may break your application in future
+     * releases.
      *
-     * @param <T>         type of the entity
-     * @param datastore   the Datastore to use when fetching this reference
+     * @param <T> type of the entity
+     * @param datastore the Datastore to use when fetching this reference
      * @param entityClass type to create
-     * @param dbObject    the object state to use
-     * @param cache       the EntityCache to use to prevent multiple loads of the same entities over and over
+     * @param dbObject the object state to use
+     * @param cache the EntityCache to use to prevent multiple loads of the same entities over and
+     *     over
      * @return the newly created and populated entity
      */
-    public <T> T fromDBObject(final Datastore datastore, final Class<T> entityClass, final DBObject dbObject, final EntityCache cache) {
+    public <T> T fromDBObject(
+            final Datastore datastore,
+            final Class<T> entityClass,
+            final DBObject dbObject,
+            final EntityCache cache) {
         if (!entityClass.isInterface() && !mapper.isMapped(entityClass)) {
-            throw new MappingException("Trying to map to an unmapped class: " + entityClass.getName());
+            throw new MappingException(
+                    "Trying to map to an unmapped class: " + entityClass.getName());
         }
         try {
             return mapper.fromDBObject(datastore, entityClass, dbObject, cache);
@@ -143,19 +146,15 @@ public class Morphia {
         }
     }
 
-    /**
-     * @return the mapper used by this instance of Morphia
-     */
+    /** @return the mapper used by this instance of Morphia */
     public Mapper getMapper() {
         return mapper;
     }
 
     /**
-     * @return false.  Setting this value has no value functionally or performance-wise.
-     * 
+     * @return false. Setting this value has no value functionally or performance-wise.
      * @see <a href="https://github.com/MorphiaOrg/morphia/issues/1052">Issue #1052</a>
      */
-    
     public boolean getUseBulkWriteOperations() {
         return false;
     }
@@ -171,25 +170,21 @@ public class Morphia {
     }
 
     /**
-     * @return false.  Setting this value has no value functionally or performance-wise.
-     * 
+     * @return false. Setting this value has no value functionally or performance-wise.
      * @see <a href="https://github.com/MorphiaOrg/morphia/issues/1052">Issue #1052</a>
      */
-    
     public boolean isUseBulkWriteOperations() {
         return false;
     }
 
     /**
-     * Configures Morphia to use bulk writes.  Only useful with MongoDB 2.6+.
+     * Configures Morphia to use bulk writes. Only useful with MongoDB 2.6+.
      *
      * @param useBulkWriteOperations true if Morphia should use bulk writes
-     * @see <a href="https://github.com/MorphiaOrg/morphia/issues/1052">Issue #1052</a>
-     *  Setting this value has no value functionally or performance-wise.
+     * @see <a href="https://github.com/MorphiaOrg/morphia/issues/1052">Issue #1052</a> Setting this
+     *     value has no value functionally or performance-wise.
      */
-    
-    public void setUseBulkWriteOperations(final boolean useBulkWriteOperations) {
-    }
+    public void setUseBulkWriteOperations(final boolean useBulkWriteOperations) {}
 
     /**
      * Maps a set of classes
@@ -226,7 +221,8 @@ public class Morphia {
     }
 
     /**
-     * Tries to map all classes in the package specified. Fails if one of the classes is not valid for mapping.
+     * Tries to map all classes in the package specified. Fails if one of the classes is not valid
+     * for mapping.
      *
      * @param packageName the name of the package to process
      * @return the Morphia instance
@@ -238,14 +234,19 @@ public class Morphia {
     /**
      * Tries to map all classes in the package specified.
      *
-     * @param packageName          the name of the package to process
-     * @param ignoreInvalidClasses specifies whether to ignore classes in the package that cannot be mapped
+     * @param packageName the name of the package to process
+     * @param ignoreInvalidClasses specifies whether to ignore classes in the package that cannot be
+     *     mapped
      * @return the Morphia instance
      */
-    public synchronized Morphia mapPackage(final String packageName, final boolean ignoreInvalidClasses) {
+    public synchronized Morphia mapPackage(
+            final String packageName, final boolean ignoreInvalidClasses) {
         try {
-            for (final Class clazz : ReflectionUtils.getClasses(getClass().getClassLoader(), packageName,
-                mapper.getOptions().isMapSubPackages())) {
+            for (final Class clazz :
+                    ReflectionUtils.getClasses(
+                            getClass().getClassLoader(),
+                            packageName,
+                            mapper.getOptions().isMapSubPackages())) {
                 try {
                     final Embedded embeddedAnn = ReflectionUtils.getClassEmbeddedAnnotation(clazz);
                     final Entity entityAnn = ReflectionUtils.getClassEntityAnnotation(clazz);
@@ -278,9 +279,8 @@ public class Morphia {
     }
 
     /**
-     * Converts an entity to a DBObject.  This method is primarily an internal method. Reliance on this method may break your application
-     * in
-     * future releases.
+     * Converts an entity to a DBObject. This method is primarily an internal method. Reliance on
+     * this method may break your application in future releases.
      *
      * @param entity the entity to convert
      * @return the DBObject

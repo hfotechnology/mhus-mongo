@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.converters;
@@ -23,9 +21,7 @@ import dev.morphia.utils.IterHelper;
 import dev.morphia.utils.IterHelper.MapIterCallback;
 import dev.morphia.utils.ReflectionUtils;
 
-/**
- * @author Uwe Schaefer, (us@thomas-daily.de)
- */
+/** @author Uwe Schaefer, (us@thomas-daily.de) */
 public class MapOfValuesConverter extends TypeConverter {
     @Override
     @SuppressWarnings("unchecked")
@@ -34,15 +30,26 @@ public class MapOfValuesConverter extends TypeConverter {
             return null;
         }
 
-
         final Map values = getMapper().getOptions().getObjectFactory().createMap(mf);
-        new IterHelper<Object, Object>().loopMap(fromDBObject, new MapIterCallback<Object, Object>() {
-            @Override
-            public void eval(final Object k, final Object val) {
-                final Object objKey = getMapper().getConverters().decode(mf.getMapKeyClass(), k, mf);
-                values.put(objKey, val != null ? getMapper().getConverters().decode(mf.getSubClass(), val, mf) : null);
-            }
-        });
+        new IterHelper<Object, Object>()
+                .loopMap(
+                        fromDBObject,
+                        new MapIterCallback<Object, Object>() {
+                            @Override
+                            public void eval(final Object k, final Object val) {
+                                final Object objKey =
+                                        getMapper()
+                                                .getConverters()
+                                                .decode(mf.getMapKeyClass(), k, mf);
+                                values.put(
+                                        objKey,
+                                        val != null
+                                                ? getMapper()
+                                                        .getConverters()
+                                                        .decode(mf.getSubClass(), val, mf)
+                                                : null);
+                            }
+                        });
 
         return values;
     }

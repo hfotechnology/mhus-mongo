@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping;
@@ -28,8 +26,9 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.utils.ReflectionUtils;
 
 /**
- * This is a MappedField facade that allows us to convert and collect values to be gathered back in to a Map or Collection, e.g., rather
- * than directly on a mapped entity.  This are not mapped directly to a field on a class like MappedFields are.
+ * This is a MappedField facade that allows us to convert and collect values to be gathered back in
+ * to a Map or Collection, e.g., rather than directly on a mapped entity. This are not mapped
+ * directly to a field on a class like MappedFields are.
  */
 public class EphemeralMappedField extends MappedField {
     private ParameterizedType pType;
@@ -39,11 +38,12 @@ public class EphemeralMappedField extends MappedField {
     /**
      * Creates an EphemeralMappedField.
      *
-     * @param t      the parameterized type of the field
-     * @param mf     the parent MappedField
+     * @param t the parameterized type of the field
+     * @param mf the parent MappedField
      * @param mapper the Mapper to use
      */
-    public EphemeralMappedField(final ParameterizedType t, final MappedField mf, final Mapper mapper) {
+    public EphemeralMappedField(
+            final ParameterizedType t, final MappedField mf, final Mapper mapper) {
         super(mf.getField(), t, mapper);
         parent = mf;
         pType = t;
@@ -58,8 +58,8 @@ public class EphemeralMappedField extends MappedField {
     /**
      * Creates an EphemeralMappedField.
      *
-     * @param t      the type of the field
-     * @param mf     the parent MappedField
+     * @param t the type of the field
+     * @param mf the parent MappedField
      * @param mapper the Mapper to use
      */
     public EphemeralMappedField(final Type t, final MappedField mf, final Mapper mapper) {
@@ -68,12 +68,10 @@ public class EphemeralMappedField extends MappedField {
     }
 
     @Override
-    public void addAnnotation(final Class<? extends Annotation> clazz) {
-    }
+    public void addAnnotation(final Class<? extends Annotation> clazz) {}
 
     @Override
-    public void addAnnotation(final Class<? extends Annotation> clazz, final Annotation ann) {
-    }
+    public void addAnnotation(final Class<? extends Annotation> clazz, final Annotation ann) {}
 
     @Override
     public Object getDbObjectValue(final DBObject dbObj) {
@@ -143,16 +141,12 @@ public class EphemeralMappedField extends MappedField {
         return "";
     }
 
-    /**
-     * @return the parent MappedField
-     */
+    /** @return the parent MappedField */
     public MappedField getParent() {
         return parent;
     }
 
-    /**
-     * @return the value of the field
-     */
+    /** @return the value of the field */
     public Object getValue() {
         return value;
     }

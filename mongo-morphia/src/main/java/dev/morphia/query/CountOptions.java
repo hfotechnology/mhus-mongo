@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -81,7 +79,7 @@ public class CountOptions {
     }
 
     /**
-     * Gets the limit to apply.  The default is 0, which means there is no limit.
+     * Gets the limit to apply. The default is 0, which means there is no limit.
      *
      * @return the limit
      * @mongodb.driver.manual reference/method/cursor.limit/#cursor.limit Limit
@@ -91,7 +89,8 @@ public class CountOptions {
     }
 
     /**
-     * Gets the maximum execution time on the server for this operation.  The default is 0, which places no limit on the execution time.
+     * Gets the maximum execution time on the server for this operation. The default is 0, which
+     * places no limit on the execution time.
      *
      * @param timeUnit the time unit to return the result in
      * @return the maximum execution time in the given time unit
@@ -121,7 +120,7 @@ public class CountOptions {
     }
 
     /**
-     * Gets the number of documents to skip.  The default is 0.
+     * Gets the number of documents to skip. The default is 0.
      *
      * @return the number of documents to skip
      * @mongodb.driver.manual reference/method/cursor.skip/#cursor.skip Skip
@@ -156,7 +155,7 @@ public class CountOptions {
     /**
      * Sets the maximum execution time on the server for this operation.
      *
-     * @param maxTime  the max time
+     * @param maxTime the max time
      * @param timeUnit the time unit, which may not be null
      * @return this
      */
@@ -205,4 +204,3 @@ public class CountOptions {
         return options;
     }
 }
-

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
@@ -68,12 +66,15 @@ final class IndexHelper {
         this.database = database;
     }
 
-    private void calculateWeights(final Index index, final com.mongodb.client.model.IndexOptions indexOptions) {
+    private void calculateWeights(
+            final Index index, final com.mongodb.client.model.IndexOptions indexOptions) {
         Document weights = new Document();
         for (Field field : index.fields()) {
             if (field.weight() != -1) {
                 if (field.type() != IndexType.TEXT) {
-                    throw new MappingException("Weight values only apply to text indexes: " + Arrays.toString(index.fields()));
+                    throw new MappingException(
+                            "Weight values only apply to text indexes: "
+                                    + Arrays.toString(index.fields()));
                 }
                 weights.put(field.value(), field.weight());
             }
@@ -85,36 +86,39 @@ final class IndexHelper {
 
     Index convert(final Text text, final String nameToStore) {
         return new IndexBuilder()
-                   .options(text.options())
-                   .fields(Collections.<Field>singletonList(new FieldBuilder()
-                                                                .value(nameToStore)
-                                                                .type(IndexType.TEXT)
-                                                                .weight(text.value())));
+                .options(text.options())
+                .fields(
+                        Collections.<Field>singletonList(
+                                new FieldBuilder()
+                                        .value(nameToStore)
+                                        .type(IndexType.TEXT)
+                                        .weight(text.value())));
     }
 
     @SuppressWarnings("deprecation")
     Index convert(final Indexed indexed, final String nameToStore) {
         if (indexed.dropDups() || indexed.options().dropDups()) {
-            LOG.warn("Support for dropDups has been removed from the server.  Please remove this setting.");
+            LOG.warn(
+                    "Support for dropDups has been removed from the server.  Please remove this setting.");
         }
         final Map<String, Object> newOptions = extractOptions(indexed.options());
         final Map<String, Object> oldOptions = extractOldOptions(indexed);
         if (!oldOptions.isEmpty() && !newOptions.isEmpty()) {
-            throw new MappingException("Mixed usage of deprecated @Indexed values with the new @IndexOption values is not "
-                                       + "allowed.  Please migrate all settings to @IndexOptions");
+            throw new MappingException(
+                    "Mixed usage of deprecated @Indexed values with the new @IndexOption values is not "
+                            + "allowed.  Please migrate all settings to @IndexOptions");
         }
 
-        List<Field> fields = Collections.<Field>singletonList(new FieldBuilder()
-                                                                  .value(nameToStore)
-                                                                  .type(fromValue(indexed.value().toIndexValue())));
+        List<Field> fields =
+                Collections.<Field>singletonList(
+                        new FieldBuilder()
+                                .value(nameToStore)
+                                .type(fromValue(indexed.value().toIndexValue())));
         return newOptions.isEmpty()
-               ? new IndexBuilder()
-                     .options(new IndexOptionsBuilder()
-                                  .migrate(indexed))
-                     .fields(fields)
-               : new IndexBuilder()
-                     .options(indexed.options())
-                     .fields(fields);
+                ? new IndexBuilder()
+                        .options(new IndexOptionsBuilder().migrate(indexed))
+                        .fields(fields)
+                : new IndexBuilder().options(indexed.options()).fields(fields);
     }
 
     @SuppressWarnings("deprecation")
@@ -144,26 +148,31 @@ final class IndexHelper {
         return indexes;
     }
 
-    
-    private List<Index> collectNestedIndexes(final MappedClass mc, final List<MappedClass> parentMCs) {
+    private List<Index> collectNestedIndexes(
+            final MappedClass mc, final List<MappedClass> parentMCs) {
         List<Index> list = new ArrayList<Index>();
         for (final MappedField mf : mc.getPersistenceFields()) {
-            if (!mf.isTypeMongoCompatible() && !mf.hasAnnotation(Reference.class) && !mf.hasAnnotation(Serialized.class)
-                && !mf.hasAnnotation(NotSaved.class) && !mf.isTransient()) {
+            if (!mf.isTypeMongoCompatible()
+                    && !mf.hasAnnotation(Reference.class)
+                    && !mf.hasAnnotation(Serialized.class)
+                    && !mf.hasAnnotation(NotSaved.class)
+                    && !mf.isTransient()) {
 
                 final List<MappedClass> parents = new ArrayList<MappedClass>(parentMCs);
                 parents.add(mc);
 
                 List<MappedClass> classes = new ArrayList<MappedClass>();
-                MappedClass mappedClass = mapper.getMappedClass(mf.isSingleValue() ? mf.getType() : mf.getSubClass());
+                MappedClass mappedClass =
+                        mapper.getMappedClass(mf.isSingleValue() ? mf.getType() : mf.getSubClass());
                 classes.add(mappedClass);
                 if (mappedClass.isInterface() || mappedClass.isAbstract()) {
                     classes.addAll(mapper.getSubTypes(mappedClass));
                 }
                 for (MappedClass aClass : classes) {
                     for (Index index : collectIndexes(aClass, parents)) {
-                        LOG.warn("Embedded index generation is being removed from 2.0.  Please migrate any index definitions you need to "
-                                 + "the parent entity to ensure these indexes continue to be generated in future versions.");
+                        LOG.warn(
+                                "Embedded index generation is being removed from 2.0.  Please migrate any index definitions you need to "
+                                        + "the parent entity to ensure these indexes continue to be generated in future versions.");
                         list.add(new IndexBuilder(index, mf.getNameToStore()));
                     }
                 }
@@ -182,17 +191,24 @@ final class IndexHelper {
                     for (final Index index : indexes.value()) {
                         Index updated = index;
                         if (index.fields().length == 0) {
-                            LOG.warn(format("This index on '%s' is using deprecated configuration options.  Please update to use the "
-                                            + "fields value on @Index: %s", mc.getClazz().getName(), index.toString()));
-                            updated = new IndexBuilder()
-                                          .migrate(index);
+                            LOG.warn(
+                                    format(
+                                            "This index on '%s' is using deprecated configuration options.  Please update to use the "
+                                                    + "fields value on @Index: %s",
+                                            mc.getClazz().getName(), index.toString()));
+                            updated = new IndexBuilder().migrate(index);
                         }
                         List<Field> fields = new ArrayList<Field>();
                         for (Field field : updated.fields()) {
-                            fields.add(new FieldBuilder()
-                                           .value(findField(mc, index.options(), asList(field.value().split("\\."))))
-                                           .type(field.type())
-                                           .weight(field.weight()));
+                            fields.add(
+                                    new FieldBuilder()
+                                            .value(
+                                                    findField(
+                                                            mc,
+                                                            index.options(),
+                                                            asList(field.value().split("\\."))))
+                                            .type(field.type())
+                                            .weight(field.weight()));
                         }
 
                         list.add(replaceFields(updated, fields));
@@ -217,12 +233,14 @@ final class IndexHelper {
     }
 
     private MappingException pathFail(final MappedClass mc, final List<String> path) {
-        return new MappingException(format("Could not resolve path '%s' against '%s'.", join(path, '.'), mc.getClazz().getName()));
+        return new MappingException(
+                format(
+                        "Could not resolve path '%s' against '%s'.",
+                        join(path, '.'), mc.getClazz().getName()));
     }
 
     private Index replaceFields(final Index original, final List<Field> list) {
-        return new IndexBuilder(original)
-                   .fields(list);
+        return new IndexBuilder(original).fields(list);
     }
 
     @SuppressWarnings("unchecked")
@@ -230,7 +248,8 @@ final class IndexHelper {
         BsonDocumentWriter writer = new BsonDocumentWriter(new BsonDocument());
         writer.writeStartDocument();
         writer.writeName(key);
-        ((Encoder) database.getCodecRegistry().get(value.getClass())).encode(writer, value, ENCODER_CONTEXT);
+        ((Encoder) database.getCodecRegistry().get(value.getClass()))
+                .encode(writer, value, ENCODER_CONTEXT);
         writer.writeEndDocument();
         return writer.getDocument();
     }
@@ -240,11 +259,17 @@ final class IndexHelper {
         for (Field field : index.fields()) {
             String path;
             try {
-                path = findField(mc, index.options(), new ArrayList<String>(asList(field.value().split("\\."))));
+                path =
+                        findField(
+                                mc,
+                                index.options(),
+                                new ArrayList<String>(asList(field.value().split("\\."))));
             } catch (Exception e) {
                 path = field.value();
-                String message = format("The path '%s' can not be validated against '%s' and may represent an invalid index",
-                    path, mc.getClazz().getName());
+                String message =
+                        format(
+                                "The path '%s' can not be validated against '%s' and may represent an invalid index",
+                                path, mc.getClazz().getName());
                 if (!index.options().disableValidation()) {
                     throw new MappingException(message);
                 }
@@ -256,14 +281,17 @@ final class IndexHelper {
     }
 
     @SuppressWarnings("deprecation")
-    com.mongodb.client.model.IndexOptions convert(final IndexOptions options, final boolean background) {
+    com.mongodb.client.model.IndexOptions convert(
+            final IndexOptions options, final boolean background) {
         if (options.dropDups()) {
-            LOG.warn("Support for dropDups has been removed from the server.  Please remove this setting.");
+            LOG.warn(
+                    "Support for dropDups has been removed from the server.  Please remove this setting.");
         }
-        com.mongodb.client.model.IndexOptions indexOptions = new com.mongodb.client.model.IndexOptions()
-                                                                 .background(options.background() || background)
-                                                                 .sparse(options.sparse())
-                                                                 .unique(options.unique());
+        com.mongodb.client.model.IndexOptions indexOptions =
+                new com.mongodb.client.model.IndexOptions()
+                        .background(options.background() || background)
+                        .sparse(options.sparse())
+                        .unique(options.unique());
 
         if (!options.language().equals("")) {
             indexOptions.defaultLanguage(options.language());
@@ -289,16 +317,16 @@ final class IndexHelper {
 
     com.mongodb.client.model.Collation convert(final Collation collation) {
         return com.mongodb.client.model.Collation.builder()
-                                                 .locale(collation.locale())
-                                                 .backwards(collation.backwards())
-                                                 .caseLevel(collation.caseLevel())
-                                                 .collationAlternate(collation.alternate())
-                                                 .collationCaseFirst(collation.caseFirst())
-                                                 .collationMaxVariable(collation.maxVariable())
-                                                 .collationStrength(collation.strength())
-                                                 .normalization(collation.normalization())
-                                                 .numericOrdering(collation.numericOrdering())
-                                                 .build();
+                .locale(collation.locale())
+                .backwards(collation.backwards())
+                .caseLevel(collation.caseLevel())
+                .collationAlternate(collation.alternate())
+                .collationCaseFirst(collation.caseFirst())
+                .collationMaxVariable(collation.maxVariable())
+                .collationStrength(collation.strength())
+                .normalization(collation.normalization())
+                .numericOrdering(collation.numericOrdering())
+                .build();
     }
 
     String findField(final MappedClass mc, final IndexOptions options, final List<String> path) {
@@ -333,7 +361,12 @@ final class IndexHelper {
         if (path.size() > 1) {
             try {
                 Class concreteType = !mf.isSingleValue() ? mf.getSubClass() : mf.getConcreteType();
-                namePath += "." + findField(mapper.getMappedClass(concreteType), options, path.subList(1, path.size()));
+                namePath +=
+                        "."
+                                + findField(
+                                        mapper.getMappedClass(concreteType),
+                                        options,
+                                        path.subList(1, path.size()));
             } catch (MappingException e) {
                 if (!options.disableValidation()) {
                     throw pathFail(mc, path);
@@ -345,7 +378,8 @@ final class IndexHelper {
         return namePath;
     }
 
-    void createIndex(final MongoCollection collection, final MappedClass mc, final boolean background) {
+    void createIndex(
+            final MongoCollection collection, final MappedClass mc, final boolean background) {
         if (!mc.isInterface() && !mc.isAbstract()) {
             for (Index index : collectIndexes(mc, Collections.<MappedClass>emptyList())) {
                 createIndex(collection, mc, index, background);
@@ -353,11 +387,16 @@ final class IndexHelper {
         }
     }
 
-    void createIndex(final MongoCollection collection, final MappedClass mc, final Index index, final boolean background) {
+    void createIndex(
+            final MongoCollection collection,
+            final MappedClass mc,
+            final Index index,
+            final boolean background) {
         Index normalized = IndexBuilder.normalize(index);
 
         BsonDocument keys = calculateKeys(mc, normalized);
-        com.mongodb.client.model.IndexOptions indexOptions = convert(normalized.options(), background);
+        com.mongodb.client.model.IndexOptions indexOptions =
+                convert(normalized.options(), background);
         calculateWeights(normalized, indexOptions);
 
         collection.createIndex(keys, indexOptions);

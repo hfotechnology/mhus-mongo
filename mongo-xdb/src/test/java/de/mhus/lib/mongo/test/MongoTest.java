@@ -1,16 +1,14 @@
 /**
  * Copyright 2018 Mike Hummel
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package de.mhus.lib.mongo.test;
@@ -72,26 +70,26 @@ public class MongoTest {
         assertEquals(1, collection.countDocuments());
         assertEquals(obj, collection.find().first());
     }
-    
+
     @Test
     public void testMongoSchema() throws MException {
         Schema schema = new Schema();
         MoManager manager = new MoManager(client, schema);
-        
+
         // sample from http://mongodb.github.io/morphia/1.3/getting-started/quick-tour/
         final Employee elmer = new Employee("Elmer Fudd", 50000.0);
         manager.saveObject(null, null, elmer);
-        
+
         assertNotNull(elmer.getId());
-        
+
         final Employee bugs = new Employee("Bugs Bunny", 60000.0);
         manager.saveObject(null, null, bugs);
-        
+
         assertNotNull(bugs.getId());
 
         System.out.println("Created: " + elmer);
         System.out.println("ObjectId: " + MoUtil.toObjectId(elmer.getId()));
-        
+
         // get all
         {
             Query<Employee> q = manager.createQuery(Employee.class);
@@ -137,14 +135,13 @@ public class MongoTest {
             }
             assertEquals(1, cnt);
         }
-        
+
         // select by id
         Employee elmer2 = manager.getObject(Employee.class, elmer.getId());
         assertNotNull(elmer2);
         assertNotNull(elmer2.getId());
         assertEquals(elmer.getName(), elmer2.getName());
-        
-        
+
         final Employee daffy = new Employee("Daffy Duck", 40000.0);
         manager.saveObject(null, null, daffy);
 
@@ -155,12 +152,12 @@ public class MongoTest {
         elmer.getDirectReports().add(pepe);
 
         manager.saveObject(null, null, elmer);
-        
+
         // test dynamic values
-        
+
         elmer.getValues().put("color", "white");
         manager.saveObject(null, null, elmer);
-        
+
         // search
         // get one
         {
@@ -176,24 +173,20 @@ public class MongoTest {
             }
             assertEquals(1, cnt);
         }
-        
-        
+
         // test DbMetadata
-        
+
         MoMetadata asterix = manager.inject(new MoMetadata("Asterix"));
         asterix.save();
-        
+
         assertNotNull(asterix.getId());
-        
+
         MoMetadata obelix = manager.inject(new MoMetadata("Obelix"));
         obelix.save();
-        
+
         assertNotNull(obelix.getId());
-               
-        
-        
     }
-    
+
     @Test
     public void testUUIDConverter() {
         ObjectId oid = new ObjectId("5a58a8352c3439f468cd8fcf");
@@ -204,6 +197,4 @@ public class MongoTest {
         System.out.println(oid2);
         assertEquals(oid.toHexString(), oid2.toHexString());
     }
-    
-    
 }

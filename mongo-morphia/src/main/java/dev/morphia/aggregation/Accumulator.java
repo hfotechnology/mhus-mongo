@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.aggregation;
@@ -21,9 +19,7 @@ import java.util.List;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-/**
- * Defines an accumulator for use in an aggregation pipeline.
- */
+/** Defines an accumulator for use in an aggregation pipeline. */
 public class Accumulator implements AggregationElement {
     private final String operation;
     private final Object value;
@@ -32,7 +28,7 @@ public class Accumulator implements AggregationElement {
      * Defines an accumulator for use in an aggregation pipeline.
      *
      * @param operation the accumulator operation
-     * @param field     the field to use
+     * @param field the field to use
      */
     public Accumulator(final String operation, final String field) {
         this(operation, (Object) ("$" + field));
@@ -42,7 +38,7 @@ public class Accumulator implements AggregationElement {
      * Defines an accumulator for use in an aggregation pipeline.
      *
      * @param operation the accumulator operation
-     * @param field     the field to use
+     * @param field the field to use
      */
     public Accumulator(final String operation, final Object field) {
         this.operation = operation;
@@ -53,7 +49,7 @@ public class Accumulator implements AggregationElement {
      * Defines an accumulator for use in an aggregation pipeline.
      *
      * @param operation the accumulator operation
-     * @param field     the field to use
+     * @param field the field to use
      * @return an Accumulator
      */
     public static Accumulator accumulator(final String operation, final String field) {
@@ -64,32 +60,24 @@ public class Accumulator implements AggregationElement {
      * Defines an accumulator for use in an aggregation pipeline.
      *
      * @param operation the accumulator operation
-     * @param field     the field to use
+     * @param field the field to use
      * @return an Accumulator
      */
     public static Accumulator accumulator(final String operation, final Object field) {
         return new Accumulator(operation, field);
     }
 
-    /**
-     * @return the value for this accumulator
-     *  use {@link #getValue()}
-     */
-    
+    /** @return the value for this accumulator use {@link #getValue()} */
     public Object getField() {
         return getValue();
     }
 
-    /**
-     * @return the operation for this accumulator
-     */
+    /** @return the operation for this accumulator */
     public String getOperation() {
         return operation;
     }
 
-    /**
-     * @return the value for this accumulator
-     */
+    /** @return the value for this accumulator */
     public Object getValue() {
         return value;
     }

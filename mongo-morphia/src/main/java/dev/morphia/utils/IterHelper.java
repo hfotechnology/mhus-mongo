@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.utils;
-
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -22,7 +19,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bson.BSONObject;
-
 
 /**
  * Helper to allow for optimizations for different types of Map/Collections
@@ -35,7 +31,7 @@ public final class IterHelper<K, V> {
     /**
      * Process a Map
      *
-     * @param x        the object to process
+     * @param x the object to process
      * @param callback the callback
      */
     @SuppressWarnings("unchecked")
@@ -72,13 +68,13 @@ public final class IterHelper<K, V> {
                 callback.eval((K) k, (V) m.get(k));
             }
         }
-
     }
 
     /**
-     * Calls eval for each entry found, or just once if the "x" isn't iterable/collection/list/etc. with "x"
+     * Calls eval for each entry found, or just once if the "x" isn't iterable/collection/list/etc.
+     * with "x"
      *
-     * @param x        the object process
+     * @param x the object process
      * @param callback the callback
      */
     @SuppressWarnings({"unchecked"})
@@ -87,7 +83,7 @@ public final class IterHelper<K, V> {
             return;
         }
 
-        //A collection
+        // A collection
         if (x instanceof Collection<?>) {
             final Collection<?> l = (Collection<?>) x;
             for (final Object o : l) {
@@ -96,7 +92,7 @@ public final class IterHelper<K, V> {
             return;
         }
 
-        //An array of Object[]
+        // An array of Object[]
         if (x.getClass().isArray()) {
             for (final Object o : (Object[]) x) {
                 callback.eval((V) o);

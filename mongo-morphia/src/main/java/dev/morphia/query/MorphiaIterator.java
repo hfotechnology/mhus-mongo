@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
-
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -27,15 +24,12 @@ import dev.morphia.Datastore;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.cache.EntityCache;
 
-
 /**
  * @param <T> the original type being iterated
  * @param <V> the type of the values returned
  * @author Scott Hernandez
- * @see MorphiaKeyIterator
- *  this is being replaced by {@link MongoCursor}
+ * @see MorphiaKeyIterator this is being replaced by {@link MongoCursor}
  */
-
 public class MorphiaIterator<T, V> implements Iterable<V>, Iterator<V> {
     private final Iterator<DBObject> wrapped;
     private final Mapper mapper;
@@ -48,15 +42,21 @@ public class MorphiaIterator<T, V> implements Iterable<V>, Iterator<V> {
 
     /**
      * Creates a MorphiaIterator
-     * @param datastore  the Datastore to use when fetching this reference
-     * @param it         the Iterator to use
-     * @param mapper     the Mapper to use
-     * @param clazz      the original type being iterated
+     *
+     * @param datastore the Datastore to use when fetching this reference
+     * @param it the Iterator to use
+     * @param mapper the Mapper to use
+     * @param clazz the original type being iterated
      * @param collection the mongodb collection
-     * @param cache      the EntityCache
+     * @param cache the EntityCache
      */
-    public MorphiaIterator(final Datastore datastore, final Iterator<DBObject> it, final Mapper mapper, final Class<T> clazz,
-                           final String collection, final EntityCache cache) {
+    public MorphiaIterator(
+            final Datastore datastore,
+            final Iterator<DBObject> it,
+            final Mapper mapper,
+            final Class<T> clazz,
+            final String collection,
+            final EntityCache cache) {
         wrapped = it;
         this.mapper = mapper;
         this.clazz = clazz;
@@ -65,53 +65,39 @@ public class MorphiaIterator<T, V> implements Iterable<V>, Iterator<V> {
         this.datastore = datastore;
     }
 
-    /**
-     * Closes the underlying cursor.
-     */
+    /** Closes the underlying cursor. */
     public void close() {
         if (wrapped != null && wrapped instanceof DBCursor) {
             ((DBCursor) wrapped).close();
         }
     }
 
-    /**
-     * @return the original class type.
-     */
+    /** @return the original class type. */
     public Class<T> getClazz() {
         return clazz;
     }
 
-    /**
-     * @return the mongodb collection
-     */
+    /** @return the mongodb collection */
     public String getCollection() {
         return collection;
     }
 
-    /**
-     * @return the underlying DBCursor
-     */
+    /** @return the underlying DBCursor */
     public DBCursor getCursor() {
         return (DBCursor) wrapped;
     }
 
-    /**
-     * @return the time spent calling the driver in ms
-     */
+    /** @return the time spent calling the driver in ms */
     public long getDriverTime() {
         return driverTime;
     }
 
-    /**
-     * @return the Mapper being used
-     */
+    /** @return the Mapper being used */
     public Mapper getMapper() {
         return mapper;
     }
 
-    /**
-     * @return the time spent calling the mapper in ms
-     */
+    /** @return the time spent calling the mapper in ms */
     public long getMapperTime() {
         return mapperTime;
     }

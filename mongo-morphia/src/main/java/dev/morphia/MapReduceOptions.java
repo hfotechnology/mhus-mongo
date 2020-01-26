@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
@@ -33,10 +31,8 @@ import dev.morphia.utils.Assert;
  * This defines options that can be applied to a mapreduce job
  *
  * @param <T> the type of the output
- * @since 1.3
- *  This feature will not be supported in 2.0
+ * @since 1.3 This feature will not be supported in 2.0
  */
-
 public class MapReduceOptions<T> {
     private String outputDB;
     private String outputCollection;
@@ -94,7 +90,8 @@ public class MapReduceOptions<T> {
     /**
      * Sets the (optional) JavaScript Mode
      *
-     * @param jsMode Specifies whether to convert intermediate data into BSON format between the execution of the map and reduce functions
+     * @param jsMode Specifies whether to convert intermediate data into BSON format between the
+     *     execution of the map and reduce functions
      * @return this
      */
     public MapReduceOptions<T> jsMode(final Boolean jsMode) {
@@ -114,7 +111,8 @@ public class MapReduceOptions<T> {
     }
 
     /**
-     * Set the JavaScript function that associates or "maps" a value with a key and emits the key and value pair.
+     * Set the JavaScript function that associates or "maps" a value with a key and emits the key
+     * and value pair.
      *
      * @param map the JavaScript function
      * @return this
@@ -129,7 +127,8 @@ public class MapReduceOptions<T> {
     /**
      * Sets the max execution time for this command, in the given time unit.
      *
-     * @param maxTimeMS the maximum execution time in milliseconds. A non-zero value requires a server version &gt;= 2.6
+     * @param maxTimeMS the maximum execution time in milliseconds. A non-zero value requires a
+     *     server version &gt;= 2.6
      * @return this
      * @mongodb.server.release 2.6
      */
@@ -139,7 +138,8 @@ public class MapReduceOptions<T> {
     }
 
     /**
-     * Sets the input collection for the job should that collection differ from the mapped collection used in the query
+     * Sets the input collection for the job should that collection differ from the mapped
+     * collection used in the query
      *
      * @param name the collection name
      * @return this
@@ -183,7 +183,7 @@ public class MapReduceOptions<T> {
     }
 
     /**
-     * Sets the query defining the input for the job.  Must not be null.
+     * Sets the query defining the input for the job. Must not be null.
      *
      * @param query the query to use
      * @return this
@@ -195,7 +195,8 @@ public class MapReduceOptions<T> {
     }
 
     /**
-     * Sets the read preference for this command. See the documentation for {@link ReadPreference} for more information.
+     * Sets the read preference for this command. See the documentation for {@link ReadPreference}
+     * for more information.
      *
      * @param preference Read Preference to use
      * @return this
@@ -206,7 +207,8 @@ public class MapReduceOptions<T> {
     }
 
     /**
-     * Sets the JavaScript function that "reduces" to a single object all the values associated with a particular key.
+     * Sets the JavaScript function that "reduces" to a single object all the values associated with
+     * a particular key.
      *
      * @param reduce the javascript function
      * @return this
@@ -269,11 +271,18 @@ public class MapReduceOptions<T> {
             throw new QueryException("mapReduce does not allow the offset/retrievedFields query ");
         }
 
-        final DBCollection dbColl = inputCollection != null ? getQuery().getCollection().getDB().getCollection(inputCollection)
-                                                            : query.getCollection();
-        final String target = outputCollection != null ? outputCollection : mapper.getMappedClass(resultType).getCollectionName();
+        final DBCollection dbColl =
+                inputCollection != null
+                        ? getQuery().getCollection().getDB().getCollection(inputCollection)
+                        : query.getCollection();
+        final String target =
+                outputCollection != null
+                        ? outputCollection
+                        : mapper.getMappedClass(resultType).getCollectionName();
 
-        final MapReduceCommand command = new MapReduceCommand(dbColl, map, reduce, target, outputType, query.getQueryObject());
+        final MapReduceCommand command =
+                new MapReduceCommand(
+                        dbColl, map, reduce, target, outputType, query.getQueryObject());
         command.setBypassDocumentValidation(bypassDocumentValidation);
         command.setCollation(collation);
         command.setFinalize(finalize);

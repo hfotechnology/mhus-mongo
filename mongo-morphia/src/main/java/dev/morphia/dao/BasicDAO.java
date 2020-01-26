@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.dao;
@@ -39,34 +37,31 @@ import dev.morphia.query.UpdateResults;
  * @param <T> the type of the entity
  * @param <K> the type of the key
  * @author Olafur Gauti Gudmundsson
- * @author Scott Hernandez
- *  This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
+ * @author Scott Hernandez This interface poorly tracks Datastore's API. Use Datastore directly or
+ *     wrap in an application specific DAO
  */
-
 @SuppressWarnings({"WeakerAccess", "deprecation", "unused"})
 public class BasicDAO<T, K> implements DAO<T, K> {
-    //CHECKSTYLE:OFF
-    /**
-     *  use {@link #getEntityClass()}
-     */
-    
+    // CHECKSTYLE:OFF
+    /** use {@link #getEntityClass()} */
     protected Class<T> entityClazz;
-    /**
-     *  use {@link #getDatastore()}
-     */
-    
+    /** use {@link #getDatastore()} */
     protected dev.morphia.DatastoreImpl ds;
-    //CHECKSTYLE:ON
+    // CHECKSTYLE:ON
 
     /**
      * Create a new BasicDAO
      *
      * @param entityClass the class of the POJO you want to persist using this DAO
      * @param mongoClient the representations of the connection to a MongoDB instance
-     * @param morphia     a Morphia instance
-     * @param dbName      the name of the database
+     * @param morphia a Morphia instance
+     * @param dbName the name of the database
      */
-    public BasicDAO(final Class<T> entityClass, final MongoClient mongoClient, final Morphia morphia, final String dbName) {
+    public BasicDAO(
+            final Class<T> entityClass,
+            final MongoClient mongoClient,
+            final Morphia morphia,
+            final String dbName) {
         initDS(mongoClient, morphia, dbName);
         initType(entityClass);
     }
@@ -75,7 +70,7 @@ public class BasicDAO<T, K> implements DAO<T, K> {
      * Create a new BasicDAO
      *
      * @param entityClass the class of the POJO you want to persist using this DAO
-     * @param ds          the Datastore which gives access to the MongoDB instance for this DAO
+     * @param ds the Datastore which gives access to the MongoDB instance for this DAO
      */
     public BasicDAO(final Class<T> entityClass, final Datastore ds) {
         this.ds = (dev.morphia.DatastoreImpl) ds;
@@ -83,24 +78,31 @@ public class BasicDAO<T, K> implements DAO<T, K> {
     }
 
     /**
-     * Only calls this from your derived class when you explicitly declare the generic types with concrete classes
-     * <p/>
-     * {@code class MyDao extends DAO<MyEntity, String>}
+     * Only calls this from your derived class when you explicitly declare the generic types with
+     * concrete classes
+     *
+     * <p>{@code class MyDao extends DAO<MyEntity, String>}
      *
      * @param mongoClient the representations of the connection to a MongoDB instance
-     * @param morphia     a Morphia instance
-     * @param dbName      the name of the database
+     * @param morphia a Morphia instance
+     * @param dbName the name of the database
      */
     @SuppressWarnings("unchecked")
     protected BasicDAO(final MongoClient mongoClient, final Morphia morphia, final String dbName) {
         initDS(mongoClient, morphia, dbName);
-        initType(((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]));
+        initType(
+                ((Class<T>)
+                        ((ParameterizedType) getClass().getGenericSuperclass())
+                                .getActualTypeArguments()[0]));
     }
 
     @SuppressWarnings("unchecked")
     protected BasicDAO(final Datastore ds) {
         this.ds = (dev.morphia.DatastoreImpl) ds;
-        initType(((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]));
+        initType(
+                ((Class<T>)
+                        ((ParameterizedType) getClass().getGenericSuperclass())
+                                .getActualTypeArguments()[0]));
     }
 
     @Override
@@ -263,20 +265,12 @@ public class BasicDAO<T, K> implements DAO<T, K> {
         return ds.update(query, ops, new UpdateOptions());
     }
 
-    /**
-     * @return the Datastore used by this DAO
-     *  use {@link #getDatastore()}
-     */
-    
+    /** @return the Datastore used by this DAO use {@link #getDatastore()} */
     public dev.morphia.DatastoreImpl getDs() {
         return ds;
     }
 
-    /**
-     * @return the entity class
-     *  use {@link #getEntityClass()} instead
-     */
-    
+    /** @return the entity class use {@link #getEntityClass()} instead */
     public Class<T> getEntityClazz() {
         return entityClazz;
     }
@@ -290,9 +284,7 @@ public class BasicDAO<T, K> implements DAO<T, K> {
         ds.getMapper().addMappedClass(type);
     }
 
-    /**
-     * Converts from a List<Key> to their id values
-     */
+    /** Converts from a List<Key> to their id values */
     protected List<?> keysToIds(final List<Key<T>> keys) {
         final List<Object> ids = new ArrayList<Object>(keys.size() * 2);
         for (final Key<T> key : keys) {
@@ -300,5 +292,4 @@ public class BasicDAO<T, K> implements DAO<T, K> {
         }
         return ids;
     }
-
 }

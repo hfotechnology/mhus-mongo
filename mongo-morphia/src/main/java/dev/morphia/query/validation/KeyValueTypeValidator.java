@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.validation;
@@ -21,14 +19,11 @@ import java.util.List;
 
 import dev.morphia.Key;
 
-/**
- * This makes sure that the field type and the Key type match.
- */
+/** This makes sure that the field type and the Key type match. */
 public final class KeyValueTypeValidator extends ValueValidator {
     private static final KeyValueTypeValidator INSTANCE = new KeyValueTypeValidator();
 
-    private KeyValueTypeValidator() {
-    }
+    private KeyValueTypeValidator() {}
 
     /**
      * Get the instance.
@@ -45,12 +40,17 @@ public final class KeyValueTypeValidator extends ValueValidator {
     }
 
     @Override
-    protected void validate(final Class<?> type, final Object value, final List<ValidationFailure> validationFailures) {
+    protected void validate(
+            final Class<?> type,
+            final Object value,
+            final List<ValidationFailure> validationFailures) {
         if (!type.equals(((Key) value).getType()) && !type.equals(Key.class)) {
-            validationFailures.add(new ValidationFailure(format("When value is a Key, the type needs to be the right kind of class. "
-                                                                + "Type was %s and value was '%s'", type, value)
-            ));
+            validationFailures.add(
+                    new ValidationFailure(
+                            format(
+                                    "When value is a Key, the type needs to be the right kind of class. "
+                                            + "Type was %s and value was '%s'",
+                                    type, value)));
         }
     }
 }
-

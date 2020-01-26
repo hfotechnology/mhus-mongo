@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.experimental;
@@ -37,8 +35,7 @@ public abstract class MorphiaReference<T> {
     private Datastore datastore;
     private MappedClass mappedClass;
 
-    MorphiaReference() {
-    }
+    MorphiaReference() {}
 
     MorphiaReference(final Datastore datastore, final MappedClass mappedClass) {
         this.datastore = datastore;
@@ -55,9 +52,7 @@ public abstract class MorphiaReference<T> {
         return encoded;
     }
 
-    /**
-     * @return returns the referenced entity if it exists.  May return null.
-     */
+    /** @return returns the referenced entity if it exists. May return null. */
     public abstract T get();
 
     /**
@@ -67,8 +62,8 @@ public abstract class MorphiaReference<T> {
     public abstract boolean isResolved();
 
     /**
-     * @param mapper            the mapper
-     * @param value             the value
+     * @param mapper the mapper
+     * @param value the value
      * @param optionalExtraInfo the MappedField
      * @return the encoded vale
      * @morphia.internal
@@ -93,6 +88,7 @@ public abstract class MorphiaReference<T> {
 
     /**
      * Wraps an value in a MorphiaReference to storing on an entity
+     *
      * @param value the value wrap
      * @param <V> the type of the value
      * @return the MorphiaReference wrapper

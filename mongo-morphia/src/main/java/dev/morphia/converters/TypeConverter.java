@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.converters;
@@ -20,15 +18,12 @@ import java.util.Arrays;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 
-/**
- * @author Uwe Schaefer, (us@thomas-daily.de)
- */
+/** @author Uwe Schaefer, (us@thomas-daily.de) */
 public abstract class TypeConverter {
     private Mapper mapper;
     private Class[] supportedTypes;
 
-    protected TypeConverter() {
-    }
+    protected TypeConverter() {}
 
     protected TypeConverter(final Class... types) {
         supportedTypes = copy(types);
@@ -37,7 +32,7 @@ public abstract class TypeConverter {
     /**
      * decode the {@link com.mongodb.DBObject} and provide the corresponding java (type-safe) object
      *
-     * @param targetClass  the class to create and populate
+     * @param targetClass the class to create and populate
      * @param fromDBObject the DBObject to use when populating the new instance
      * @return the new instance
      */
@@ -46,16 +41,17 @@ public abstract class TypeConverter {
     }
 
     /**
-     * decode the {@link com.mongodb.DBObject} and provide the corresponding java (type-safe) object <br><b>NOTE: optionalExtraInfo might
-     * be
-     * null</b>
+     * decode the {@link com.mongodb.DBObject} and provide the corresponding java (type-safe) object
+     * <br>
+     * <b>NOTE: optionalExtraInfo might be null</b>
      *
-     * @param targetClass       the class to create and populate
-     * @param fromDBObject      the DBObject to use when populating the new instance
+     * @param targetClass the class to create and populate
+     * @param fromDBObject the DBObject to use when populating the new instance
      * @param optionalExtraInfo the MappedField that contains the metadata useful for decoding
      * @return the new instance
      */
-    public abstract Object decode(Class<?> targetClass, Object fromDBObject, MappedField optionalExtraInfo);
+    public abstract Object decode(
+            Class<?> targetClass, Object fromDBObject, MappedField optionalExtraInfo);
 
     /**
      * encode the type safe java object into the corresponding {@link com.mongodb.DBObject}
@@ -70,7 +66,7 @@ public abstract class TypeConverter {
     /**
      * encode the (type-safe) java object into the corresponding {@link com.mongodb.DBObject}
      *
-     * @param value             The object to encode
+     * @param value The object to encode
      * @param optionalExtraInfo the MappedField that contains the metadata useful for decoding
      * @return the encoded version of the object
      */
@@ -78,9 +74,7 @@ public abstract class TypeConverter {
         return value; // as a default impl
     }
 
-    /**
-     * @return the mapper used by the converter
-     */
+    /** @return the mapper used by the converter */
     public Mapper getMapper() {
         return mapper;
     }
@@ -94,20 +88,12 @@ public abstract class TypeConverter {
         this.mapper = mapper;
     }
 
-    /**
-     * @return an array of supported convertable types
-     *  use #getSupportedTypes()
-     */
-    
+    /** @return an array of supported convertable types use #getSupportedTypes() */
     public Class[] getSupportTypes() {
         return copy(supportedTypes);
     }
 
-    /**
-     * @param supportTypes the types this converter supports
-     *  use #setSupportedTypes(Class[])
-     */
-    
+    /** @param supportTypes the types this converter supports use #setSupportedTypes(Class[]) */
     public void setSupportTypes(final Class[] supportTypes) {
         this.supportedTypes = copy(supportTypes);
     }
@@ -122,23 +108,17 @@ public abstract class TypeConverter {
         return obj != null && getClass().equals(obj.getClass());
     }
 
-    /**
-     * checks if the class is supported for this converter.
-     */
+    /** checks if the class is supported for this converter. */
     protected boolean isSupported(final Class<?> c, final MappedField optionalExtraInfo) {
         return false;
     }
 
-    /**
-     * checks if Class f is in classes *
-     */
+    /** checks if Class f is in classes * */
     protected boolean oneOf(final Class f, final Class... classes) {
         return oneOfClasses(f, classes);
     }
 
-    /**
-     * checks if Class f is in classes *
-     */
+    /** checks if Class f is in classes * */
     protected boolean oneOfClasses(final Class f, final Class[] classes) {
         for (final Class c : classes) {
             if (c.equals(f)) {
@@ -152,9 +132,7 @@ public abstract class TypeConverter {
         return array == null ? null : Arrays.copyOf(array, array.length);
     }
 
-    /**
-     * @return an array of supported convertable types
-     */
+    /** @return an array of supported convertable types */
     final Class[] getSupportedTypes() {
         return copy(supportedTypes);
     }
@@ -168,16 +146,12 @@ public abstract class TypeConverter {
         this.supportedTypes = copy(supportedTypes);
     }
 
-    /**
-     * checks if the class is supported for this converter.
-     */
+    /** checks if the class is supported for this converter. */
     final boolean canHandle(final Class c) {
         return isSupported(c, null);
     }
 
-    /**
-     * checks if the MappedField is supported for this converter.
-     */
+    /** checks if the MappedField is supported for this converter. */
     final boolean canHandle(final MappedField mf) {
         return isSupported(mf.getType(), mf);
     }

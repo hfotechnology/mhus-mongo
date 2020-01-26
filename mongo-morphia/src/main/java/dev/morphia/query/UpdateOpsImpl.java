@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
-
 
 import static dev.morphia.utils.ReflectionUtils.iterToList;
 import static java.util.Collections.singletonList;
@@ -32,7 +29,6 @@ import dev.morphia.internal.PathTarget;
 import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 
-
 /**
  * @param <T> the type to update
  * @author Scott Hernandez
@@ -47,7 +43,7 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
     /**
      * Creates an UpdateOpsImpl for the type given.
      *
-     * @param type   the type to update
+     * @param type the type to update
      * @param mapper the Mapper to use
      */
     public UpdateOpsImpl(final Class<T> type, final Mapper mapper) {
@@ -56,13 +52,11 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
     }
 
     @Override
-    
     public UpdateOperations<T> add(final String field, final Object value) {
         return addToSet(field, value);
     }
 
     @Override
-    
     public UpdateOperations<T> add(final String field, final Object value, final boolean addDups) {
         if (value == null) {
             throw new QueryException("Value cannot be null.");
@@ -79,8 +73,8 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
     }
 
     @Override
-    
-    public UpdateOperations<T> addAll(final String field, final List<?> values, final boolean addDups) {
+    public UpdateOperations<T> addAll(
+            final String field, final List<?> values, final boolean addDups) {
         if (values == null || values.isEmpty()) {
             throw new QueryException("Values cannot be null or empty.");
         }
@@ -115,11 +109,15 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
 
     @Override
     public UpdateOperations<T> push(final String field, final Object value) {
-        return push(field, value instanceof List ? (List<?>) value : singletonList(value), new PushOptions());
+        return push(
+                field,
+                value instanceof List ? (List<?>) value : singletonList(value),
+                new PushOptions());
     }
 
     @Override
-    public UpdateOperations<T> push(final String field, final Object value, final PushOptions options) {
+    public UpdateOperations<T> push(
+            final String field, final Object value, final PushOptions options) {
         return push(field, value instanceof List ? (List<?>) value : singletonList(value), options);
     }
 
@@ -129,14 +127,19 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
     }
 
     @Override
-    public UpdateOperations<T> push(final String field, final List<?> values, final PushOptions options) {
+    public UpdateOperations<T> push(
+            final String field, final List<?> values, final PushOptions options) {
         if (values == null || values.isEmpty()) {
             throw new QueryException("Values cannot be null or empty.");
         }
 
-        PathTarget pathTarget = new PathTarget(mapper, mapper.getMappedClass(clazz), field, validateNames);
+        PathTarget pathTarget =
+                new PathTarget(mapper, mapper.getMappedClass(clazz), field, validateNames);
 
-        BasicDBObject dbObject = new BasicDBObject(UpdateOperator.EACH.val(), mapper.toMongoObject(pathTarget.getTarget(), null, values));
+        BasicDBObject dbObject =
+                new BasicDBObject(
+                        UpdateOperator.EACH.val(),
+                        mapper.toMongoObject(pathTarget.getTarget(), null, values));
         options.update(dbObject);
         addOperation(UpdateOperator.PUSH, pathTarget.translatedPath(), dbObject);
 
@@ -259,9 +262,7 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
         return this;
     }
 
-    /**
-     * @return the operations listed
-     */
+    /** @return the operations listed */
     public DBObject getOps() {
         return new BasicDBObject(ops);
     }
@@ -276,16 +277,15 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
         this.ops = (Map<String, Map<String, Object>>) ops;
     }
 
-    /**
-     * @return true if isolated
-     */
+    /** @return true if isolated */
     @Override
     public boolean isIsolated() {
         return isolated;
     }
 
-    //TODO Clean this up a little.
-    protected void add(final UpdateOperator op, final String f, final Object value, final boolean convert) {
+    // TODO Clean this up a little.
+    protected void add(
+            final UpdateOperator op, final String f, final Object value, final boolean convert) {
         if (value == null) {
             throw new QueryException("Val cannot be null");
         }
@@ -301,7 +301,6 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
                 val = mapper.toMongoObject(mf, null, value);
             }
         }
-
 
         if (UpdateOperator.ADD_TO_SET_EACH.equals(op)) {
             val = new BasicDBObject(UpdateOperator.EACH.val(), val);
@@ -332,5 +331,4 @@ public class UpdateOpsImpl<T> implements UpdateOperations<T> {
 
         return list;
     }
-
 }

@@ -1,21 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package dev.morphia.annotations;
-
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -25,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import dev.morphia.mapping.Mapper;
-
 
 /**
  * Optional annotation for specifying persistence behavior
@@ -39,13 +34,9 @@ import dev.morphia.mapping.Mapper;
 @Target(ElementType.FIELD)
 public @interface Property {
 
-    /**
-     * @return the concrete class to instantiate.
-     */
+    /** @return the concrete class to instantiate. */
     Class<?> concreteClass() default Object.class;
 
-    /**
-     * @return the field name to use in the document.  Defaults to the java field name.
-     */
+    /** @return the field name to use in the document. Defaults to the java field name. */
     String value() default Mapper.IGNORED_FIELDNAME;
 }

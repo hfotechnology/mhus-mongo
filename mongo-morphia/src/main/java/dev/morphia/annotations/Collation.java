@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.annotations;
@@ -22,13 +20,15 @@ import com.mongodb.client.model.CollationStrength;
 
 /**
  * Defines the collation options for an index
+ *
  * @since 1.3
  */
 public @interface Collation {
     /**
-     * Causes secondary differences to be considered in reverse order, as it is done in the French language
+     * Causes secondary differences to be considered in reverse order, as it is done in the French
+     * language
      *
-     * @return  the backwards value
+     * @return the backwards value
      */
     boolean backwards() default false;
 
@@ -41,18 +41,16 @@ public @interface Collation {
 
     /**
      * @return the locale
-     *
      * @see <a href="http://userguide.icu-project.org/locale">ICU User Guide - Locale</a>
      */
     String locale();
 
-    /**
-     * @return the normalization value.  If true, normalizes text into Unicode NFD.
-     */
+    /** @return the normalization value. If true, normalizes text into Unicode NFD. */
     boolean normalization() default false;
 
     /**
-     * @return  the numeric ordering.  if true will order numbers based on numerical order and not collation order
+     * @return the numeric ordering. if true will order numbers based on numerical order and not
+     *     collation order
      */
     boolean numericOrdering() default false;
 
@@ -70,13 +68,9 @@ public @interface Collation {
      */
     CollationCaseFirst caseFirst() default CollationCaseFirst.OFF;
 
-    /**
-     * @return the maxVariable
-     */
+    /** @return the maxVariable */
     CollationMaxVariable maxVariable() default CollationMaxVariable.PUNCT;
 
-    /**
-     * @return the collation strength
-     */
+    /** @return the collation strength */
     CollationStrength strength() default CollationStrength.TERTIARY;
 }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.internal;
@@ -41,20 +39,24 @@ public class MorphiaKeyCursor<T> implements MongoCursor<Key<T>> {
     private final String collection;
     private final Datastore datastore;
 
-
     /**
      * Create
-     * @param datastore  the Datastore to use when fetching this reference
-     * @param cursor     the cursor to use
-     * @param mapper     the Mapper to use
-     * @param clazz      the original type being iterated
+     *
+     * @param datastore the Datastore to use when fetching this reference
+     * @param cursor the cursor to use
+     * @param mapper the Mapper to use
+     * @param clazz the original type being iterated
      * @param collection the mongodb collection
      */
-    public MorphiaKeyCursor(final Datastore datastore, final Cursor cursor, final Mapper mapper,
-                            final Class<T> clazz, final String collection) {
+    public MorphiaKeyCursor(
+            final Datastore datastore,
+            final Cursor cursor,
+            final Mapper mapper,
+            final Class<T> clazz,
+            final String collection) {
         this.datastore = datastore;
         this.wrapped = cursor;
-        if(wrapped == null) {
+        if (wrapped == null) {
             throw new IllegalArgumentException("The wrapped cursor can not be null");
         }
         this.mapper = mapper;
@@ -62,9 +64,7 @@ public class MorphiaKeyCursor<T> implements MongoCursor<Key<T>> {
         this.collection = collection;
     }
 
-    /**
-     * Closes the underlying cursor.
-     */
+    /** Closes the underlying cursor. */
     public void close() {
         if (wrapped != null) {
             wrapped.close();
@@ -97,7 +97,9 @@ public class MorphiaKeyCursor<T> implements MongoCursor<Key<T>> {
     }
 
     /**
-     * Converts this cursor to a List.  Care should be taken on large datasets as OutOfMemoryErrors are a risk.
+     * Converts this cursor to a List. Care should be taken on large datasets as OutOfMemoryErrors
+     * are a risk.
+     *
      * @return the list of Entities
      */
     public List<Key<T>> toList() {

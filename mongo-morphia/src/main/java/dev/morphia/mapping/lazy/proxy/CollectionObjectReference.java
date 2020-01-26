@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.lazy.proxy;
@@ -30,7 +28,8 @@ import dev.morphia.Key;
  *
  * @param <T> the type of the proxied items
  */
-public class CollectionObjectReference<T> extends AbstractReference implements ProxiedEntityReferenceList {
+public class CollectionObjectReference<T> extends AbstractReference
+        implements ProxiedEntityReferenceList {
 
     private static final long serialVersionUID = 1L;
     private final List<Key<?>> listOfKeys;
@@ -38,13 +37,16 @@ public class CollectionObjectReference<T> extends AbstractReference implements P
     /**
      * Creates a CollectionObjectReference
      *
-     * @param type              the collection
+     * @param type the collection
      * @param referenceObjClass the Class of the referenced objects
-     * @param ignoreMissing     ignore missing referenced documents
-     * @param datastore         the Datastore to use when fetching this reference
+     * @param ignoreMissing ignore missing referenced documents
+     * @param datastore the Datastore to use when fetching this reference
      */
-    public CollectionObjectReference(final Collection<T> type, final Class<T> referenceObjClass, final boolean ignoreMissing,
-                                     final Datastore datastore) {
+    public CollectionObjectReference(
+            final Collection<T> type,
+            final Class<T> referenceObjClass,
+            final boolean ignoreMissing,
+            final Datastore datastore) {
 
         super(datastore, referenceObjClass, ignoreMissing);
 
@@ -53,20 +55,20 @@ public class CollectionObjectReference<T> extends AbstractReference implements P
     }
 
     @Override
-    //CHECKSTYLE:OFF
+    // CHECKSTYLE:OFF
     public void __add(final Key key) {
-        //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         listOfKeys.add(key);
     }
 
     @Override
-    //CHECKSTYLE:OFF
+    // CHECKSTYLE:OFF
     public void __addAll(final Collection<? extends Key<?>> keys) {
-        //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         listOfKeys.addAll(keys);
     }
 
-    //CHECKSTYLE:OFF
+    // CHECKSTYLE:OFF
     @Override
     public List<Key<?>> __getKeysAsList() {
         return Collections.unmodifiableList(listOfKeys);
@@ -80,7 +82,7 @@ public class CollectionObjectReference<T> extends AbstractReference implements P
             ((Collection<T>) object).clear();
         }
     }
-    //CHECKSTYLE:ON
+    // CHECKSTYLE:ON
 
     @Override
     @SuppressWarnings("unchecked")
@@ -103,9 +105,11 @@ public class CollectionObjectReference<T> extends AbstractReference implements P
         }
 
         if (!ignoreMissing && (numberOfEntitiesExpected != retrievedEntities.size())) {
-            throw new LazyReferenceFetchingException(format("During the lifetime of a proxy of type '%s', some referenced Entities"
-                                                                + " of type '%s' have disappeared from the Datastore.",
-                                                            c.getClass().getSimpleName(), referenceObjClass.getSimpleName()));
+            throw new LazyReferenceFetchingException(
+                    format(
+                            "During the lifetime of a proxy of type '%s', some referenced Entities"
+                                    + " of type '%s' have disappeared from the Datastore.",
+                            c.getClass().getSimpleName(), referenceObjClass.getSimpleName()));
         }
 
         c.addAll(retrievedEntities);

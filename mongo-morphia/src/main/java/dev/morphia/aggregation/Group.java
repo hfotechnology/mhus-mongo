@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.aggregation;
@@ -40,7 +38,7 @@ public final class Group {
     /**
      * Creates a new Group
      *
-     * @param name        the name of the group
+     * @param name the name of the group
      * @param sourceField the source field
      */
     private Group(final String name, final String sourceField) {
@@ -50,7 +48,7 @@ public final class Group {
     /**
      * Creates a new Group
      *
-     * @param name        the name of the group
+     * @param name the name of the group
      * @param projections the fields to create
      */
     private Group(final String name, final Projection... projections) {
@@ -86,7 +84,7 @@ public final class Group {
     /**
      * Creates a named grouping
      *
-     * @param name        the field name
+     * @param name the field name
      * @param projections the fields to create
      * @return the Group
      */
@@ -96,7 +94,7 @@ public final class Group {
     /**
      * Creates a named grouping
      *
-     * @param name        the field name
+     * @param name the field name
      * @param group the fields to create
      * @return the Group
      */
@@ -107,7 +105,7 @@ public final class Group {
     /**
      * Creates a named grouping on a field
      *
-     * @param name        the group name
+     * @param name the group name
      * @param sourceField the field name
      * @return the Group
      */
@@ -118,7 +116,7 @@ public final class Group {
     /**
      * Creates a named grouping on a field
      *
-     * @param name        the group name
+     * @param name the group name
      * @param accumulator the Accumulator to apply to the field
      * @return the Group
      */
@@ -127,8 +125,9 @@ public final class Group {
     }
 
     /**
-     * Returns an array of all unique values that results from applying an expression to each document in a group of documents that share
-     * the same group by key. Order of the elements in the output array is unspecified.
+     * Returns an array of all unique values that results from applying an expression to each
+     * document in a group of documents that share the same group by key. Order of the elements in
+     * the output array is unspecified.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -139,8 +138,9 @@ public final class Group {
     }
 
     /**
-     * Returns the average value of the numeric values that result from applying a specified expression to each document in a group of
-     * documents that share the same group by key. $avg ignores non-numeric values.
+     * Returns the average value of the numeric values that result from applying a specified
+     * expression to each document in a group of documents that share the same group by key. $avg
+     * ignores non-numeric values.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -151,9 +151,9 @@ public final class Group {
     }
 
     /**
-     * Returns the value that results from applying an expression to the first document in a group of documents that share the same group
-     * by
-     * key. Only meaningful when documents are in a defined order.
+     * Returns the value that results from applying an expression to the first document in a group
+     * of documents that share the same group by key. Only meaningful when documents are in a
+     * defined order.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -164,8 +164,9 @@ public final class Group {
     }
 
     /**
-     * Returns the value that results from applying an expression to the last document in a group of documents that share the same group by
-     * a field. Only meaningful when documents are in a defined order.
+     * Returns the value that results from applying an expression to the last document in a group of
+     * documents that share the same group by a field. Only meaningful when documents are in a
+     * defined order.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -176,9 +177,8 @@ public final class Group {
     }
 
     /**
-     * Returns the highest value that results from applying an expression to each document in a group of documents that share the same
-     * group
-     * by key.
+     * Returns the highest value that results from applying an expression to each document in a
+     * group of documents that share the same group by key.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -189,8 +189,8 @@ public final class Group {
     }
 
     /**
-     * Returns the lowest value that results from applying an expression to each document in a group of documents that share the same group
-     * by key.
+     * Returns the lowest value that results from applying an expression to each document in a group
+     * of documents that share the same group by key.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -201,8 +201,8 @@ public final class Group {
     }
 
     /**
-     * Returns an array of all values that result from applying an expression to each document in a group of documents that share the same
-     * group by key.
+     * Returns an array of all values that result from applying an expression to each document in a
+     * group of documents that share the same group by key.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -213,9 +213,9 @@ public final class Group {
     }
 
     /**
-     * Calculates and returns the sum of all the numeric values that result from applying a specified expression to each document in a
-     * group
-     * of documents that share the same group by key. $sum ignores non-numeric values.
+     * Calculates and returns the sum of all the numeric values that result from applying a
+     * specified expression to each document in a group of documents that share the same group by
+     * key. $sum ignores non-numeric values.
      *
      * @param field the field to process
      * @return an Accumulator
@@ -225,37 +225,27 @@ public final class Group {
         return new Accumulator("$sum", field);
     }
 
-    /**
-     * @return the accumulator for this Group
-     */
+    /** @return the accumulator for this Group */
     public Accumulator getAccumulator() {
         return accumulator;
     }
 
-    /**
-     * @return the name of the group
-     */
+    /** @return the name of the group */
     public String getName() {
         return name;
     }
 
-    /**
-     * @return the source field for the group
-     */
+    /** @return the source field for the group */
     public String getSourceField() {
         return sourceField;
     }
 
-    /**
-     * @return the projections for the group
-     */
+    /** @return the projections for the group */
     public List<Projection> getProjections() {
         return projections != null ? new ArrayList<Projection>(projections) : null;
     }
 
-    /**
-     * @return the nested group
-     */
+    /** @return the nested group */
     public Group getNested() {
         return nested;
     }

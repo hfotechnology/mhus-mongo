@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.geo;
@@ -20,11 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class represents a series of lines, which will saved into MongoDB as per the <a href="http://geojson.org/geojson-spec
- * .html#id6">GeoJSON
- * specification</a>.
- * <p/>
- * The factory for creating a MultiLineString is the {@code GeoJson.multiLineString} method.
+ * This class represents a series of lines, which will saved into MongoDB as per the <a
+ * href="http://geojson.org/geojson-spec .html#id6">GeoJSON specification</a>.
+ *
+ * <p>The factory for creating a MultiLineString is the {@code GeoJson.multiLineString} method.
  *
  * @see dev.morphia.geo.GeoJson#multiLineString(LineString...)
  */
@@ -75,9 +72,7 @@ public class MultiLineString implements Geometry {
 
     @Override
     public String toString() {
-        return "MultiLineString{"
-               + "coordinates=" + coordinates
-               + '}';
+        return "MultiLineString{" + "coordinates=" + coordinates + '}';
     }
 
     @Override
@@ -86,8 +81,9 @@ public class MultiLineString implements Geometry {
     }
 
     @Override
-    public com.mongodb.client.model.geojson.MultiLineString convert(final CoordinateReferenceSystem crs) {
-        return new com.mongodb.client.model.geojson.MultiLineString(crs != null ? crs.convert() : null,
-            GeoJson.convertLineStrings(coordinates));
+    public com.mongodb.client.model.geojson.MultiLineString convert(
+            final CoordinateReferenceSystem crs) {
+        return new com.mongodb.client.model.geojson.MultiLineString(
+                crs != null ? crs.convert() : null, GeoJson.convertLineStrings(coordinates));
     }
 }

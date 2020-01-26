@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.internal;
@@ -45,8 +43,11 @@ public abstract class MongoIterableImpl<TResult> implements MongoIterable<TResul
     private final ReadPreference readPreference;
     private Integer batchSize;
 
-    public MongoIterableImpl(@Nullable final ClientSession clientSession, final OperationExecutor executor, final ReadConcern readConcern,
-                             final ReadPreference readPreference) {
+    public MongoIterableImpl(
+            @Nullable final ClientSession clientSession,
+            final OperationExecutor executor,
+            final ReadConcern readConcern,
+            final ReadPreference readPreference) {
         this.clientSession = clientSession;
         this.executor = notNull("executor", executor);
         this.readConcern = notNull("readConcern", readConcern);
@@ -121,12 +122,13 @@ public abstract class MongoIterableImpl<TResult> implements MongoIterable<TResul
 
     @Override
     public <A extends Collection<? super TResult>> A into(final A target) {
-        forEach(new Block<TResult>() {
-            @Override
-            public void apply(final TResult t) {
-                target.add(t);
-            }
-        });
+        forEach(
+                new Block<TResult>() {
+                    @Override
+                    public void apply(final TResult t) {
+                        target.add(t);
+                    }
+                });
         return target;
     }
 

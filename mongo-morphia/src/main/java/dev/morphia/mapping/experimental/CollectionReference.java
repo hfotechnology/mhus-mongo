@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.experimental;
@@ -43,8 +41,7 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
     private List<Object> ids;
     private Map<String, List<Object>> collections = new HashMap<String, List<Object>>();
 
-    CollectionReference() {
-    }
+    CollectionReference() {}
 
     CollectionReference(final Datastore datastore, final MappedClass mappedClass, final List ids) {
         super(datastore, mappedClass);
@@ -58,8 +55,10 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
         this.ids = unwrapped;
     }
 
-    static void collate(final Datastore datastore, final Map<String, List<Object>> collections,
-                        final Object o) {
+    static void collate(
+            final Datastore datastore,
+            final Map<String, List<Object>> collections,
+            final Object o) {
         final String collectionName;
         final Object id;
         if (o instanceof DBRef) {
@@ -83,18 +82,14 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
         return list;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public final boolean isResolved() {
         return getValues() != null;
     }
 
     abstract Collection<?> getValues();
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public abstract C get();
 
     final List<Object> getIds() {
@@ -110,12 +105,15 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
         return values;
     }
 
-    void query(final String collection, final List<Object> collectionIds, final List<Object> values) {
+    void query(
+            final String collection, final List<Object> collectionIds, final List<Object> values) {
 
-        final MongoCursor<?> cursor = ((AdvancedDatastore) getDatastore()).find(collection, Object.class)
-                                                                          .disableValidation()
-                                                                          .filter("_id in ", collectionIds)
-                                                                          .find();
+        final MongoCursor<?> cursor =
+                ((AdvancedDatastore) getDatastore())
+                        .find(collection, Object.class)
+                        .disableValidation()
+                        .filter("_id in ", collectionIds)
+                        .find();
         try {
             final Map<Object, Object> idMap = new HashMap<Object, Object>();
             while (cursor.hasNext()) {
@@ -150,6 +148,7 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
 
     /**
      * Decodes a document in to entities
+     *
      * @param datastore the datastore
      * @param mapper the mapper
      * @param mappedField the MappedField
@@ -157,11 +156,12 @@ public abstract class CollectionReference<C extends Collection> extends MorphiaR
      * @param dbObject the DBObject to decode
      * @return the entities
      */
-    public static MorphiaReference<?> decode(final Datastore datastore,
-                                             final Mapper mapper,
-                                             final MappedField mappedField,
-                                             final Class paramType,
-                                             final DBObject dbObject) {
+    public static MorphiaReference<?> decode(
+            final Datastore datastore,
+            final Mapper mapper,
+            final MappedField mappedField,
+            final Class paramType,
+            final DBObject dbObject) {
         MorphiaReference reference = null;
         final List dbVal = (List) mappedField.getDbObjectValue(dbObject);
         if (dbVal != null) {

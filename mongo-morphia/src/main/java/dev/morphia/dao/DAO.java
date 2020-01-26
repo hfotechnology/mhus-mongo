@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.dao;
-
 
 import java.util.List;
 
@@ -28,23 +25,19 @@ import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
 import dev.morphia.query.UpdateResults;
 
-
 /**
  * Defines a basic interface for use in applications
  *
  * @param <T> The Java type serviced by this DAO
- * @param <K> The Key type used by the entity
- *  This interface poorly tracks Datastore's API.  Use Datastore directly or wrap in an application specific DAO
+ * @param <K> The Key type used by the entity This interface poorly tracks Datastore's API. Use
+ *     Datastore directly or wrap in an application specific DAO
  */
-
 public interface DAO<T, K> {
-    /**
-     * @return the total count
-     */
+    /** @return the total count */
     long count();
 
     /**
-     * @param key   The key to search with
+     * @param key The key to search with
      * @param value the value to look for
      * @return the count which match criteria {key:value}
      */
@@ -83,7 +76,7 @@ public interface DAO<T, K> {
      * Deletes an entity
      *
      * @param entity the entity to delete
-     * @param wc     the WriteConcern to use when deleting
+     * @param wc the WriteConcern to use when deleting
      * @return the results of the deletion
      * @see WriteConcern
      * @see WriteResult
@@ -108,15 +101,13 @@ public interface DAO<T, K> {
      */
     WriteResult deleteByQuery(Query<T> query);
 
-    /**
-     * ensures indexed for this DAO
-     */
+    /** ensures indexed for this DAO */
     void ensureIndexes();
 
     /**
      * checks for entities which match criteria {key:value}
      *
-     * @param key   the key to query
+     * @param key the key to query
      * @param value the value to search for
      * @return true if a document is found with a key matching the value
      */
@@ -156,7 +147,7 @@ public interface DAO<T, K> {
     /**
      * Finds the entities Key<T> by the criteria {key:value}
      *
-     * @param key   the key to query
+     * @param key the key to query
      * @param value the value to search for
      * @return the list of IDs for documents matching the query
      */
@@ -173,7 +164,7 @@ public interface DAO<T, K> {
     /**
      * Finds the first entity matching the query.
      *
-     * @param key   the key to query
+     * @param key the key to query
      * @param value the value to search for
      * @return the entity which match criteria {key:value}
      */
@@ -197,7 +188,7 @@ public interface DAO<T, K> {
     /**
      * Finds the first entity's ID matching a query
      *
-     * @param key   the key to query
+     * @param key the key to query
      * @param value the value to search for
      * @return the Key of the first entity
      */
@@ -221,15 +212,11 @@ public interface DAO<T, K> {
 
     /**
      * @return the collection mapped by the entity class
-     * @see #getEntityClass()
-     *  the return type for this method will change in 2.0
+     * @see #getEntityClass() the return type for this method will change in 2.0
      */
-    
     DBCollection getCollection();
 
-    /**
-     * @return the underlying datastore
-     */
+    /** @return the underlying datastore */
     Datastore getDatastore();
 
     /**
@@ -251,7 +238,7 @@ public interface DAO<T, K> {
      * Saves the entity; either inserting or overriding the existing document
      *
      * @param entity the entity to save
-     * @param wc     the WriteConcern to use when saving
+     * @param wc the WriteConcern to use when saving
      * @return the key of the entity
      * @see WriteConcern
      */
@@ -261,7 +248,7 @@ public interface DAO<T, K> {
      * Updates all entities matched by the constraints with the modifiers supplied.
      *
      * @param query the query used to match the documents to update
-     * @param ops   the update operations to perform
+     * @param ops the update operations to perform
      * @return the results of the updates
      */
     UpdateResults update(Query<T> query, UpdateOperations<T> ops);
@@ -270,7 +257,7 @@ public interface DAO<T, K> {
      * Updates the first entity matched by the constraints with the modifiers supplied.
      *
      * @param query the query used to match the document to update
-     * @param ops   the update operations to perform
+     * @param ops the update operations to perform
      * @return the results of the update
      */
     UpdateResults updateFirst(Query<T> query, UpdateOperations<T> ops);

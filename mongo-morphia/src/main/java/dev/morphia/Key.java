@@ -1,29 +1,30 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
-
 
 import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * <p> The key object; this class is take from the app-engine datastore (mostly) implementation. It is also Serializable and GWT-safe,
- * enabling your entity objects to be used for GWT RPC should you so desire. </p> <p/> <p> You may use normal DBRef objects as
- * relationships
- * in your entities if you desire neither type safety nor GWT-ability. </p>
+ * The key object; this class is take from the app-engine datastore (mostly) implementation. It is
+ * also Serializable and GWT-safe, enabling your entity objects to be used for GWT RPC should you so
+ * desire.
+ *
+ * <p>
+ *
+ * <p>You may use normal DBRef objects as relationships in your entities if you desire neither type
+ * safety nor GWT-ability.
  *
  * @param <T> The type of the entity
  * @author Jeff Schnitzer <jeff@infohazard.org> (from Objectify codebase)
@@ -33,24 +34,20 @@ public class Key<T> implements Serializable, Comparable<Key<T>> {
     private String collection;
     private Class<? extends T> type;
 
-    /**
-     * Id value
-     */
+    /** Id value */
     private Object id;
+
     private byte[] idBytes;
 
-    /**
-     * For GWT serialization
-     */
-    protected Key() {
-    }
+    /** For GWT serialization */
+    protected Key() {}
 
     /**
      * Create a key with an id
      *
-     * @param type       the type of the entity
+     * @param type the type of the entity
      * @param collection the collection in which the entity lives
-     * @param id         the value of the entity's ID
+     * @param id the value of the entity's ID
      */
     public Key(final Class<? extends T> type, final String collection, final Object id) {
         this.type = type;
@@ -61,9 +58,9 @@ public class Key<T> implements Serializable, Comparable<Key<T>> {
     /**
      * Create a key with an id
      *
-     * @param type       the type of the entity
+     * @param type the type of the entity
      * @param collection the collection in which the entity lives
-     * @param idBytes    the value of the entity's ID
+     * @param idBytes the value of the entity's ID
      */
     public Key(final Class<? extends T> type, final String collection, final byte[] idBytes) {
         this.type = type;
@@ -120,9 +117,7 @@ public class Key<T> implements Serializable, Comparable<Key<T>> {
         return 0;
     }
 
-    /**
-     * @return the collection name.
-     */
+    /** @return the collection name. */
     public String getCollection() {
         return collection;
     }
@@ -136,16 +131,12 @@ public class Key<T> implements Serializable, Comparable<Key<T>> {
         this.collection = collection.intern();
     }
 
-    /**
-     * @return the id associated with this key.
-     */
+    /** @return the id associated with this key. */
     public Object getId() {
         return id;
     }
 
-    /**
-     * @return type of the entity
-     */
+    /** @return type of the entity */
     public Class<? extends T> getType() {
         return type;
     }
@@ -168,7 +159,6 @@ public class Key<T> implements Serializable, Comparable<Key<T>> {
     @SuppressWarnings("unchecked")
     public boolean equals(final Object obj) {
         return obj != null && obj instanceof Key<?> && compareTo((Key<T>) obj) == 0;
-
     }
 
     @Override

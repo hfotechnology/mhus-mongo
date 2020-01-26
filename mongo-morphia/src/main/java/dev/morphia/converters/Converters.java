@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.converters;
@@ -37,16 +35,16 @@ import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.MapperOptions;
 import dev.morphia.mapping.MappingException;
 
-/**
- * Defines a bundle of converters
- */
+/** Defines a bundle of converters */
 public abstract class Converters {
     private static final Logger LOG = LoggerFactory.getLogger(Converters.class);
 
     private final Mapper mapper;
     private final List<TypeConverter> untypedTypeEncoders = new LinkedList<TypeConverter>();
-    private final Map<Class, List<TypeConverter>> tcMap = new ConcurrentHashMap<Class, List<TypeConverter>>();
-    private final List<Class<? extends TypeConverter>> registeredConverterClasses = new ArrayList<Class<? extends TypeConverter>>();
+    private final Map<Class, List<TypeConverter>> tcMap =
+            new ConcurrentHashMap<Class, List<TypeConverter>>();
+    private final List<Class<? extends TypeConverter>> registeredConverterClasses =
+            new ArrayList<Class<? extends TypeConverter>>();
 
     /**
      * Creates a bundle with a particular Mapper.
@@ -90,11 +88,12 @@ public abstract class Converters {
 
     /**
      * decode the {@link com.mongodb.DBObject} and provide the corresponding java (type-safe) object
-     * <br><b>NOTE: mf might be null</b>
+     * <br>
+     * <b>NOTE: mf might be null</b>
      *
-     * @param c            the class to create and populate
+     * @param c the class to create and populate
      * @param fromDBObject the DBObject to use when populating the new instance
-     * @param mf           the MappedField that contains the metadata useful for decoding
+     * @param mf the MappedField that contains the metadata useful for decoding
      * @return the new instance
      */
     public Object decode(final Class c, final Object fromDBObject, final MappedField mf) {
@@ -130,29 +129,36 @@ public abstract class Converters {
     }
 
     /**
-     * Creates an entity and populates its state based on the dbObject given.  This method is primarily an internal method.  Reliance on
-     * this method may break your application in future releases.
+     * Creates an entity and populates its state based on the dbObject given. This method is
+     * primarily an internal method. Reliance on this method may break your application in future
+     * releases.
      *
-     * @param dbObj        the object state to use
-     * @param mf           the MappedField containing the metadata to use when decoding in to a field
+     * @param dbObj the object state to use
+     * @param mf the MappedField containing the metadata to use when decoding in to a field
      * @param targetEntity then entity to hold the state from the database
      */
-    public void fromDBObject(final DBObject dbObj, final MappedField mf, final Object targetEntity) {
+    public void fromDBObject(
+            final DBObject dbObj, final MappedField mf, final Object targetEntity) {
         final Object object = mf.getDbObjectValue(dbObj);
         if (object != null) {
             final TypeConverter enc = getEncoder(object, mf);
             Object decodedValue = enc.decode(mf.getType(), object, mf);
-            
-            //TODO this is a hack
-            if (decodedValue != null && decodedValue instanceof ObjectId && mf.getType() == UUID.class) {
+
+            // TODO this is a hack
+            if (decodedValue != null
+                    && decodedValue instanceof ObjectId
+                    && mf.getType() == UUID.class) {
                 decodedValue = MoUtil.toUUID((ObjectId) decodedValue);
             }
-            
+
             try {
                 mf.setFieldValue(targetEntity, decodedValue);
             } catch (IllegalArgumentException e) {
-                throw new MappingException(format("Error setting value from converter (%s) for %s to %s",
-                                                  enc.getClass().getSimpleName(), mf.getFullName(), decodedValue), e);
+                throw new MappingException(
+                        format(
+                                "Error setting value from converter (%s) for %s to %s",
+                                enc.getClass().getSimpleName(), mf.getFullName(), decodedValue),
+                        e);
             }
         }
     }
@@ -163,7 +169,9 @@ public abstract class Converters {
      */
     public boolean hasDbObjectConverter(final MappedField field) {
         final TypeConverter converter = getEncoder(field);
-        return converter != null && !(converter instanceof IdentityConverter) && !(converter instanceof SimpleValueConverter);
+        return converter != null
+                && !(converter instanceof IdentityConverter)
+                && !(converter instanceof SimpleValueConverter);
     }
 
     /**
@@ -172,7 +180,9 @@ public abstract class Converters {
      */
     public boolean hasDbObjectConverter(final Class c) {
         final TypeConverter converter = getEncoder(c);
-        return converter != null && !(converter instanceof IdentityConverter) && !(converter instanceof SimpleValueConverter);
+        return converter != null
+                && !(converter instanceof IdentityConverter)
+                && !(converter instanceof SimpleValueConverter);
     }
 
     /**
@@ -240,18 +250,21 @@ public abstract class Converters {
             }
             registeredConverterClasses.remove(tc.getClass());
         }
-
     }
 
     /**
      * Converts an entity to a DBObject
      *
      * @param containingObject The object to convert
-     * @param mf               the MappedField to extract
-     * @param dbObj            the DBObject to populate
-     * @param opts             the options to apply
+     * @param mf the MappedField to extract
+     * @param dbObj the DBObject to populate
+     * @param opts the options to apply
      */
-    public void toDBObject(final Object containingObject, final MappedField mf, final DBObject dbObj, final MapperOptions opts) {
+    public void toDBObject(
+            final Object containingObject,
+            final MappedField mf,
+            final DBObject dbObj,
+            final MapperOptions opts) {
         final Object fieldValue = mf.getFieldValue(containingObject);
         final TypeConverter enc = getEncoder(fieldValue, mf);
 
@@ -292,7 +305,11 @@ public abstract class Converters {
 
         if (tcs != null) {
             if (tcs.size() > 1) {
-                LOG.warn("Duplicate converter for " + mf.getType() + ", returning first one from " + tcs);
+                LOG.warn(
+                        "Duplicate converter for "
+                                + mf.getType()
+                                + ", returning first one from "
+                                + tcs);
             }
             return tcs.get(0);
         }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.validation;
@@ -19,9 +17,7 @@ import static java.lang.String.format;
 
 import java.util.List;
 
-/**
- * Checks the type of the value if the type of the field is a Long or long.
- */
+/** Checks the type of the value if the type of the field is a Long or long. */
 public class LongTypeValidator extends TypeValidator {
     private static final LongTypeValidator INSTANCE = new LongTypeValidator();
 
@@ -40,14 +36,20 @@ public class LongTypeValidator extends TypeValidator {
     }
 
     @Override
-    protected void validate(final Class<?> type, final Object value, final List<ValidationFailure> validationFailures) {
+    protected void validate(
+            final Class<?> type,
+            final Object value,
+            final List<ValidationFailure> validationFailures) {
         if (value.getClass() != long.class
-            && value.getClass() != Long.class
-            && value.getClass() != int.class
-            && value.getClass() != Integer.class) {
-            validationFailures.add(new ValidationFailure(format("When type is a long the value should be a long or integer.  "
-                                                                + "Type was %s and value '%s' was a %s", type, value, value.getClass())));
+                && value.getClass() != Long.class
+                && value.getClass() != int.class
+                && value.getClass() != Integer.class) {
+            validationFailures.add(
+                    new ValidationFailure(
+                            format(
+                                    "When type is a long the value should be a long or integer.  "
+                                            + "Type was %s and value '%s' was a %s",
+                                    type, value, value.getClass())));
         }
-
     }
 }

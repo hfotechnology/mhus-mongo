@@ -1,20 +1,17 @@
 /**
  * Copyright 2018 Mike Hummel
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package de.mhus.lib.mongo.test;
-
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -31,17 +28,16 @@ import dev.morphia.annotations.Indexes;
 import dev.morphia.annotations.Reference;
 
 @Entity("employees")
-@Indexes(
-    @Index(value = "salary", fields = @Field("salary"))
-)
+@Indexes(@Index(value = "salary", fields = @Field("salary")))
 public class Employee implements Persistable {
-    
+
     public Employee() {}
 
     public Employee(String name, double d) {
         this.setName(name);
         this.setSalary(d);
     }
+
     public UUID getId() {
         return id;
     }
@@ -78,19 +74,13 @@ public class Employee implements Persistable {
         this.salary = salary;
     }
 
-    @DbPrimaryKey
-    private UUID id;
-    @DbPersistent
-    private String name;
-    @Reference
-    private Employee manager;
-    @Reference
-    private List<Employee> directReports = new LinkedList<Employee>();
-    @DbPersistent
-    private Double salary;
-    @DbPersistent
-    private HashMap<String, String> values = new HashMap<>();
-    
+    @DbPrimaryKey private UUID id;
+    @DbPersistent private String name;
+    @Reference private Employee manager;
+    @Reference private List<Employee> directReports = new LinkedList<Employee>();
+    @DbPersistent private Double salary;
+    @DbPersistent private HashMap<String, String> values = new HashMap<>();
+
     @Override
     public String toString() {
         return id + " " + name;
@@ -99,5 +89,4 @@ public class Employee implements Persistable {
     public HashMap<String, String> getValues() {
         return values;
     }
-
 }

@@ -1,27 +1,22 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.logging.jdk;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Provides a logger using the JDK logging facilities.
- */
+/** Provides a logger using the JDK logging facilities. */
 public class JDKLogger implements dev.morphia.logging.Logger {
     private final transient Logger logger;
 
@@ -47,19 +42,16 @@ public class JDKLogger implements dev.morphia.logging.Logger {
     @Override
     public void debug(final String msg, final Throwable t) {
         log(Level.FINE, msg, t);
-
     }
 
     @Override
     public void error(final String msg) {
         log(Level.SEVERE, msg);
-
     }
 
     @Override
     public void error(final String format, final Object... arg) {
         log(Level.SEVERE, format, arg);
-
     }
 
     @Override
@@ -137,9 +129,7 @@ public class JDKLogger implements dev.morphia.logging.Logger {
         log(Level.WARNING, msg, t);
     }
 
-    /**
-     * returns an array (class, method) of the caller before our logger class in the stack
-     */
+    /** returns an array (class, method) of the caller before our logger class in the stack */
     protected String[] getCaller() {
         final StackTraceElement[] stack = (new Throwable()).getStackTrace();
         final String loggerClassname = getClass().getName();
@@ -158,7 +148,7 @@ public class JDKLogger implements dev.morphia.logging.Logger {
             i++;
         }
 
-        //skip an extra frame... we call ourselves
+        // skip an extra frame... we call ourselves
         i++;
 
         while (i < stack.length) {
@@ -167,11 +157,11 @@ public class JDKLogger implements dev.morphia.logging.Logger {
             if (!fc.equals(loggerClassname)) {
                 callerMethod = ste.getMethodName();
                 callerName = fc;
-                return new String[]{callerName, callerMethod};
+                return new String[] {callerName, callerMethod};
             }
             i++;
         }
-        return new String[]{"", ""};
+        return new String[] {"", ""};
     }
 
     protected void log(final Level l, final String f, final Object... a) {

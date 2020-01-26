@@ -1,28 +1,23 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.utils;
 
 import static java.lang.String.format;
 
-/**
- * Provides various assertions for Morphia during validation
- */
+/** Provides various assertions for Morphia during validation */
 public final class Assert {
-    private Assert() {
-    }
+    private Assert() {}
 
     /**
      * Throws an AssertionFailedException with the given error message.
@@ -36,7 +31,7 @@ public final class Assert {
     /**
      * Validates that all the parameters are not null
      *
-     * @param names   a comma separated String of parameter names
+     * @param names a comma separated String of parameter names
      * @param objects the proposed parameter values
      */
     public static void parametersNotNull(final String names, final Object... objects) {
@@ -58,7 +53,7 @@ public final class Assert {
     /**
      * Validates that the parameter is not null
      *
-     * @param name      the parameter name
+     * @param name the parameter name
      * @param reference the proposed parameter value
      */
     public static void parameterNotNull(final String name, final Object reference) {
@@ -71,18 +66,21 @@ public final class Assert {
      * Validates that the Iterable is not empty
      *
      * @param name the parameter name
-     * @param obj  the proposed parameter value
+     * @param obj the proposed parameter value
      */
     public static void parameterNotEmpty(final String name, final Iterable obj) {
         if (!obj.iterator().hasNext()) {
-            raiseError(format("Parameter '%s' from type '%s' is expected to NOT be empty", name, obj.getClass().getName()));
+            raiseError(
+                    format(
+                            "Parameter '%s' from type '%s' is expected to NOT be empty",
+                            name, obj.getClass().getName()));
         }
     }
 
     /**
      * Validates that the value is not empty
      *
-     * @param name  the parameter name
+     * @param name the parameter name
      * @param value the proposed parameter value
      */
     public static void parameterNotEmpty(final String name, final String value) {
@@ -91,9 +89,7 @@ public final class Assert {
         }
     }
 
-    /**
-     * Represents a failed Morphia Assertion
-     */
+    /** Represents a failed Morphia Assertion */
     public static class AssertionFailedException extends RuntimeException {
 
         private static final long serialVersionUID = 435272532743543854L;
@@ -111,7 +107,7 @@ public final class Assert {
          * Creates a AssertionFailedException with a message and a cause
          *
          * @param message the message to record
-         * @param cause   the underlying cause
+         * @param cause the underlying cause
          */
         public AssertionFailedException(final String message, final Throwable cause) {
             super(message, cause);

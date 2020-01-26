@@ -1,19 +1,16 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package dev.morphia.annotations;
 
 import java.lang.annotation.Documented;
@@ -36,14 +33,10 @@ import dev.morphia.mapping.Mapper;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 public @interface Entity {
-    /**
-     * @return The capped collection configuration options
-     */
+    /** @return The capped collection configuration options */
     CappedAt cap() default @CappedAt(0);
 
-    /**
-     * @return The default write concern to use when dealing with this entity
-     */
+    /** @return The default write concern to use when dealing with this entity */
     String concern() default "";
 
     /**
@@ -52,16 +45,12 @@ public @interface Entity {
     // //to be replaced. This is a temp hack until polymorphism and discriminators are implemented
     boolean noClassnameStored() default false;
 
-    /**
-     * @return slaveOk for queries for this Entity.
-     */
+    /** @return slaveOk for queries for this Entity. */
     boolean queryNonPrimary() default false;
 
     /**
-     * @return the collection name to for this entity.  Defaults to the class's simple name
-     *
+     * @return the collection name to for this entity. Defaults to the class's simple name
      * @see Class#getSimpleName()
      */
     String value() default Mapper.IGNORED_FIELDNAME;
 }
-

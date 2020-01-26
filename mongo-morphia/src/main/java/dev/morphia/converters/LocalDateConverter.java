@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.converters;
@@ -23,7 +21,8 @@ import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 
 /**
- * Provides a converter for {@link LocalDate} converting the value to the Date at the start of that day.
+ * Provides a converter for {@link LocalDate} converting the value to the Date at the start of that
+ * day.
  */
 @SuppressWarnings("Since15")
 public class LocalDateConverter extends TypeConverter implements SimpleValueConverter {
@@ -40,7 +39,8 @@ public class LocalDateConverter extends TypeConverter implements SimpleValueConv
     }
 
     @Override
-    public Object decode(final Class<?> targetClass, final Object val, final MappedField optionalExtraInfo) {
+    public Object decode(
+            final Class<?> targetClass, final Object val, final MappedField optionalExtraInfo) {
         if (val == null) {
             return null;
         }
@@ -50,8 +50,10 @@ public class LocalDateConverter extends TypeConverter implements SimpleValueConv
         }
 
         if (val instanceof Date) {
-            return LocalDateTime.ofInstant(((Date) val).toInstant(), mapper.getOptions().getDateStorage().getZone())
-                                .toLocalDate();
+            return LocalDateTime.ofInstant(
+                            ((Date) val).toInstant(),
+                            mapper.getOptions().getDateStorage().getZone())
+                    .toLocalDate();
         }
 
         throw new IllegalArgumentException("Can't convert to LocalDate from " + val);
@@ -63,8 +65,9 @@ public class LocalDateConverter extends TypeConverter implements SimpleValueConv
             return null;
         }
         LocalDate date = (LocalDate) value;
-        return Date.from(date.atStartOfDay()
-                             .atZone(mapper.getOptions().getDateStorage().getZone())
-                             .toInstant());
+        return Date.from(
+                date.atStartOfDay()
+                        .atZone(mapper.getOptions().getDateStorage().getZone())
+                        .toInstant());
     }
 }

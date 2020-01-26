@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.validation;
@@ -21,24 +19,30 @@ import dev.morphia.mapping.MappedField;
 import dev.morphia.query.FilterOperator;
 
 /**
- * Extend this abstract class to provide a way of validating part of a query that contains a {@code FilterOperator}. Currently all
- * subclasses of this are final and singletons so this isn't the root of a massive class hierarchy.
+ * Extend this abstract class to provide a way of validating part of a query that contains a {@code
+ * FilterOperator}. Currently all subclasses of this are final and singletons so this isn't the root
+ * of a massive class hierarchy.
  */
 public abstract class OperationValidator implements Validator {
     /**
-     * Apply validation for the given operator.  If the operator does not match the operator required by the implementing class, then this
-     * method will return false to show validation was not applied.  If the operator is the one being validated, this method will return
-     * true, and any failures in validation will be added to the list of {@code validationFailures}.
+     * Apply validation for the given operator. If the operator does not match the operator required
+     * by the implementing class, then this method will return false to show validation was not
+     * applied. If the operator is the one being validated, this method will return true, and any
+     * failures in validation will be added to the list of {@code validationFailures}.
      *
-     * @param mappedField        the field being queried
-     * @param operator           any FilterOperator for a query
-     * @param value              the query value, to apply the operator to
-     * @param validationFailures the list to add any failures to. If validation passes or {@code appliesTo} returned false, this list will
-     *                           not change.
-     * @return true if validation was applied, false if this validation doesn't apply to this operator.
+     * @param mappedField the field being queried
+     * @param operator any FilterOperator for a query
+     * @param value the query value, to apply the operator to
+     * @param validationFailures the list to add any failures to. If validation passes or {@code
+     *     appliesTo} returned false, this list will not change.
+     * @return true if validation was applied, false if this validation doesn't apply to this
+     *     operator.
      */
-    public boolean apply(final MappedField mappedField, final FilterOperator operator, final Object value,
-                         final List<ValidationFailure> validationFailures) {
+    public boolean apply(
+            final MappedField mappedField,
+            final FilterOperator operator,
+            final Object value,
+            final List<ValidationFailure> validationFailures) {
         if (getOperator().equals(operator)) {
             validate(mappedField, value, validationFailures);
             return true;
@@ -47,8 +51,9 @@ public abstract class OperationValidator implements Validator {
     }
 
     /**
-     * This method is called by the {@code apply} method to determine whether to validate the query.  The validator will only work for a
-     * single FilterOperator, and this will be returned by this method
+     * This method is called by the {@code apply} method to determine whether to validate the query.
+     * The validator will only work for a single FilterOperator, and this will be returned by this
+     * method
      *
      * @return the FilterOperator this validator cares about.
      */
@@ -57,10 +62,13 @@ public abstract class OperationValidator implements Validator {
     /**
      * Performs the actual validation, and assumes {@code appliesTo} has returned true
      *
-     * @param mappedField        the field being queried
-     * @param value              the query value, to apply the operator to. This should not be null.
-     * @param validationFailures the list to add any new {@code ValidationFailures} to. If validation passed this list will not change.
+     * @param mappedField the field being queried
+     * @param value the query value, to apply the operator to. This should not be null.
+     * @param validationFailures the list to add any new {@code ValidationFailures} to. If
+     *     validation passed this list will not change.
      */
-    protected abstract void validate(final MappedField mappedField, final Object value, final List<ValidationFailure> validationFailures);
-
+    protected abstract void validate(
+            final MappedField mappedField,
+            final Object value,
+            final List<ValidationFailure> validationFailures);
 }

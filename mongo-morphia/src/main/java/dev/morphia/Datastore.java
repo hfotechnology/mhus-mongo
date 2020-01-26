@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
-
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +37,6 @@ import dev.morphia.query.QueryFactory;
 import dev.morphia.query.UpdateOperations;
 import dev.morphia.query.UpdateResults;
 
-
 /**
  * Datastore interface to get/delete/save objects
  *
@@ -59,7 +55,7 @@ public interface Datastore {
      * Returns a new query bound to the collection (a specific {@link DBCollection})
      *
      * @param collection The collection to query
-     * @param <T>        the type of the query
+     * @param <T> the type of the query
      * @return the query
      */
     <T> Query<T> createQuery(Class<T> collection);
@@ -68,7 +64,7 @@ public interface Datastore {
      * The builder for all update operations
      *
      * @param clazz the type to update
-     * @param <T>   the type to update
+     * @param <T> the type to update
      * @return the new UpdateOperations instance
      */
     <T> UpdateOperations<T> createUpdateOperations(Class<T> clazz);
@@ -77,63 +73,55 @@ public interface Datastore {
      * Deletes the given entity (by id)
      *
      * @param clazz the type to delete
-     * @param id    the ID of the entity to delete
-     * @param <T>   the type to delete
-     * @param <V>   the type of the id
-     * @return results of the delete
-     *  use {@link #delete(Query)} instead
+     * @param id the ID of the entity to delete
+     * @param <T> the type to delete
+     * @param <V> the type of the id
+     * @return results of the delete use {@link #delete(Query)} instead
      */
-    
     <T, V> WriteResult delete(Class<T> clazz, V id);
 
     /**
      * Deletes the given entity (by id)
      *
-     * @param clazz   the type to delete
-     * @param id      the ID of the entity to delete
+     * @param clazz the type to delete
+     * @param id the ID of the entity to delete
      * @param options the options to use when deleting
-     * @param <T>     the type to delete
-     * @param <V>     the type of the id
+     * @param <T> the type to delete
+     * @param <V> the type of the id
      * @return results of the delete
-     * @since 1.3
-     *  use {@link #delete(Query, DeleteOptions)} instead
+     * @since 1.3 use {@link #delete(Query, DeleteOptions)} instead
      */
-    
     <T, V> WriteResult delete(Class<T> clazz, V id, DeleteOptions options);
 
     /**
      * Deletes the given entities (by id)
      *
      * @param clazz the type to delete
-     * @param ids   the IDs of the entity to delete
-     * @param <T>   the type to delete
-     * @param <V>   the type of the id
-     * @return results of the delete
-     *  use {@link #delete(Query)} instead
+     * @param ids the IDs of the entity to delete
+     * @param <T> the type to delete
+     * @param <V> the type of the id
+     * @return results of the delete use {@link #delete(Query)} instead
      */
-    
     <T, V> WriteResult delete(Class<T> clazz, Iterable<V> ids);
 
     /**
      * Deletes the given entities (by id)
      *
-     * @param clazz   the type to delete
-     * @param ids     the IDs of the entity to delete
+     * @param clazz the type to delete
+     * @param ids the IDs of the entity to delete
      * @param options the options to use when deleting
-     * @param <T>     the type to delete
-     * @param <V>     the type of the id
+     * @param <T> the type to delete
+     * @param <V> the type of the id
      * @return results of the delete
-     * @since 1.3
-     *  use {@link #delete(Query, DeleteOptions)} instead
+     * @since 1.3 use {@link #delete(Query, DeleteOptions)} instead
      */
-    
     <T, V> WriteResult delete(Class<T> clazz, Iterable<V> ids, DeleteOptions options);
 
     /**
      * Deletes entities based on the query
      *
      * @param query the query to use when finding documents to delete
-     * @param <T>   the type to delete
+     * @param <T> the type to delete
      * @return results of the delete
      */
     <T> WriteResult delete(Query<T> query);
@@ -141,9 +129,9 @@ public interface Datastore {
     /**
      * Deletes entities based on the query
      *
-     * @param query   the query to use when finding documents to delete
+     * @param query the query to use when finding documents to delete
      * @param options the options to apply to the delete
-     * @param <T>     the type to delete
+     * @param <T> the type to delete
      * @return results of the delete
      * @since 1.3
      */
@@ -153,19 +141,18 @@ public interface Datastore {
      * Deletes entities based on the query, with the WriteConcern
      *
      * @param query the query to use when finding documents to delete
-     * @param wc    the WriteConcern to use when deleting
-     * @param <T>   the type to delete
-     * @return results of the delete
-     *  use {@link AdvancedDatastore#delete(Query, DeleteOptions)} instead
+     * @param wc the WriteConcern to use when deleting
+     * @param <T> the type to delete
+     * @return results of the delete use {@link AdvancedDatastore#delete(Query, DeleteOptions)}
+     *     instead
      */
-    
     <T> WriteResult delete(Query<T> query, WriteConcern wc);
 
     /**
      * Deletes the given entity (by @Id)
      *
      * @param entity the entity to delete
-     * @param <T>    the type to delete
+     * @param <T> the type to delete
      * @return results of the delete
      */
     <T> WriteResult delete(T entity);
@@ -173,9 +160,9 @@ public interface Datastore {
     /**
      * Deletes the given entity (by @Id), with the WriteConcern
      *
-     * @param entity  the entity to delete
+     * @param entity the entity to delete
      * @param options the options to use when deleting
-     * @param <T>     the type to delete
+     * @param <T> the type to delete
      * @return results of the delete
      * @since 1.3
      */
@@ -185,17 +172,13 @@ public interface Datastore {
      * Deletes the given entity (by @Id), with the WriteConcern
      *
      * @param entity the entity to delete
-     * @param wc     the WriteConcern to use when deleting
-     * @param <T>    the type to delete
-     * @return results of the delete
-     *  use {@link #delete(Query, DeleteOptions)} instead
+     * @param wc the WriteConcern to use when deleting
+     * @param <T> the type to delete
+     * @return results of the delete use {@link #delete(Query, DeleteOptions)} instead
      */
-    
     <T> WriteResult delete(T entity, WriteConcern wc);
 
-    /**
-     * ensure capped collections for {@code Entity}(s)
-     */
+    /** ensure capped collections for {@code Entity}(s) */
     void ensureCaps();
 
     /**
@@ -207,35 +190,37 @@ public interface Datastore {
     void enableDocumentValidation();
 
     /**
-     * Ensures (creating if necessary) the index including the field(s) + directions on the given collection name; eg fields = "field1,
-     * -field2" ({field1:1, field2:-1})
+     * Ensures (creating if necessary) the index including the field(s) + directions on the given
+     * collection name; eg fields = "field1, -field2" ({field1:1, field2:-1})
      *
-     * @param clazz  the class from which to get the index definitions
+     * @param clazz the class from which to get the index definitions
      * @param fields the fields to index
-     * @param <T>    the type to index
-     * @see MongoCollection#createIndex(org.bson.conversions.Bson, com.mongodb.client.model.IndexOptions)
-     *  This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
-     * methods in the Java driver itself.
+     * @param <T> the type to index
+     * @see MongoCollection#createIndex(org.bson.conversions.Bson,
+     *     com.mongodb.client.model.IndexOptions) This method uses the legacy approach for defining
+     *     indexes. Switch to using annotations on entity classes or the methods in the Java driver
+     *     itself.
      */
-    
     <T> void ensureIndex(Class<T> clazz, String fields);
 
     /**
-     * Ensures (creating if necessary) the index including the field(s) + directions on the given collection name; eg fields = "field1,
-     * -field2" ({field1:1, field2:-1})
+     * Ensures (creating if necessary) the index including the field(s) + directions on the given
+     * collection name; eg fields = "field1, -field2" ({field1:1, field2:-1})
      *
-     * @param clazz            the class from which to get the index definitions
-     * @param name             the name of the index to create
-     * @param fields           the fields to index
-     * @param unique           true if the index should enforce uniqueness on the fields indexed
-     * @param dropDupsOnCreate Support for this has been removed from the server.  This value is ignored.
-     * @param <T>              the type to index
-     * @see MongoCollection#createIndex(org.bson.conversions.Bson, com.mongodb.client.model.IndexOptions)
-     *  This method uses the legacy approach for defining indexes.  Switch to using annotations on entity classes or the
-     * methods in the Java driver itself.
+     * @param clazz the class from which to get the index definitions
+     * @param name the name of the index to create
+     * @param fields the fields to index
+     * @param unique true if the index should enforce uniqueness on the fields indexed
+     * @param dropDupsOnCreate Support for this has been removed from the server. This value is
+     *     ignored.
+     * @param <T> the type to index
+     * @see MongoCollection#createIndex(org.bson.conversions.Bson,
+     *     com.mongodb.client.model.IndexOptions) This method uses the legacy approach for defining
+     *     indexes. Switch to using annotations on entity classes or the methods in the Java driver
+     *     itself.
      */
-    
-    <T> void ensureIndex(Class<T> clazz, String name, String fields, boolean unique, boolean dropDupsOnCreate);
+    <T> void ensureIndex(
+            Class<T> clazz, String name, String fields, boolean unique, boolean dropDupsOnCreate);
 
     /**
      * Ensures (creating if necessary) the indexes found during class mapping
@@ -247,24 +232,22 @@ public interface Datastore {
     void ensureIndexes();
 
     /**
-     * Ensures (creating if necessary) the indexes found during class mapping (using {@code @Indexed, @Indexes)} on the given collection
-     * name, possibly in the background
+     * Ensures (creating if necessary) the indexes found during class mapping (using
+     * {@code @Indexed, @Indexes)} on the given collection name, possibly in the background
      *
-     * @param background if true, the index will be built in the background.  If false, background indexing is deferred to the annotation
-     *                   definition
+     * @param background if true, the index will be built in the background. If false, background
+     *     indexing is deferred to the annotation definition
      * @see Indexes
      * @see Indexed
-     * @see Text
-     *  use {@link #ensureIndexes()} instead
+     * @see Text use {@link #ensureIndexes()} instead
      */
-    
     void ensureIndexes(boolean background);
 
     /**
      * Ensures (creating if necessary) the indexes found during class mapping
      *
      * @param clazz the class from which to get the index definitions
-     * @param <T>   the type to index
+     * @param <T> the type to index
      * @see Indexes
      * @see Indexed
      * @see Text
@@ -274,74 +257,67 @@ public interface Datastore {
     /**
      * Ensures (creating if necessary) the indexes found during class mapping
      *
-     * @param clazz      the class from which to get the index definitions
-     * @param background if true, the index will be built in the background.  If false, background indexing is deferred to the annotation
-     *                   definition
-     * @param <T>        the type to index
+     * @param clazz the class from which to get the index definitions
+     * @param background if true, the index will be built in the background. If false, background
+     *     indexing is deferred to the annotation definition
+     * @param <T> the type to index
      * @see Indexes
      * @see Indexed
-     * @see Text
-     *  use {@link #ensureIndexes(Class)} instead
+     * @see Text use {@link #ensureIndexes(Class)} instead
      */
-    
     <T> void ensureIndexes(Class<T> clazz, boolean background);
 
     /**
      * Does a query to check if the keyOrEntity exists in mongodb
      *
      * @param keyOrEntity the value to check for
-     * @return the key if the entity exists
-     *  use {@link Query#first()} instead
+     * @return the key if the entity exists use {@link Query#first()} instead
      */
-    
     Key<?> exists(Object keyOrEntity);
 
     /**
      * Find all instances by type
      *
      * @param clazz the class to use for mapping the results
-     * @param <T>   the type to query
+     * @param <T> the type to query
      * @return the query
      */
     <T> Query<T> find(Class<T> clazz);
 
     /**
-     * <p> Find all instances by collectionName, and filter property. </p><p> This is the same as: {@code find(clazzOrEntity).filter
-     * (property, value); } </p>
+     * Find all instances by collectionName, and filter property.
      *
-     * @param clazz    the class to use for mapping the results
+     * <p>This is the same as: {@code find(clazzOrEntity).filter (property, value); }
+     *
+     * @param clazz the class to use for mapping the results
      * @param property the document property to query against
-     * @param value    the value to check for
-     * @param <T>      the type to query
-     * @param <V>      the type to filter value
-     * @return the query
-     *  use {@link Query} instead
+     * @param value the value to check for
+     * @param <T> the type to query
+     * @param <V> the type to filter value
+     * @return the query use {@link Query} instead
      */
-    
     <T, V> Query<T> find(Class<T> clazz, String property, V value);
 
     /**
-     * Find all instances by type in a different collection than what is mapped on the class given skipping some documents and returning a
-     * fixed number of the remaining.
+     * Find all instances by type in a different collection than what is mapped on the class given
+     * skipping some documents and returning a fixed number of the remaining.
      *
-     * @param clazz    the class to use for mapping the results
+     * @param clazz the class to use for mapping the results
      * @param property the document property to query against
-     * @param value    the value to check for
-     * @param offset   the number of results to skip
-     * @param size     the maximum number of results to return
-     * @param <T>      the type to query
-     * @param <V>      the type to filter value
-     * @return the query
-     *  use {@link Query} instead
+     * @param value the value to check for
+     * @param offset the number of results to skip
+     * @param size the maximum number of results to return
+     * @param <T> the type to query
+     * @param <V> the type to filter value
+     * @return the query use {@link Query} instead
      */
-    
     <T, V> Query<T> find(Class<T> clazz, String property, V value, int offset, int size);
 
     /**
      * Deletes the given entities based on the query (first item only).
      *
      * @param query the query to use when finding entities to delete
-     * @param <T>   the type to query
+     * @param <T> the type to query
      * @return the deleted Entity
      */
     <T> T findAndDelete(Query<T> query);
@@ -349,9 +325,9 @@ public interface Datastore {
     /**
      * Deletes the given entities based on the query (first item only).
      *
-     * @param query   the query to use when finding entities to delete
+     * @param query the query to use when finding entities to delete
      * @param options the options to apply to the delete
-     * @param <T>     the type to query
+     * @param <T> the type to query
      * @return the deleted Entity
      * @since 1.3
      */
@@ -360,21 +336,22 @@ public interface Datastore {
     /**
      * Find the first Entity from the Query, and modify it.
      *
-     * @param query      the query to use when finding entities to update
+     * @param query the query to use when finding entities to update
      * @param operations the updates to apply to the matched documents
-     * @param options    the options to apply to the update
-     * @param <T>        the type to query
+     * @param options the options to apply to the update
+     * @param <T> the type to query
      * @return The modified Entity (the result of the update)
      * @since 1.3
      */
-    <T> T findAndModify(Query<T> query, UpdateOperations<T> operations, FindAndModifyOptions options);
+    <T> T findAndModify(
+            Query<T> query, UpdateOperations<T> operations, FindAndModifyOptions options);
 
     /**
      * Find the first Entity from the Query, and modify it.
      *
-     * @param query      the query to use when finding entities to update
+     * @param query the query to use when finding entities to update
      * @param operations the updates to apply to the matched documents
-     * @param <T>        the type to query
+     * @param <T> the type to query
      * @return The modified Entity (the result of the update)
      */
     <T> T findAndModify(Query<T> query, UpdateOperations<T> operations);
@@ -382,171 +359,152 @@ public interface Datastore {
     /**
      * Find the first Entity from the Query, and modify it.
      *
-     * @param query      the query to find the Entity with; You are not allowed to offset/skip in the query.
+     * @param query the query to find the Entity with; You are not allowed to offset/skip in the
+     *     query.
      * @param operations the updates to apply to the matched documents
      * @param oldVersion indicated the old version of the Entity should be returned
-     * @param <T>        the type to query
-     * @return The Entity (the result of the update if oldVersion is false)
-     *  use {@link #findAndModify(Query, UpdateOperations, FindAndModifyOptions)}
+     * @param <T> the type to query
+     * @return The Entity (the result of the update if oldVersion is false) use {@link
+     *     #findAndModify(Query, UpdateOperations, FindAndModifyOptions)}
      */
-    
     <T> T findAndModify(Query<T> query, UpdateOperations<T> operations, boolean oldVersion);
 
     /**
      * Find the first Entity from the Query, and modify it.
      *
-     * @param query           the query to find the Entity with; You are not allowed to offset/skip in the query.
-     * @param operations      the updates to apply to the matched documents
-     * @param oldVersion      indicated the old version of the Entity should be returned
-     * @param createIfMissing if the query returns no results, then a new object will be created (sets upsert=true)
-     * @param <T>             the type of the entity
-     * @return The Entity (the result of the update if oldVersion is false)
-     *  use {@link #findAndModify(Query, UpdateOperations, FindAndModifyOptions)}
+     * @param query the query to find the Entity with; You are not allowed to offset/skip in the
+     *     query.
+     * @param operations the updates to apply to the matched documents
+     * @param oldVersion indicated the old version of the Entity should be returned
+     * @param createIfMissing if the query returns no results, then a new object will be created
+     *     (sets upsert=true)
+     * @param <T> the type of the entity
+     * @return The Entity (the result of the update if oldVersion is false) use {@link
+     *     #findAndModify(Query, UpdateOperations, FindAndModifyOptions)}
      */
-    
-    <T> T findAndModify(Query<T> query, UpdateOperations<T> operations, boolean oldVersion, boolean createIfMissing);
+    <T> T findAndModify(
+            Query<T> query,
+            UpdateOperations<T> operations,
+            boolean oldVersion,
+            boolean createIfMissing);
 
     /**
      * Find the given entities (by id); shorthand for {@code find("_id in", ids)}
      *
      * @param clazz the class to use for mapping
-     * @param ids   the IDs to query
-     * @param <T>   the type to fetch
-     * @param <V>   the type of the ID
-     * @return the query to find the entities
-     *  use {@link Query} instead.
+     * @param ids the IDs to query
+     * @param <T> the type to fetch
+     * @param <V> the type of the ID
+     * @return the query to find the entities use {@link Query} instead.
      * @morphia.inline
      */
-    
     <T, V> Query<T> get(Class<T> clazz, Iterable<V> ids);
 
     /**
      * Find the given entity (by id); shorthand for {@code find("_id ", id)}
      *
      * @param clazz the class to use for mapping
-     * @param id    the ID to query
-     * @param <T>   the type to fetch
-     * @param <V>   the type of the ID
-     * @return the matched entity.  may be null.
-     *  use {@link Query} instead
+     * @param id the ID to query
+     * @param <T> the type to fetch
+     * @param <V> the type of the ID
+     * @return the matched entity. may be null. use {@link Query} instead
      */
-    
     <T, V> T get(Class<T> clazz, V id);
 
     /**
      * Find the given entity (by collectionName/id); think of this as refresh
      *
      * @param entity The entity to search for
-     * @param <T>    the type to fetch
-     * @return the matched entity.  may be null.
-     *  use {@link Query} instead
+     * @param <T> the type to fetch
+     * @return the matched entity. may be null. use {@link Query} instead
      * @morphia.inline
      */
-    
     <T> T get(T entity);
 
     /**
      * Find the given entity (by collectionName/id);
      *
      * @param clazz the class to use for mapping
-     * @param key   the key search with
-     * @param <T>   the type to fetch
-     *  use a {@link Query} instead
-     * @return the matched entity.  may be null.
+     * @param key the key search with
+     * @param <T> the type to fetch use a {@link Query} instead
+     * @return the matched entity. may be null.
      */
-    
     <T> T getByKey(Class<T> clazz, Key<T> key);
 
-
     /**
-     * Find the given entities (by id), verifying they are of the correct type; shorthand for {@code find("_id in", ids)}
+     * Find the given entities (by id), verifying they are of the correct type; shorthand for {@code
+     * find("_id in", ids)}
      *
      * @param clazz the class to use for mapping
-     * @param keys  the keys to search with
-     * @param <T>   the type to fetch
-     * @return the matched entities.  may be null.
-     *  use a {@link Query} instead
+     * @param keys the keys to search with
+     * @param <T> the type to fetch
+     * @return the matched entities. may be null. use a {@link Query} instead
      */
-    
     <T> List<T> getByKeys(Class<T> clazz, Iterable<Key<T>> keys);
 
     /**
      * Find the given entities (by id); shorthand for {@code find("_id in", ids)}
      *
      * @param keys the keys to search with
-     * @param <T>  the type to fetch
-     * @return the matched entities.  may be null.
-     *  use a {@link Query} instead
+     * @param <T> the type to fetch
+     * @return the matched entities. may be null. use a {@link Query} instead
      */
-    
     <T> List<T> getByKeys(Iterable<Key<T>> keys);
 
     /**
      * @param clazz the class to use for mapping
-     * @return the mapped collection for the collection
-     *  the return type for this method will change in 2.0
+     * @return the mapped collection for the collection the return type for this method will change
+     *     in 2.0
      * @morphia.internal
      */
-    
     DBCollection getCollection(Class<?> clazz);
 
     /**
      * Gets the count this kind ({@link DBCollection})
      *
      * @param entity The entity whose type to count
-     * @param <T>    the type to count
-     * @return the count
-     *  use {@link Query#count()} instead
+     * @param <T> the type to count
+     * @return the count use {@link Query#count()} instead
      */
-    
     <T> long getCount(T entity);
 
     /**
      * Gets the count this kind ({@link DBCollection})
      *
      * @param clazz The clazz type to count
-     * @param <T>   the type to count
-     * @return the count
-     *  use {@link Query#count()} instead
+     * @param <T> the type to count
+     * @return the count use {@link Query#count()} instead
      * @morphia.inline
      */
-    
     <T> long getCount(Class<T> clazz);
-
 
     /**
      * Gets the count of items returned by this query; same as {@code query.countAll()}
      *
      * @param query the query to filter the documents to count
-     * @param <T>   the type to count
-     * @return the count
-     *  use {@link Query#count()} instead
+     * @param <T> the type to count
+     * @return the count use {@link Query#count()} instead
      * @morphia.inline
      */
-    
     <T> long getCount(Query<T> query);
 
     /**
      * Gets the count of items returned by this query; same as {@code query.countAll()}
      *
-     * @param query   the query to filter the documents to count
-     * @param <T>     the type to count
+     * @param query the query to filter the documents to count
+     * @param <T> the type to count
      * @param options the options to apply to the count
      * @return the count
-     * @since 1.3
-     *  use {@link Query#count(CountOptions)} instead
+     * @since 1.3 use {@link Query#count(CountOptions)} instead
      */
-    
     <T> long getCount(Query<T> query, CountOptions options);
 
     /**
      * @return the DB this Datastore uses
      * @see MongoClient#getDB(String)
-     * @see MongoDatabase
-     *  use #getDatabase(). In general, should you need a DB reference, please use the MongoClient used to create this
-     * Datastore to retrieve it.
+     * @see MongoDatabase use #getDatabase(). In general, should you need a DB reference, please use
+     *     the MongoClient used to create this Datastore to retrieve it.
      */
-    
     DB getDB();
 
     /**
@@ -557,26 +515,25 @@ public interface Datastore {
     MongoDatabase getDatabase();
 
     /**
-     * @return the default WriteConcern used by this Datastore
-     *  {@link MongoClient#setWriteConcern(WriteConcern)}
+     * @return the default WriteConcern used by this Datastore {@link
+     *     MongoClient#setWriteConcern(WriteConcern)}
      */
-    
     WriteConcern getDefaultWriteConcern();
 
     /**
      * Sets the default WriteConcern for this Datastore
      *
-     * @param wc the default WriteConcern to be used by this Datastore
-     *  {@link MongoClient#setWriteConcern(WriteConcern)}
+     * @param wc the default WriteConcern to be used by this Datastore {@link
+     *     MongoClient#setWriteConcern(WriteConcern)}
      */
-    
     void setDefaultWriteConcern(WriteConcern wc);
 
     /**
-     * Creates a (type-safe) reference to the entity; if stored this will become a {@link com.mongodb.DBRef}
+     * Creates a (type-safe) reference to the entity; if stored this will become a {@link
+     * com.mongodb.DBRef}
      *
      * @param entity the entity whose key is to be returned
-     * @param <T>    the type of the entity
+     * @param <T> the type of the entity
      * @return the Key
      */
     <T> Key<T> getKey(T entity);
@@ -584,10 +541,8 @@ public interface Datastore {
     /**
      * Get the underlying MongoClient that allows connection to the MongoDB instance being used.
      *
-     * @return the MongoClient being used by this datastore.
-     *  no replacement is planned
+     * @return the MongoClient being used by this datastore. no replacement is planned
      */
-    
     MongoClient getMongo();
 
     /**
@@ -607,62 +562,67 @@ public interface Datastore {
     /**
      * Runs a map/reduce job at the server
      *
-     * @param <T>     The type of resulting data
+     * @param <T> The type of resulting data
      * @param options the options to apply to the map/reduce job
      * @return the results
-     * @since 1.3
-     *  This feature will not be supported in 2.0
+     * @since 1.3 This feature will not be supported in 2.0
      */
-    
     <T> MapreduceResults<T> mapReduce(MapReduceOptions<T> options);
 
     /**
-     * Runs a map/reduce job at the server; this should be used with a server version 1.7.4 or higher
+     * Runs a map/reduce job at the server; this should be used with a server version 1.7.4 or
+     * higher
      *
-     * @param <T>         The type of resulting data
-     * @param outputType  The type of resulting data; inline is not working yet
-     * @param type        MapreduceType
-     * @param q           The query (only the criteria, limit and sort will be used)
-     * @param map         The map function, in javascript, as a string
-     * @param reduce      The reduce function, in javascript, as a string
-     * @param finalize    The finalize function, in javascript, as a string; can be null
+     * @param <T> The type of resulting data
+     * @param outputType The type of resulting data; inline is not working yet
+     * @param type MapreduceType
+     * @param q The query (only the criteria, limit and sort will be used)
+     * @param map The map function, in javascript, as a string
+     * @param reduce The reduce function, in javascript, as a string
+     * @param finalize The finalize function, in javascript, as a string; can be null
      * @param scopeFields Each map entry will be a global variable in all the functions; can be null
-     * @return counts and stuff
-     *  This feature will not be supported in 2.0
+     * @return counts and stuff This feature will not be supported in 2.0
      */
-    
-    <T> MapreduceResults<T> mapReduce(MapreduceType type, Query q, String map, String reduce, String finalize,
-                                      Map<String, Object> scopeFields, Class<T> outputType);
+    <T> MapreduceResults<T> mapReduce(
+            MapreduceType type,
+            Query q,
+            String map,
+            String reduce,
+            String finalize,
+            Map<String, Object> scopeFields,
+            Class<T> outputType);
 
     /**
-     * Runs a map/reduce job at the server; this should be used with a server version 1.7.4 or higher
+     * Runs a map/reduce job at the server; this should be used with a server version 1.7.4 or
+     * higher
      *
-     * @param <T>         The type of resulting data
-     * @param type        MapreduceType
-     * @param q           The query (only the criteria, limit and sort will be used)
-     * @param outputType  The type of resulting data; inline is not working yet
+     * @param <T> The type of resulting data
+     * @param type MapreduceType
+     * @param q The query (only the criteria, limit and sort will be used)
+     * @param outputType The type of resulting data; inline is not working yet
      * @param baseCommand The base command to fill in and send to the server
-     * @return counts and stuff
-     *  This feature will not be supported in 2.0
+     * @return counts and stuff This feature will not be supported in 2.0
      */
-    
-    <T> MapreduceResults<T> mapReduce(MapreduceType type, Query q, Class<T> outputType, MapReduceCommand baseCommand);
+    <T> MapreduceResults<T> mapReduce(
+            MapreduceType type, Query q, Class<T> outputType, MapReduceCommand baseCommand);
 
     /**
-     * Work as if you did an update with each field in the entity doing a $set; Only at the top level of the entity.
+     * Work as if you did an update with each field in the entity doing a $set; Only at the top
+     * level of the entity.
      *
      * @param entity the entity to merge back in to the database
-     * @param <T>    the type of the entity
+     * @param <T> the type of the entity
      * @return the key of the entity
      */
     <T> Key<T> merge(T entity);
 
     /**
-     * Work as if you did an update with each field in the entity doing a $set; Only at the top level of the entity.
+     * Work as if you did an update with each field in the entity doing a $set; Only at the top
+     * level of the entity.
      *
      * @param entity the entity to merge back in to the database
-     * @param <T>    the type of the entity
-     * @param wc     the WriteConcern to use
+     * @param <T> the type of the entity
+     * @param wc the WriteConcern to use
      * @return the key of the entity
      */
     <T> Key<T> merge(T entity, WriteConcern wc);
@@ -671,7 +631,7 @@ public interface Datastore {
      * Returns a new query based on the example object
      *
      * @param example the example entity to use when creating the query
-     * @param <T>     the type of the entity
+     * @param <T> the type of the entity
      * @return the query
      */
     <T> Query<T> queryByExample(T example);
@@ -680,7 +640,7 @@ public interface Datastore {
      * Saves the entities (Objects) and updates the @Id field
      *
      * @param entities the entities to save
-     * @param <T>      the type of the entity
+     * @param <T> the type of the entity
      * @return the keys of the entities
      */
     <T> Iterable<Key<T>> save(Iterable<T> entities);
@@ -689,20 +649,18 @@ public interface Datastore {
      * Saves the entities (Objects) and updates the @Id field, with the WriteConcern
      *
      * @param entities the entities to save
-     * @param <T>      the type of the entity
-     * @param wc       the WriteConcern to use
-     * @return the keys of the entities
-     *  use {@link #save(Iterable, InsertOptions)} instead
+     * @param <T> the type of the entity
+     * @param wc the WriteConcern to use
+     * @return the keys of the entities use {@link #save(Iterable, InsertOptions)} instead
      */
-    
     <T> Iterable<Key<T>> save(Iterable<T> entities, WriteConcern wc);
 
     /**
      * Saves the entities (Objects) and updates the @Id field, with the WriteConcern
      *
      * @param entities the entities to save
-     * @param <T>      the type of the entity
-     * @param options  the options to apply to the save operation
+     * @param <T> the type of the entity
+     * @param options the options to apply to the save operation
      * @return the keys of the entities
      */
     <T> Iterable<Key<T>> save(Iterable<T> entities, InsertOptions options);
@@ -711,18 +669,16 @@ public interface Datastore {
      * Saves the entities (Objects) and updates the @Id field
      *
      * @param entities the entities to save
-     * @param <T>      the type of the entity
-     * @return the keys of the entities
-     *  use {@link #save(Iterable, InsertOptions)} instead
+     * @param <T> the type of the entity
+     * @return the keys of the entities use {@link #save(Iterable, InsertOptions)} instead
      */
-    
     <T> Iterable<Key<T>> save(T... entities);
 
     /**
      * Saves an entity (Object) and updates the @Id field
      *
      * @param entity the entity to save
-     * @param <T>    the type of the entity
+     * @param <T> the type of the entity
      * @return the keys of the entity
      */
     <T> Key<T> save(T entity);
@@ -731,20 +687,18 @@ public interface Datastore {
      * Saves an entity (Object) and updates the @Id field, with the WriteConcern
      *
      * @param entity the entity to save
-     * @param wc     the WriteConcern to use
-     * @param <T>    the type of the entity
-     * @return the keys of the entity
-     *  use {@link #save(Object, InsertOptions)} instead
+     * @param wc the WriteConcern to use
+     * @param <T> the type of the entity
+     * @return the keys of the entity use {@link #save(Object, InsertOptions)} instead
      */
-    
     <T> Key<T> save(T entity, WriteConcern wc);
 
     /**
      * Saves an entity (Object) and updates the @Id field
      *
-     * @param entity  the entity to save
+     * @param entity the entity to save
      * @param options the options to apply to the save operation
-     * @param <T>     the type of the entity
+     * @param <T> the type of the entity
      * @return the keys of the entity
      */
     <T> Key<T> save(T entity, InsertOptions options);
@@ -752,36 +706,31 @@ public interface Datastore {
     /**
      * Updates an entity with the operations; this is an atomic operation
      *
-     * @param entity     the entity to update
+     * @param entity the entity to update
      * @param operations the update operations to perform
-     * @param <T>        the type of the entity
+     * @param <T> the type of the entity
      * @return the update results
-     * @see UpdateResults
-     *  use {@link #update(Query, UpdateOperations)} instead
+     * @see UpdateResults use {@link #update(Query, UpdateOperations)} instead
      */
-    
     <T> UpdateResults update(T entity, UpdateOperations<T> operations);
 
     /**
      * Updates an entity with the operations; this is an atomic operation
      *
-     * @param key        the key of entity to update
+     * @param key the key of entity to update
      * @param operations the update operations to perform
-     * @param <T>        the type of the entity
+     * @param <T> the type of the entity
      * @return the update results
-     * @see UpdateResults
-     *  use {@link #update(Query, UpdateOperations)} instead
+     * @see UpdateResults use {@link #update(Query, UpdateOperations)} instead
      */
-    
     <T> UpdateResults update(Key<T> key, UpdateOperations<T> operations);
-
 
     /**
      * Updates all entities found with the operations; this is an atomic operation per entity
      *
-     * @param query      the query used to match the documents to update
+     * @param query the query used to match the documents to update
      * @param operations the update operations to perform
-     * @param <T>        the type of the entity
+     * @param <T> the type of the entity
      * @return the results of the updates
      */
     <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations);
@@ -789,101 +738,108 @@ public interface Datastore {
     /**
      * Updates all entities found with the operations; this is an atomic operation per entity
      *
-     * @param query      the query used to match the documents to update
+     * @param query the query used to match the documents to update
      * @param operations the update operations to perform
-     * @param options    the options to apply to the update
-     * @param <T>        the type of the entity
+     * @param options the options to apply to the update
+     * @param <T> the type of the entity
      * @return the results of the updates
      * @since 1.3
      */
     <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations, UpdateOptions options);
 
     /**
-     * Updates all entities found with the operations, if nothing is found insert the update as an entity if "createIfMissing" is true;
-     * this
-     * is an atomic operation per entity
+     * Updates all entities found with the operations, if nothing is found insert the update as an
+     * entity if "createIfMissing" is true; this is an atomic operation per entity
      *
-     * @param query           the query used to match the documents to update
-     * @param operations      the update operations to perform
-     * @param createIfMissing if true, a document will be created if none can be found that match the query
-     * @param <T>             the type of the entity
-     * @return the results of the updates
-     *  use {@link #update(Query, UpdateOperations, UpdateOptions)} with upsert set to the value of
-     * createIfMissing
+     * @param query the query used to match the documents to update
+     * @param operations the update operations to perform
+     * @param createIfMissing if true, a document will be created if none can be found that match
+     *     the query
+     * @param <T> the type of the entity
+     * @return the results of the updates use {@link #update(Query, UpdateOperations,
+     *     UpdateOptions)} with upsert set to the value of createIfMissing
      */
-    
-    <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations, boolean createIfMissing);
+    <T> UpdateResults update(
+            Query<T> query, UpdateOperations<T> operations, boolean createIfMissing);
 
     /**
-     * Updates all entities found with the operations, if nothing is found insert the update as an entity if "createIfMissing" is true;
-     * this
-     * is an atomic operation per entity
+     * Updates all entities found with the operations, if nothing is found insert the update as an
+     * entity if "createIfMissing" is true; this is an atomic operation per entity
      *
-     * @param query           the query used to match the documents to update
-     * @param operations      the update operations to perform
-     * @param createIfMissing if true, a document will be created if none can be found that match the query
-     * @param wc              the WriteConcern to use
-     * @param <T>             the type of the entity
-     * @return the results of the updates
-     *  use {@link AdvancedDatastore#update(Query, UpdateOperations, UpdateOptions)}
-     * with upsert set to the value of createIfMissing
+     * @param query the query used to match the documents to update
+     * @param operations the update operations to perform
+     * @param createIfMissing if true, a document will be created if none can be found that match
+     *     the query
+     * @param wc the WriteConcern to use
+     * @param <T> the type of the entity
+     * @return the results of the updates use {@link AdvancedDatastore#update(Query,
+     *     UpdateOperations, UpdateOptions)} with upsert set to the value of createIfMissing
      */
-    
-    <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations, boolean createIfMissing, WriteConcern wc);
+    <T> UpdateResults update(
+            Query<T> query,
+            UpdateOperations<T> operations,
+            boolean createIfMissing,
+            WriteConcern wc);
 
     /**
      * Updates the first entity found with the operations; this is an atomic operation
      *
-     * @param query      the query used to match the document to update
+     * @param query the query used to match the document to update
      * @param operations the update operations to perform
-     * @param <T>        the type of the entity
-     * @return the results of the update
-     *  use {@link #update(Query, UpdateOperations, UpdateOptions)}
+     * @param <T> the type of the entity
+     * @return the results of the update use {@link #update(Query, UpdateOperations, UpdateOptions)}
      */
-    
     <T> UpdateResults updateFirst(Query<T> query, UpdateOperations<T> operations);
 
     /**
-     * Updates the first entity found with the operations, if nothing is found insert the update as an entity if "createIfMissing" is true.
+     * Updates the first entity found with the operations, if nothing is found insert the update as
+     * an entity if "createIfMissing" is true.
      *
-     * @param query           the query used to match the documents to update
-     * @param operations      the update operations to perform
-     * @param createIfMissing if true, a document will be created if none can be found that match the query
-     * @param <T>             the type of the entity
-     * @return the results of the updates
-     *  use {@link #update(Query, UpdateOperations, UpdateOptions)} with upsert set to the value of createIfMissing
+     * @param query the query used to match the documents to update
+     * @param operations the update operations to perform
+     * @param createIfMissing if true, a document will be created if none can be found that match
+     *     the query
+     * @param <T> the type of the entity
+     * @return the results of the updates use {@link #update(Query, UpdateOperations,
+     *     UpdateOptions)} with upsert set to the value of createIfMissing
      */
-    
-    <T> UpdateResults updateFirst(Query<T> query, UpdateOperations<T> operations, boolean createIfMissing);
+    <T> UpdateResults updateFirst(
+            Query<T> query, UpdateOperations<T> operations, boolean createIfMissing);
 
     /**
-     * Updates the first entity found with the operations, if nothing is found insert the update as an entity if "createIfMissing" is true.
+     * Updates the first entity found with the operations, if nothing is found insert the update as
+     * an entity if "createIfMissing" is true.
      *
-     * @param query           the query used to match the documents to update
-     * @param operations      the update operations to perform
-     * @param createIfMissing if true, a document will be created if none can be found that match the query
-     * @param wc              the WriteConcern to use
-     * @param <T>             the type of the entity
-     * @return the results of the updates
-     *  use {@link #update(Query, UpdateOperations, UpdateOptions)} with upsert set to the value of createIfMissing
+     * @param query the query used to match the documents to update
+     * @param operations the update operations to perform
+     * @param createIfMissing if true, a document will be created if none can be found that match
+     *     the query
+     * @param wc the WriteConcern to use
+     * @param <T> the type of the entity
+     * @return the results of the updates use {@link #update(Query, UpdateOperations,
+     *     UpdateOptions)} with upsert set to the value of createIfMissing
      */
-    
-    <T> UpdateResults updateFirst(Query<T> query, UpdateOperations<T> operations, boolean createIfMissing, WriteConcern wc);
+    <T> UpdateResults updateFirst(
+            Query<T> query,
+            UpdateOperations<T> operations,
+            boolean createIfMissing,
+            WriteConcern wc);
 
     /**
-     * updates the first entity found using the entity as a template, if nothing is found insert the update as an entity if
-     * "createIfMissing" is true.
-     * <p>
-     * If the entity is a versioned entity, an UnsupportedOperationException is thrown.
+     * updates the first entity found using the entity as a template, if nothing is found insert the
+     * update as an entity if "createIfMissing" is true.
      *
-     * @param query           the query used to match the documents to update
-     * @param entity          the entity whose state will be used as an update template for any matching documents
-     * @param createIfMissing if true, a document will be created if none can be found that match the query
-     * @param <T>             the type of the entity
-     * @return the results of the updates
-     *  use {@link #update(Query, UpdateOperations, UpdateOptions)} with upsert set to the value of createIfMissing
+     * <p>If the entity is a versioned entity, an UnsupportedOperationException is thrown.
+     *
+     * @param query the query used to match the documents to update
+     * @param entity the entity whose state will be used as an update template for any matching
+     *     documents
+     * @param createIfMissing if true, a document will be created if none can be found that match
+     *     the query
+     * @param <T> the type of the entity
+     * @return the results of the updates use {@link #update(Query, UpdateOperations,
+     *     UpdateOptions)} with upsert set to the value of createIfMissing
      */
-    
     <T> UpdateResults updateFirst(Query<T> query, T entity, boolean createIfMissing);
 
     /**

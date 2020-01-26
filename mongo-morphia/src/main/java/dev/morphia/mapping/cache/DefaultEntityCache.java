@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.cache;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,15 +21,13 @@ import dev.morphia.mapping.lazy.LazyFeatureDependencies;
 import dev.morphia.mapping.lazy.proxy.ProxyHelper;
 import relocated.morphia.org.apache.commons.collections.ReferenceMap;
 
-
-/**
- * This is the default EntityCache for Morphia
- */
+/** This is the default EntityCache for Morphia */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DefaultEntityCache implements EntityCache {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private final Map entityMap = new ReferenceMap(ReferenceMap.HARD, ReferenceMap.WEAK);
+
     private final Map proxyMap = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.WEAK);
     private final Map<Key, Boolean> existenceMap = new HashMap<Key, Boolean>();
     private final EntityCacheStatistics stats = new EntityCacheStatistics();
@@ -109,12 +104,10 @@ public class DefaultEntityCache implements EntityCache {
     public <T> void putProxy(final Key<T> k, final T t) {
         proxyMap.put(k, t);
         stats.incEntities();
-
     }
 
     @Override
     public EntityCacheStatistics stats() {
         return stats.copy();
     }
-
 }

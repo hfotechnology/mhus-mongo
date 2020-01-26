@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.experimental;
@@ -40,10 +38,11 @@ public class MapReference<T> extends MorphiaReference<Map<String, T>> {
     private Map<String, T> values;
     private Map<String, List<Object>> collections = new HashMap<String, List<Object>>();
 
-    /**
-     * @morphia.internal
-     */
-    MapReference(final Datastore datastore, final MappedClass mappedClass, final Map<String, Object> ids) {
+    /** @morphia.internal */
+    MapReference(
+            final Datastore datastore,
+            final MappedClass mappedClass,
+            final Map<String, Object> ids) {
         super(datastore, mappedClass);
         Map<String, Object> unwrapped = ids;
         if (ids != null) {
@@ -59,9 +58,7 @@ public class MapReference<T> extends MorphiaReference<Map<String, T>> {
         this.values = values;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public Map<String, T> get() {
         if (values == null && ids != null) {
             values = new LinkedHashMap<String, T>();
@@ -77,12 +74,16 @@ public class MapReference<T> extends MorphiaReference<Map<String, T>> {
     }
 
     @SuppressWarnings("unchecked")
-    private void readFromSingleCollection(final String collection, final List<Object> collectionIds) {
+    private void readFromSingleCollection(
+            final String collection, final List<Object> collectionIds) {
 
         final Class<?> collectionType = getMappedClass().getClazz();
-        final MongoCursor<T> cursor = (MongoCursor<T>) ((AdvancedDatastore) getDatastore()).find(collection, collectionType)
-                                                                                           .filter("_id in ", collectionIds)
-                                                                                           .find();
+        final MongoCursor<T> cursor =
+                (MongoCursor<T>)
+                        ((AdvancedDatastore) getDatastore())
+                                .find(collection, collectionType)
+                                .filter("_id in ", collectionIds)
+                                .find();
         try {
             final Map<Object, T> idMap = new HashMap<Object, T>();
             while (cursor.hasNext()) {
@@ -102,16 +103,12 @@ public class MapReference<T> extends MorphiaReference<Map<String, T>> {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public boolean isResolved() {
         return values != null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Object encode(final Mapper mapper, final Object value, final MappedField field) {
         if (isResolved()) {
@@ -128,17 +125,21 @@ public class MapReference<T> extends MorphiaReference<Map<String, T>> {
     /**
      * Decodes a document in to entities
      *
-     * @param datastore   the datastore
-     * @param mapper      the mapper
+     * @param datastore the datastore
+     * @param mapper the mapper
      * @param mappedField the MappedField
-     * @param dbObject    the DBObject to decode
+     * @param dbObject the DBObject to decode
      * @return the entities
      */
-    public static MapReference decode(final Datastore datastore, final Mapper mapper, final MappedField mappedField,
-                                      final DBObject dbObject) {
+    public static MapReference decode(
+            final Datastore datastore,
+            final Mapper mapper,
+            final MappedField mappedField,
+            final DBObject dbObject) {
         final Class subType = mappedField.getTypeParameters().get(0).getSubClass();
 
-        final Map<String, Object> ids = (Map<String, Object>) mappedField.getDbObjectValue(dbObject);
+        final Map<String, Object> ids =
+                (Map<String, Object>) mappedField.getDbObjectValue(dbObject);
         MapReference reference = null;
         if (ids != null) {
             reference = new MapReference(datastore, mapper.getMappedClass(subType), ids);

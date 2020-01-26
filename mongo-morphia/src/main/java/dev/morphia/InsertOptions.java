@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
@@ -18,18 +16,16 @@ package dev.morphia;
 import com.mongodb.WriteConcern;
 
 /**
- * Options related to insertion of documents into MongoDB.  The setter methods return {@code this} so that a chaining style can be used.
+ * Options related to insertion of documents into MongoDB. The setter methods return {@code this} so
+ * that a chaining style can be used.
  *
  * @since 1.3
  */
 public class InsertOptions {
     private com.mongodb.InsertOptions options = new com.mongodb.InsertOptions();
 
-    /**
-     * Creates a new options instance.
-     */
-    public InsertOptions() {
-    }
+    /** Creates a new options instance. */
+    public InsertOptions() {}
 
     /**
      * Create a copy of the options instance.
@@ -38,9 +34,9 @@ public class InsertOptions {
      */
     public InsertOptions copy() {
         return new InsertOptions()
-            .bypassDocumentValidation(getBypassDocumentValidation())
-            .continueOnError(isContinueOnError())
-            .writeConcern(getWriteConcern());
+                .bypassDocumentValidation(getBypassDocumentValidation())
+                .continueOnError(isContinueOnError())
+                .writeConcern(getWriteConcern());
     }
 
     com.mongodb.InsertOptions getOptions() {
@@ -70,7 +66,8 @@ public class InsertOptions {
     }
 
     /**
-     * The write concern to use for the insertion.  By default the write concern configured for the DBCollection instance will be used.
+     * The write concern to use for the insertion. By default the write concern configured for the
+     * DBCollection instance will be used.
      *
      * @return the write concern, or null if the default will be used.
      */
@@ -79,8 +76,9 @@ public class InsertOptions {
     }
 
     /**
-     * Whether documents will continue to be inserted after a failure to insert one (most commonly due to a duplicate key error).  Note that
-     * this only is relevant for multi-document inserts. The default value is false.
+     * Whether documents will continue to be inserted after a failure to insert one (most commonly
+     * due to a duplicate key error). Note that this only is relevant for multi-document inserts.
+     * The default value is false.
      *
      * @return whether insertion will continue on error.
      */
@@ -89,7 +87,7 @@ public class InsertOptions {
     }
 
     /**
-     * Gets whether to bypass document validation, or null if unspecified.  The default is null.
+     * Gets whether to bypass document validation, or null if unspecified. The default is null.
      *
      * @return whether to bypass document validation, or null if unspecified.
      * @mongodb.server.release 3.2

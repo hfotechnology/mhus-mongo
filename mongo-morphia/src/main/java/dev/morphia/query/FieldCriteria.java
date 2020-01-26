@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
-
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,9 +29,7 @@ import dev.morphia.mapping.MappedField;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.utils.ReflectionUtils;
 
-/**
- * Defines a Criteria against a field
- */
+/** Defines a Criteria against a field */
 class FieldCriteria extends AbstractCriteria {
     private static final Logger LOG = LoggerFactory.getLogger(FieldCriteria.class);
 
@@ -44,30 +39,47 @@ class FieldCriteria extends AbstractCriteria {
     private final boolean not;
     private final QueryImpl<?> query;
 
-    FieldCriteria(final QueryImpl<?> query, final String field, final FilterOperator op, final Object value) {
+    FieldCriteria(
+            final QueryImpl<?> query,
+            final String field,
+            final FilterOperator op,
+            final Object value) {
         this(query, field, op, value, false);
     }
 
-    FieldCriteria(final QueryImpl<?> query, final String fieldName, final FilterOperator op, final Object value, final boolean not) {
-        //validate might modify prop string to translate java field name to db field name
+    FieldCriteria(
+            final QueryImpl<?> query,
+            final String fieldName,
+            final FilterOperator op,
+            final Object value,
+            final boolean not) {
+        // validate might modify prop string to translate java field name to db field name
         this.query = query;
         final Mapper mapper = query.getDatastore().getMapper();
-        final PathTarget pathTarget = new PathTarget(mapper, mapper.getMappedClass(query.getEntityClass()), fieldName,
-            query.isValidatingNames());
+        final PathTarget pathTarget =
+                new PathTarget(
+                        mapper,
+                        mapper.getMappedClass(query.getEntityClass()),
+                        fieldName,
+                        query.isValidatingNames());
         final MappedField mf = pathTarget.getTarget();
 
         MappedClass mc = null;
         try {
-            if (value != null && !ReflectionUtils.isPropertyType(value.getClass())
-                && !ReflectionUtils.implementsInterface(value.getClass(), Iterable.class)) {
+            if (value != null
+                    && !ReflectionUtils.isPropertyType(value.getClass())
+                    && !ReflectionUtils.implementsInterface(value.getClass(), Iterable.class)) {
                 if (mf != null && !mf.isTypeMongoCompatible()) {
-                    mc = mapper.getMappedClass((mf.isSingleValue()) ? mf.getType() : mf.getSubClass());
+                    mc =
+                            mapper.getMappedClass(
+                                    (mf.isSingleValue()) ? mf.getType() : mf.getSubClass());
                 } else {
                     mc = mapper.getMappedClass(value);
                 }
             }
         } catch (Exception e) {
-            // Ignore these. It is likely they related to mapping validation that is unimportant for queries (the query will
+            // Ignore these. It is likely they related to mapping validation that is unimportant for
+            // queries (the query will
             // fail/return-empty anyway)
             LOG.debug("Error during mapping of filter criteria: ", e);
         }
@@ -76,14 +88,18 @@ class FieldCriteria extends AbstractCriteria {
 
         final Class<?> type = (mappedValue == null) ? null : mappedValue.getClass();
 
-        //convert single values into lists for $in/$nin
-        if (type != null && (op == FilterOperator.IN || op == FilterOperator.NOT_IN)
-            && !type.isArray() && !Iterable.class.isAssignableFrom(type)) {
+        // convert single values into lists for $in/$nin
+        if (type != null
+                && (op == FilterOperator.IN || op == FilterOperator.NOT_IN)
+                && !type.isArray()
+                && !Iterable.class.isAssignableFrom(type)) {
             mappedValue = Collections.singletonList(mappedValue);
         }
 
-        if (value != null && type == null && (op == FilterOperator.IN || op == FilterOperator.NOT_IN)
-            && Iterable.class.isAssignableFrom(value.getClass())) {
+        if (value != null
+                && type == null
+                && (op == FilterOperator.IN || op == FilterOperator.NOT_IN)
+                && Iterable.class.isAssignableFrom(value.getClass())) {
             mappedValue = Collections.emptyList();
         }
 
@@ -133,9 +149,7 @@ class FieldCriteria extends AbstractCriteria {
         return field;
     }
 
-    /**
-     * @return the field
-     */
+    /** @return the field */
     public String getField() {
         return field;
     }
@@ -148,16 +162,12 @@ class FieldCriteria extends AbstractCriteria {
         return operator;
     }
 
-    /**
-     * @return the value used in the Criteria
-     */
+    /** @return the value used in the Criteria */
     public Object getValue() {
         return value;
     }
 
-    /**
-     * @return true if 'not' has been applied against this Criteria
-     */
+    /** @return true if 'not' has been applied against this Criteria */
     public boolean isNot() {
         return not;
     }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -20,6 +18,7 @@ import com.mongodb.DBObject;
 
 /**
  * Defines $meta expression object
+ *
  * @mongodb.driver.manual reference/operator/aggregation/meta/ $meta
  */
 public class Meta {
@@ -28,14 +27,13 @@ public class Meta {
 
     /**
      * Representing specified metadata keyword
+     *
      * @mongodb.driver.manual reference/operator/aggregation/meta/#exp._S_meta $meta
      */
     public enum MetaDataKeyword {
         textScore;
 
-        /**
-         * @return MetaDataKeyword name
-         */
+        /** @return MetaDataKeyword name */
         public String getName() {
             return textScore.name();
         }
@@ -46,6 +44,7 @@ public class Meta {
 
     /**
      * Specify the meta
+     *
      * @param metaDataKeyword - metadata keyword to create
      */
     public Meta(final MetaDataKeyword metaDataKeyword) {
@@ -54,7 +53,7 @@ public class Meta {
     }
 
     /**
-     * @param metaDataKeyword  - metadata keyword to create
+     * @param metaDataKeyword - metadata keyword to create
      * @param field - metadata object field name
      */
     public Meta(final MetaDataKeyword metaDataKeyword, final String field) {
@@ -62,15 +61,14 @@ public class Meta {
         this.field = field;
     }
 
-    /**
-     * @return metadata object field name
-     */
+    /** @return metadata object field name */
     public String getField() {
         return field;
     }
 
     /**
      * factory method for textScore metaDataKeyword
+     *
      * @return instance of 'textScore' Meta
      */
     public static Meta textScore() {
@@ -78,9 +76,8 @@ public class Meta {
     }
 
     /**
-     *
      * @param field - the field to project meta data
-     * @return  instance of 'textScore' Meta
+     * @return instance of 'textScore' Meta
      */
     public static Meta textScore(final String field) {
         return new Meta(MetaDataKeyword.textScore, field);

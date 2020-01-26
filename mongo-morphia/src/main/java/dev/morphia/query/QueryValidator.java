@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -38,38 +36,54 @@ import dev.morphia.query.validation.SizeOperationValidator;
 import dev.morphia.query.validation.ValidationFailure;
 
 final class QueryValidator {
-    private QueryValidator() {
-    }
+    private QueryValidator() {}
 
     /*package*/
-    static boolean isCompatibleForOperator(final MappedClass mappedClass, final MappedField mappedField, final Class<?> type,
-                                           final FilterOperator op,
-                                           final Object value, final List<ValidationFailure> validationFailures) {
-        // TODO: it's really OK to have null values?  I think this is to prevent null pointers further down,
-        // but I want to move the null check into the operations that care whether they allow nulls or not.
+    static boolean isCompatibleForOperator(
+            final MappedClass mappedClass,
+            final MappedField mappedField,
+            final Class<?> type,
+            final FilterOperator op,
+            final Object value,
+            final List<ValidationFailure> validationFailures) {
+        // TODO: it's really OK to have null values?  I think this is to prevent null pointers
+        // further down,
+        // but I want to move the null check into the operations that care whether they allow nulls
+        // or not.
         if (value == null || type == null) {
             return true;
         }
 
-        boolean validationApplied = ExistsOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || SizeOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || InOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || NotInOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || ModOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || GeoWithinOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || AllOperationValidator.getInstance().apply(mappedField, op, value, validationFailures)
-                                    || KeyValueTypeValidator.getInstance().apply(type, value, validationFailures)
-                                    || IntegerTypeValidator.getInstance().apply(type, value, validationFailures)
-                                    || LongTypeValidator.getInstance().apply(type, value, validationFailures)
-                                    || DoubleTypeValidator.getInstance().apply(type, value, validationFailures)
-                                    || PatternValueValidator.getInstance().apply(type, value, validationFailures)
-                                    || EntityAnnotatedValueValidator.getInstance().apply(type, value, validationFailures)
-                                    || ListValueValidator.getInstance().apply(type, value, validationFailures)
-                                    || EntityTypeAndIdValueValidator.getInstance()
-                                                                    .apply(mappedClass, mappedField, value, validationFailures)
-                                    || DefaultTypeValidator.getInstance().apply(type, value, validationFailures);
+        boolean validationApplied =
+                ExistsOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || SizeOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || InOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || NotInOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || ModOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || GeoWithinOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || AllOperationValidator.getInstance()
+                                .apply(mappedField, op, value, validationFailures)
+                        || KeyValueTypeValidator.getInstance()
+                                .apply(type, value, validationFailures)
+                        || IntegerTypeValidator.getInstance().apply(type, value, validationFailures)
+                        || LongTypeValidator.getInstance().apply(type, value, validationFailures)
+                        || DoubleTypeValidator.getInstance().apply(type, value, validationFailures)
+                        || PatternValueValidator.getInstance()
+                                .apply(type, value, validationFailures)
+                        || EntityAnnotatedValueValidator.getInstance()
+                                .apply(type, value, validationFailures)
+                        || ListValueValidator.getInstance().apply(type, value, validationFailures)
+                        || EntityTypeAndIdValueValidator.getInstance()
+                                .apply(mappedClass, mappedField, value, validationFailures)
+                        || DefaultTypeValidator.getInstance()
+                                .apply(type, value, validationFailures);
 
         return validationApplied && validationFailures.isEmpty();
     }
-
 }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.logging;
@@ -32,8 +30,7 @@ public final class MorphiaLoggerFactory {
         FACTORIES.add(JDKLoggerFactory.class.getName());
     }
 
-    private MorphiaLoggerFactory() {
-    }
+    private MorphiaLoggerFactory() {}
 
     /**
      * Gets or creates a Logger for the given class.
@@ -56,7 +53,9 @@ public final class MorphiaLoggerFactory {
         for (final String f : FACTORIES) {
             loggerFactory = newInstance(f);
             if (loggerFactory != null) {
-                loggerFactory.get(MorphiaLoggerFactory.class).info("LoggerImplFactory set to " + loggerFactory.getClass().getName());
+                loggerFactory
+                        .get(MorphiaLoggerFactory.class)
+                        .info("LoggerImplFactory set to " + loggerFactory.getClass().getName());
                 return;
             }
         }
@@ -80,13 +79,12 @@ public final class MorphiaLoggerFactory {
         if (loggerFactory == null) {
             FACTORIES.add(0, factoryClass.getName());
         } else {
-            throw new IllegalStateException("LoggerImplFactory must be registered before logging is initialized.");
+            throw new IllegalStateException(
+                    "LoggerImplFactory must be registered before logging is initialized.");
         }
     }
 
-    /**
-     * Clears the logger factory
-     */
+    /** Clears the logger factory */
     public static void reset() {
         loggerFactory = null;
     }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.geo;
@@ -24,12 +22,14 @@ import com.mongodb.client.model.geojson.PolygonCoordinates;
 import com.mongodb.client.model.geojson.Position;
 
 /**
- * This class represents either a simple polygon enclosing an area, or a more complex polygon that contains both an exterior boundary and
- * interior boundaries (holes) within it.  It will be persisted into the database according to <a
- * href="http://geojson.org/geojson-spec.html#id4">the specification</a>.
- * <p/>
- * The factory for creating a Polygon is {@code PolygonBuilder}, which is accessible via the {@code GeoJson.polygonBuilder} method.
- * Alternatively, simple polygons without inner rings can be created via the {@code GeoJson.polygon} factory method.
+ * This class represents either a simple polygon enclosing an area, or a more complex polygon that
+ * contains both an exterior boundary and interior boundaries (holes) within it. It will be
+ * persisted into the database according to <a href="http://geojson.org/geojson-spec.html#id4">the
+ * specification</a>.
+ *
+ * <p>The factory for creating a Polygon is {@code PolygonBuilder}, which is accessible via the
+ * {@code GeoJson.polygonBuilder} method. Alternatively, simple polygons without inner rings can be
+ * created via the {@code GeoJson.polygon} factory method.
  *
  * @see dev.morphia.geo.GeoJson#polygon(LineString, LineString...)
  * @see dev.morphia.geo.GeoJson#polygon(Point...)
@@ -67,17 +67,19 @@ public class Polygon implements Geometry {
     }
 
     /**
-     * Returns a LineString representing the exterior boundary of this Polygon.  Polygons should have an exterior boundary where the end
-     * point is the same as the start point.
+     * Returns a LineString representing the exterior boundary of this Polygon. Polygons should have
+     * an exterior boundary where the end point is the same as the start point.
      *
-     * @return a LineString containing the points that make up the external boundary of this Polygon.
+     * @return a LineString containing the points that make up the external boundary of this
+     *     Polygon.
      */
     public LineString getExteriorBoundary() {
         return exteriorBoundary;
     }
 
     /**
-     * Returns a (possibly empty) List of LineStrings, one for each hole inside the external boundary of this polygon.
+     * Returns a (possibly empty) List of LineStrings, one for each hole inside the external
+     * boundary of this polygon.
      *
      * @return a List of LineStrings where each LineString represents an internal boundary or hole.
      */
@@ -117,9 +119,11 @@ public class Polygon implements Geometry {
     @Override
     public String toString() {
         return "Polygon{"
-               + "exteriorBoundary=" + exteriorBoundary
-               + ", interiorBoundaries=" + interiorBoundaries
-               + '}';
+                + "exteriorBoundary="
+                + exteriorBoundary
+                + ", interiorBoundaries="
+                + interiorBoundaries
+                + '}';
     }
 
     @Override
@@ -132,7 +136,8 @@ public class Polygon implements Geometry {
     public com.mongodb.client.model.geojson.Polygon convert(final CoordinateReferenceSystem crs) {
         final List<List<Position>> lists = GeoJson.convertLineStrings(interiorBoundaries);
         final List[] holeArray = lists.toArray(new List[0]);
-        return new com.mongodb.client.model.geojson.Polygon(crs != null ? crs.convert() : null,
-            new PolygonCoordinates(exteriorBoundary.convert().getCoordinates(), holeArray));
+        return new com.mongodb.client.model.geojson.Polygon(
+                crs != null ? crs.convert() : null,
+                new PolygonCoordinates(exteriorBoundary.convert().getCoordinates(), holeArray));
     }
 }

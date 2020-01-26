@@ -1,16 +1,14 @@
 /**
  * Copyright 2018 Mike Hummel
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package de.mhus.lib.mongo;
@@ -63,269 +61,243 @@ import dev.morphia.query.UpdateResults;
 
 public class MoManager extends MJmx implements MoHandler {
 
-	private MongoClient client;
-	private MoSchema schema;
-	private Morphia morhia;
-	private Datastore datastore;
-	private LinkedList<Class<? extends Persistable>> managedTypes;
-	private HashMap<String, PojoModel> modelCache = new HashMap<>();
+    private MongoClient client;
+    private MoSchema schema;
+    private Morphia morhia;
+    private Datastore datastore;
+    private LinkedList<Class<? extends Persistable>> managedTypes;
+    private HashMap<String, PojoModel> modelCache = new HashMap<>();
 
-	public MoManager(MongoClient client, MoSchema schema) {
-		this.client = client;
-		this.schema = schema;
-		initDatabase();
-		
-	}
+    public MoManager(MongoClient client, MoSchema schema) {
+        this.client = client;
+        this.schema = schema;
+        initDatabase();
+    }
 
-	@SuppressWarnings("rawtypes")
-	protected void initDatabase() {
-		Mapper mapper = createMapper();
-		Set<Class> classObjs = new HashSet<>();
-		managedTypes = new LinkedList<>();
-		schema.findObjectTypes(managedTypes);
-		classObjs.addAll(managedTypes);
-		morhia = new Morphia(mapper, classObjs );
-		datastore = morhia.createDatastore(client, schema.getDatabaseName());
-		datastore.ensureIndexes();
-	}
-	
-	protected Mapper createMapper() {
+    @SuppressWarnings("rawtypes")
+    protected void initDatabase() {
+        Mapper mapper = createMapper();
+        Set<Class> classObjs = new HashSet<>();
+        managedTypes = new LinkedList<>();
+        schema.findObjectTypes(managedTypes);
+        classObjs.addAll(managedTypes);
+        morhia = new Morphia(mapper, classObjs);
+        datastore = morhia.createDatastore(client, schema.getDatabaseName());
+        datastore.ensureIndexes();
+    }
+
+    protected Mapper createMapper() {
         Mapper mapper = new MoMapper(this);
-        
+
         schema.initMapper(mapper);
         return mapper;
     }
-	
-	public MongoClient getMongoClient() {
-	    return client;
-	}
-	
-	public Morphia getMorphia() {
-	    return  morhia;
-	}
 
-	public <T> T getObject(Class<T> clazz, Object ... keys) throws MException {
-		if (keys == null || keys.length != 1 || keys[0] == null) return null;
-		ObjectId id = null;
-		if (keys[0].toString().contains("-"))
-	        id = MoUtil.toObjectId(UUID.fromString(String.valueOf(keys[0])));
-		else
-		    id = new ObjectId(String.valueOf(keys[0]));
-		T ret = datastore.get(clazz, id);
-        if (ret instanceof DbObject)
-            ((DbObject)ret).doPostLoad(null);
-		return ret;
-		// return datastore.find(clazz, "_id", id);
-	}
-		
+    public MongoClient getMongoClient() {
+        return client;
+    }
+
+    public Morphia getMorphia() {
+        return morhia;
+    }
+
+    public <T> T getObject(Class<T> clazz, Object... keys) throws MException {
+        if (keys == null || keys.length != 1 || keys[0] == null) return null;
+        ObjectId id = null;
+        if (keys[0].toString().contains("-"))
+            id = MoUtil.toObjectId(UUID.fromString(String.valueOf(keys[0])));
+        else id = new ObjectId(String.valueOf(keys[0]));
+        T ret = datastore.get(clazz, id);
+        if (ret instanceof DbObject) ((DbObject) ret).doPostLoad(null);
+        return ret;
+        // return datastore.find(clazz, "_id", id);
+    }
+
     public <T> Query<T> createQuery(Class<T> clazz) {
-		return datastore.createQuery(clazz);
-	}
-		
-	// ----
-	
-	@Override
-	public void saveObject(DbConnection con, String registryName, Object obj) throws MException {
-        if (obj instanceof DbObject)
-            ((DbObject)obj).doPreSave(con);
+        return datastore.createQuery(clazz);
+    }
+
+    // ----
+
+    @Override
+    public void saveObject(DbConnection con, String registryName, Object obj) throws MException {
+        if (obj instanceof DbObject) ((DbObject) obj).doPreSave(con);
         datastore.save(obj);
-	}
+    }
 
-	@Override
-	public boolean objectChanged(Object obj) throws MException {
-		Object id = datastore.getKey(obj).getId();
-		Object clone = datastore.get(obj.getClass(), id);
-		try {
-			PojoModel model = getModelFor(obj.getClass());
-			for ( PojoAttribute<?> f : model) {
-				Object v1 = f.get(obj);
-				Object v2 = f.get(clone);
-				if (!MSystem.equals(v1, v2)) return true;
-			}
-		} catch (IOException e) {
-			throw new MException(e);
-		}
-		return false;
-	}
+    @Override
+    public boolean objectChanged(Object obj) throws MException {
+        Object id = datastore.getKey(obj).getId();
+        Object clone = datastore.get(obj.getClass(), id);
+        try {
+            PojoModel model = getModelFor(obj.getClass());
+            for (PojoAttribute<?> f : model) {
+                Object v1 = f.get(obj);
+                Object v2 = f.get(clone);
+                if (!MSystem.equals(v1, v2)) return true;
+            }
+        } catch (IOException e) {
+            throw new MException(e);
+        }
+        return false;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void reloadObject(DbConnection con, String registryName, Object obj) throws MException {
-		Object id = datastore.getKey(obj).getId();
-		Object clone = datastore.get(obj.getClass(), id);
-		try {
-			PojoModel model = getModelFor(obj.getClass());
-			for ( PojoAttribute<Object> f : model) {
-				Object v = f.get(clone);
-				f.set(obj, v);
-			}
-		} catch (IOException e) {
-			throw new MException(e);
-		}
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public void reloadObject(DbConnection con, String registryName, Object obj) throws MException {
+        Object id = datastore.getKey(obj).getId();
+        Object clone = datastore.get(obj.getClass(), id);
+        try {
+            PojoModel model = getModelFor(obj.getClass());
+            for (PojoAttribute<Object> f : model) {
+                Object v = f.get(clone);
+                f.set(obj, v);
+            }
+        } catch (IOException e) {
+            throw new MException(e);
+        }
+    }
 
-	@Override
-	public void deleteObject(DbConnection con, String registryName, Object obj) throws MException {
-        if (obj instanceof DbObject)
-            ((DbObject)obj).doPreDelete(con);
+    @Override
+    public void deleteObject(DbConnection con, String registryName, Object obj) throws MException {
+        if (obj instanceof DbObject) ((DbObject) obj).doPreDelete(con);
         datastore.delete(obj);
-        if (obj instanceof DbObject)
-            ((DbObject)obj).doPostDelete(con);
-	}
+        if (obj instanceof DbObject) ((DbObject) obj).doPostDelete(con);
+    }
 
-	@Override
-	public void createObject(DbConnection con, Object obj) throws MException {
-		PojoModel model = getModelFor(obj.getClass());
-		for ( PojoAttribute<?> f : model)
-			if (f.getAnnotation(DbPrimaryKey.class) != null) {
-				try {
-					f.set(obj, null);
-				} catch (IOException e) {
-					throw new MException(f,e);
-				}
-				break;
-			}
-		
-        if (obj instanceof DbObject)
-            ((DbObject)obj).doPreCreate(con);
+    @Override
+    public void createObject(DbConnection con, Object obj) throws MException {
+        PojoModel model = getModelFor(obj.getClass());
+        for (PojoAttribute<?> f : model)
+            if (f.getAnnotation(DbPrimaryKey.class) != null) {
+                try {
+                    f.set(obj, null);
+                } catch (IOException e) {
+                    throw new MException(f, e);
+                }
+                break;
+            }
+
+        if (obj instanceof DbObject) ((DbObject) obj).doPreCreate(con);
         datastore.save(obj);
-        if (obj instanceof DbObject)
-            ((DbObject)obj).doPostCreate(con);
-	}
+        if (obj instanceof DbObject) ((DbObject) obj).doPostCreate(con);
+    }
 
-	// -----
-	
-	public synchronized PojoModel getModelFor(Class<?> clazz) throws NotFoundException {
-		// find managed object
-		Class<? extends Persistable> type = null;
-		for (Class<? extends Persistable> t : managedTypes) {
-			if (clazz.isAssignableFrom(t)) {
-				type = t;
-				break;
-			}
-		}
-		if (type == null) throw new NotFoundException("Managed type not found",clazz);
-		
-		PojoModel model = modelCache.get(type.getName());
-		if (model == null) {
-			model = new PojoParser().parse(type, new AttributesStrategy()).filter(new MongoFilter()).getModel();
-			modelCache.put(type.getName(), model);
-		}
-		return model;
-	}
+    // -----
 
-	public <T> UpdateOperations<T> createUpdateOperations(Class<T> clazz) {
-		return datastore.createUpdateOperations(clazz);
-	}
+    public synchronized PojoModel getModelFor(Class<?> clazz) throws NotFoundException {
+        // find managed object
+        Class<? extends Persistable> type = null;
+        for (Class<? extends Persistable> t : managedTypes) {
+            if (clazz.isAssignableFrom(t)) {
+                type = t;
+                break;
+            }
+        }
+        if (type == null) throw new NotFoundException("Managed type not found", clazz);
 
-	public <T> T findAndDelete(Query<T> query) {
-		return datastore.findAndDelete(query);
-	}
+        PojoModel model = modelCache.get(type.getName());
+        if (model == null) {
+            model =
+                    new PojoParser()
+                            .parse(type, new AttributesStrategy())
+                            .filter(new MongoFilter())
+                            .getModel();
+            modelCache.put(type.getName(), model);
+        }
+        return model;
+    }
 
-	public <T> T findAndModify(Query<T> query, UpdateOperations<T> operations, FindAndModifyOptions options) {
-		return datastore.findAndModify(query, operations, options);
-	}
+    public <T> UpdateOperations<T> createUpdateOperations(Class<T> clazz) {
+        return datastore.createUpdateOperations(clazz);
+    }
 
-	public <T> T findAndModify(Query<T> query, UpdateOperations<T> operations) {
-		return datastore.findAndModify(query, operations);
-	}
+    public <T> T findAndDelete(Query<T> query) {
+        return datastore.findAndDelete(query);
+    }
 
-	public <T> long getCount(T entity) {
-		return datastore.getCount(entity);
-	}
+    public <T> T findAndModify(
+            Query<T> query, UpdateOperations<T> operations, FindAndModifyOptions options) {
+        return datastore.findAndModify(query, operations, options);
+    }
 
-	public <T> long getCount(Class<T> clazz) {
-		return datastore.getCount(clazz);
-	}
+    public <T> T findAndModify(Query<T> query, UpdateOperations<T> operations) {
+        return datastore.findAndModify(query, operations);
+    }
 
-	public <T> long getCount(Query<T> query) {
-		return datastore.getCount(query);
-	}
-	
-	public <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations) {
-		return datastore.update(query, operations);
-	}
+    public <T> long getCount(T entity) {
+        return datastore.getCount(entity);
+    }
 
-	public void close() {
+    public <T> long getCount(Class<T> clazz) {
+        return datastore.getCount(clazz);
+    }
 
-	}
+    public <T> long getCount(Query<T> query) {
+        return datastore.getCount(query);
+    }
 
-	public MoSchema getSchema() {
-		return schema;
-	}
+    public <T> UpdateResults update(Query<T> query, UpdateOperations<T> operations) {
+        return datastore.update(query, operations);
+    }
 
-	public List<Class<? extends Persistable>> getManagedTypes() {
-		return managedTypes;
-	}
+    public void close() {}
 
-	public Class<?> getManagedType(String name) throws NotFoundException {
-		name = name.trim().toLowerCase();
-		for (Class<? extends Persistable> type : managedTypes)
-			if (type.getCanonicalName().toLowerCase().endsWith(name)) return type;
-		throw new NotFoundException("Type not found",name);
-	}
+    public MoSchema getSchema() {
+        return schema;
+    }
 
-	public Object getId(Object object) {
-		if (object == null) return "";
-		return datastore.getKey(object).getId();
-	}
+    public List<Class<? extends Persistable>> getManagedTypes() {
+        return managedTypes;
+    }
 
-	public <T> T inject(T instance) {
-		if (instance instanceof DbComfortableObject)
-			((DbComfortableObject)instance).doInit(this, null, false);
-		return instance;
-	}
-	
-	private static class MongoFilter implements PojoFilter {
+    public Class<?> getManagedType(String name) throws NotFoundException {
+        name = name.trim().toLowerCase();
+        for (Class<? extends Persistable> type : managedTypes)
+            if (type.getCanonicalName().toLowerCase().endsWith(name)) return type;
+        throw new NotFoundException("Type not found", name);
+    }
 
-		@Override
-		public void filter(PojoModelImpl model) {
-			for (String name : model.getAttributeNames()) {
-				PojoAttribute<?> attr = model.getAttribute(name);
-				if (
-						
-						attr.getAnnotation(NotSaved.class) != null 
-						||
-						attr.getManagedClass() == DbComfortableObject.class
-						||
-						attr.getManagedClass() == MObject.class
-						||
-						!attr.getType().isPrimitive() 
-						&& 
-						attr.getType() != String.class 
-						&& 
-						attr.getType() != Date.class
-						&&
-						attr.getType() != BigDecimal.class
-						&&
-						attr.getType() != BigInteger.class
-						&&
-						!Map.class.isAssignableFrom(attr.getType())
-						&&
-						!List.class.isAssignableFrom(attr.getType())
-						&&
-						attr.getAnnotation(Property.class) == null 
-						&& 
-						attr.getAnnotation(Serialized.class) == null
-						&&
-						attr.getAnnotation(Reference.class) == null
-						&&
-						attr.getAnnotation(Embedded.class) == null
-						&&
-                        attr.getAnnotation(DbPrimaryKey.class) == null
-                        &&
-                        attr.getAnnotation(DbPersistent.class) == null
-						) {
-					model.removeAttribute(name);
-				}
-			}
-			
-			for (String name : model.getActionNames()) {
-				model.removeAction(name);
-			}
-			
-		}
-		
-	}
-		
+    public Object getId(Object object) {
+        if (object == null) return "";
+        return datastore.getKey(object).getId();
+    }
+
+    public <T> T inject(T instance) {
+        if (instance instanceof DbComfortableObject)
+            ((DbComfortableObject) instance).doInit(this, null, false);
+        return instance;
+    }
+
+    private static class MongoFilter implements PojoFilter {
+
+        @Override
+        public void filter(PojoModelImpl model) {
+            for (String name : model.getAttributeNames()) {
+                PojoAttribute<?> attr = model.getAttribute(name);
+                if (attr.getAnnotation(NotSaved.class) != null
+                        || attr.getManagedClass() == DbComfortableObject.class
+                        || attr.getManagedClass() == MObject.class
+                        || !attr.getType().isPrimitive()
+                                && attr.getType() != String.class
+                                && attr.getType() != Date.class
+                                && attr.getType() != BigDecimal.class
+                                && attr.getType() != BigInteger.class
+                                && !Map.class.isAssignableFrom(attr.getType())
+                                && !List.class.isAssignableFrom(attr.getType())
+                                && attr.getAnnotation(Property.class) == null
+                                && attr.getAnnotation(Serialized.class) == null
+                                && attr.getAnnotation(Reference.class) == null
+                                && attr.getAnnotation(Embedded.class) == null
+                                && attr.getAnnotation(DbPrimaryKey.class) == null
+                                && attr.getAnnotation(DbPersistent.class) == null) {
+                    model.removeAttribute(name);
+                }
+            }
+
+            for (String name : model.getActionNames()) {
+                model.removeAction(name);
+            }
+        }
+    }
 }

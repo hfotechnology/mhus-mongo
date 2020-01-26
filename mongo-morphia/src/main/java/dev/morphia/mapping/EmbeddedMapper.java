@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping;
@@ -33,17 +31,16 @@ import dev.morphia.utils.IterHelper;
 import dev.morphia.utils.IterHelper.MapIterCallback;
 import dev.morphia.utils.ReflectionUtils;
 
-/**
- * @morphia.internal
- * 
- */
+/** @morphia.internal */
 class EmbeddedMapper implements CustomMapper {
-    static boolean shouldSaveClassName(final Object rawVal, final Object convertedVal, final MappedField mf) {
+    static boolean shouldSaveClassName(
+            final Object rawVal, final Object convertedVal, final MappedField mf) {
         if (rawVal == null || mf == null) {
             return true;
         }
         if (mf.isSingleValue()) {
-            return !(mf.getType().equals(rawVal.getClass()) && !(convertedVal instanceof BasicDBList));
+            return !(mf.getType().equals(rawVal.getClass())
+                    && !(convertedVal instanceof BasicDBList));
         }
         boolean isDBObject = convertedVal instanceof DBObject;
         boolean anInterface = mf.getSubClass().isInterface();
@@ -53,13 +50,19 @@ class EmbeddedMapper implements CustomMapper {
     }
 
     private static boolean isMapOrCollection(final MappedField mf) {
-        return Map.class.isAssignableFrom(mf.getSubClass()) || Iterable.class.isAssignableFrom(mf.getSubClass());
+        return Map.class.isAssignableFrom(mf.getSubClass())
+                || Iterable.class.isAssignableFrom(mf.getSubClass());
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void fromDBObject(final Datastore datastore, final DBObject dbObject, final MappedField mf, final Object entity,
-                             final EntityCache cache, final Mapper mapper) {
+    public void fromDBObject(
+            final Datastore datastore,
+            final DBObject dbObject,
+            final MappedField mf,
+            final Object entity,
+            final EntityCache cache,
+            final Mapper mapper) {
         try {
             if (mf.isMap()) {
                 readMap(datastore, mapper, entity, cache, mf, dbObject);
@@ -71,19 +74,23 @@ class EmbeddedMapper implements CustomMapper {
                 if (dbVal != null) {
                     final boolean isDBObject = dbVal instanceof DBObject;
 
-                    //run converters
-                    if (isDBObject && !mapper.isMapped(mf.getConcreteType()) && (mapper.getConverters().hasDbObjectConverter(mf)
-                                                                                 || mapper.getConverters()
-                                                                                          .hasDbObjectConverter(mf.getType()))) {
+                    // run converters
+                    if (isDBObject
+                            && !mapper.isMapped(mf.getConcreteType())
+                            && (mapper.getConverters().hasDbObjectConverter(mf)
+                                    || mapper.getConverters().hasDbObjectConverter(mf.getType()))) {
                         mapper.getConverters().fromDBObject(dbObject, mf, entity);
                     } else {
                         Object refObj;
-                        if (mapper.getConverters().hasSimpleValueConverter(mf) || mapper.getConverters()
-                                                                                        .hasSimpleValueConverter(mf.getType())) {
+                        if (mapper.getConverters().hasSimpleValueConverter(mf)
+                                || mapper.getConverters().hasSimpleValueConverter(mf.getType())) {
                             refObj = mapper.getConverters().decode(mf.getType(), dbVal, mf);
                         } else {
                             DBObject value = (DBObject) dbVal;
-                            refObj = mapper.getOptions().getObjectFactory().createInstance(mapper, mf, value);
+                            refObj =
+                                    mapper.getOptions()
+                                            .getObjectFactory()
+                                            .createInstance(mapper, mf, value);
                             refObj = mapper.fromDb(datastore, value, refObj, cache);
                         }
                         if (refObj != null) {
@@ -98,8 +105,12 @@ class EmbeddedMapper implements CustomMapper {
     }
 
     @Override
-    public void toDBObject(final Object entity, final MappedField mf, final DBObject dbObject, final Map<Object, DBObject> involvedObjects,
-                           final Mapper mapper) {
+    public void toDBObject(
+            final Object entity,
+            final MappedField mf,
+            final DBObject dbObject,
+            final Map<Object, DBObject> involvedObjects,
+            final Mapper mapper) {
         final String name = mf.getNameToStore();
 
         final Object fieldValue = mf.getFieldValue(entity);
@@ -109,13 +120,15 @@ class EmbeddedMapper implements CustomMapper {
         } else if (mf.isMultipleValues()) {
             writeCollection(mf, dbObject, involvedObjects, name, fieldValue, mapper);
         } else {
-            //run converters
-            if (mapper.getConverters().hasDbObjectConverter(mf) || mapper.getConverters().hasDbObjectConverter(entity.getClass())) {
+            // run converters
+            if (mapper.getConverters().hasDbObjectConverter(mf)
+                    || mapper.getConverters().hasDbObjectConverter(entity.getClass())) {
                 mapper.getConverters().toDBObject(entity, mf, dbObject, mapper.getOptions());
                 return;
             }
 
-            final DBObject dbObj = fieldValue == null ? null : mapper.toDBObject(fieldValue, involvedObjects);
+            final DBObject dbObj =
+                    fieldValue == null ? null : mapper.toDBObject(fieldValue, involvedObjects);
             if (dbObj != null) {
                 if (!shouldSaveClassName(fieldValue, dbObj, mf)) {
                     dbObj.removeField(mapper.getOptions().getDiscriminatorField());
@@ -129,15 +142,22 @@ class EmbeddedMapper implements CustomMapper {
     }
 
     @SuppressWarnings("unchecked")
-    private void readCollection(final Datastore datastore, final Mapper mapper, final Object entity, final EntityCache cache,
-                                final MappedField mf, final DBObject dbObject) {
+    private void readCollection(
+            final Datastore datastore,
+            final Mapper mapper,
+            final Object entity,
+            final EntityCache cache,
+            final MappedField mf,
+            final DBObject dbObject) {
         Collection values;
 
         final Object dbVal = mf.getDbObjectValue(dbObject);
         if (dbVal != null) {
             // multiple documents in a List
-            values = mf.isSet() ? mapper.getOptions().getObjectFactory().createSet(mf)
-                                : mapper.getOptions().getObjectFactory().createList(mf);
+            values =
+                    mf.isSet()
+                            ? mapper.getOptions().getObjectFactory().createSet(mf)
+                            : mapper.getOptions().getObjectFactory().createList(mf);
 
             final List dbValues;
             if (dbVal instanceof List) {
@@ -147,21 +167,31 @@ class EmbeddedMapper implements CustomMapper {
                 dbValues.add(dbVal);
             }
 
-            EphemeralMappedField ephemeralMappedField = !mapper.isMapped(mf.getType()) && isMapOrCollection(mf)
-                                                            && (mf.getSubType() instanceof ParameterizedType)
-                                                        ? new EphemeralMappedField((ParameterizedType) mf.getSubType(), mf, mapper)
-                                                        : null;
+            EphemeralMappedField ephemeralMappedField =
+                    !mapper.isMapped(mf.getType())
+                                    && isMapOrCollection(mf)
+                                    && (mf.getSubType() instanceof ParameterizedType)
+                            ? new EphemeralMappedField(
+                                    (ParameterizedType) mf.getSubType(), mf, mapper)
+                            : null;
             for (final Object o : dbValues) {
 
                 Object newEntity = null;
 
                 if (o != null) {
-                    //run converters
-                    if (mapper.getConverters().hasSimpleValueConverter(mf) || mapper.getConverters()
-                                                                                    .hasSimpleValueConverter(mf.getSubClass())) {
+                    // run converters
+                    if (mapper.getConverters().hasSimpleValueConverter(mf)
+                            || mapper.getConverters().hasSimpleValueConverter(mf.getSubClass())) {
                         newEntity = mapper.getConverters().decode(mf.getSubClass(), o, mf);
                     } else {
-                        newEntity = readMapOrCollectionOrEntity(datastore, mapper, cache, mf, ephemeralMappedField, (DBObject) o);
+                        newEntity =
+                                readMapOrCollectionOrEntity(
+                                        datastore,
+                                        mapper,
+                                        cache,
+                                        mf,
+                                        ephemeralMappedField,
+                                        (DBObject) o);
                     }
                 }
 
@@ -169,7 +199,10 @@ class EmbeddedMapper implements CustomMapper {
             }
             if (!values.isEmpty() || mapper.getOptions().isStoreEmpties()) {
                 if (mf.getType().isArray()) {
-                    mf.setFieldValue(entity, ReflectionUtils.convertToArray(mf.getSubClass(), ReflectionUtils.iterToList(values)));
+                    mf.setFieldValue(
+                            entity,
+                            ReflectionUtils.convertToArray(
+                                    mf.getSubClass(), ReflectionUtils.iterToList(values)));
                 } else {
                     mf.setFieldValue(entity, values);
                 }
@@ -178,40 +211,62 @@ class EmbeddedMapper implements CustomMapper {
     }
 
     @SuppressWarnings("unchecked")
-    private void readMap(final Datastore datastore, final Mapper mapper, final Object entity, final EntityCache cache,
-                         final MappedField mf, final DBObject dbObject) {
+    private void readMap(
+            final Datastore datastore,
+            final Mapper mapper,
+            final Object entity,
+            final EntityCache cache,
+            final MappedField mf,
+            final DBObject dbObject) {
         final DBObject dbObj = (DBObject) mf.getDbObjectValue(dbObject);
 
         if (dbObj != null) {
             final Map map = mapper.getOptions().getObjectFactory().createMap(mf);
 
-            final EphemeralMappedField ephemeralMappedField = isMapOrCollection(mf)
-                                                              ? new EphemeralMappedField((ParameterizedType) mf.getSubType(), mf, mapper)
-                                                              : null;
-            new IterHelper<Object, Object>().loopMap(dbObj, new MapIterCallback<Object, Object>() {
-                @Override
-                public void eval(final Object k, final Object val) {
-                    Object newEntity = null;
+            final EphemeralMappedField ephemeralMappedField =
+                    isMapOrCollection(mf)
+                            ? new EphemeralMappedField(
+                                    (ParameterizedType) mf.getSubType(), mf, mapper)
+                            : null;
+            new IterHelper<Object, Object>()
+                    .loopMap(
+                            dbObj,
+                            new MapIterCallback<Object, Object>() {
+                                @Override
+                                public void eval(final Object k, final Object val) {
+                                    Object newEntity = null;
 
-                    //run converters
-                    if (val != null) {
-                        if (mapper.getConverters().hasSimpleValueConverter(mf)
-                            || mapper.getConverters().hasSimpleValueConverter(mf.getSubClass())) {
-                            newEntity = mapper.getConverters().decode(mf.getSubClass(), val, mf);
-                        } else {
-                            if (val instanceof DBObject) {
-                                newEntity = readMapOrCollectionOrEntity(datastore, mapper, cache, mf, ephemeralMappedField, (DBObject) val);
-                            } else {
-                                newEntity = val;
-                            }
+                                    // run converters
+                                    if (val != null) {
+                                        if (mapper.getConverters().hasSimpleValueConverter(mf)
+                                                || mapper.getConverters()
+                                                        .hasSimpleValueConverter(
+                                                                mf.getSubClass())) {
+                                            newEntity =
+                                                    mapper.getConverters()
+                                                            .decode(mf.getSubClass(), val, mf);
+                                        } else {
+                                            if (val instanceof DBObject) {
+                                                newEntity =
+                                                        readMapOrCollectionOrEntity(
+                                                                datastore,
+                                                                mapper,
+                                                                cache,
+                                                                mf,
+                                                                ephemeralMappedField,
+                                                                (DBObject) val);
+                                            } else {
+                                                newEntity = val;
+                                            }
+                                        }
+                                    }
 
-                        }
-                    }
-
-                    final Object objKey = mapper.getConverters().decode(mf.getMapKeyClass(), k, mf);
-                    map.put(objKey, newEntity);
-                }
-            });
+                                    final Object objKey =
+                                            mapper.getConverters()
+                                                    .decode(mf.getMapKeyClass(), k, mf);
+                                    map.put(objKey, newEntity);
+                                }
+                            });
 
             if (!map.isEmpty() || mapper.getOptions().isStoreEmpties()) {
                 mf.setFieldValue(entity, map);
@@ -219,20 +274,30 @@ class EmbeddedMapper implements CustomMapper {
         }
     }
 
-    private Object readMapOrCollectionOrEntity(final Datastore datastore, final Mapper mapper, final EntityCache cache,
-                                               final MappedField mf, final EphemeralMappedField ephemeralMappedField,
-                                               final DBObject dbObj) {
+    private Object readMapOrCollectionOrEntity(
+            final Datastore datastore,
+            final Mapper mapper,
+            final EntityCache cache,
+            final MappedField mf,
+            final EphemeralMappedField ephemeralMappedField,
+            final DBObject dbObj) {
         if (ephemeralMappedField != null) {
             mapper.fromDb(datastore, dbObj, ephemeralMappedField, cache);
             return ephemeralMappedField.getValue();
         } else {
-            final Object newEntity = mapper.getOptions().getObjectFactory().createInstance(mapper, mf, dbObj);
+            final Object newEntity =
+                    mapper.getOptions().getObjectFactory().createInstance(mapper, mf, dbObj);
             return mapper.fromDb(datastore, dbObj, newEntity, cache);
         }
     }
 
-    private void writeCollection(final MappedField mf, final DBObject dbObject, final Map<Object, DBObject> involvedObjects,
-                                 final String name, final Object fieldValue, final Mapper mapper) {
+    private void writeCollection(
+            final MappedField mf,
+            final DBObject dbObject,
+            final Map<Object, DBObject> involvedObjects,
+            final String name,
+            final Object fieldValue,
+            final Mapper mapper) {
         Iterable coll = null;
 
         if (fieldValue != null) {
@@ -248,12 +313,13 @@ class EmbeddedMapper implements CustomMapper {
             for (final Object o : coll) {
                 if (null == o) {
                     values.add(null);
-                } else if (mapper.getConverters().hasSimpleValueConverter(mf) || mapper.getConverters()
-                                                                                       .hasSimpleValueConverter(o.getClass())) {
+                } else if (mapper.getConverters().hasSimpleValueConverter(mf)
+                        || mapper.getConverters().hasSimpleValueConverter(o.getClass())) {
                     values.add(mapper.getConverters().encode(o));
                 } else {
                     final Object val;
-                    if (Collection.class.isAssignableFrom(o.getClass()) || Map.class.isAssignableFrom(o.getClass())) {
+                    if (Collection.class.isAssignableFrom(o.getClass())
+                            || Map.class.isAssignableFrom(o.getClass())) {
                         val = mapper.toMongoObject(o, true);
                     } else {
                         val = mapper.toDBObject(o, involvedObjects);
@@ -273,8 +339,13 @@ class EmbeddedMapper implements CustomMapper {
     }
 
     @SuppressWarnings("unchecked")
-    private void writeMap(final MappedField mf, final DBObject dbObject, final Map<Object, DBObject> involvedObjects, final String name,
-                          final Object fieldValue, final Mapper mapper) {
+    private void writeMap(
+            final MappedField mf,
+            final DBObject dbObject,
+            final Map<Object, DBObject> involvedObjects,
+            final String name,
+            final Object fieldValue,
+            final Mapper mapper) {
         final Map<String, Object> map = (Map<String, Object>) fieldValue;
         if (map != null) {
             final BasicDBObject values = new BasicDBObject();
@@ -286,10 +357,11 @@ class EmbeddedMapper implements CustomMapper {
                 if (entryVal == null) {
                     val = null;
                 } else if (mapper.getConverters().hasSimpleValueConverter(mf)
-                    || mapper.getConverters().hasSimpleValueConverter(entryVal.getClass())) {
+                        || mapper.getConverters().hasSimpleValueConverter(entryVal.getClass())) {
                     val = mapper.getConverters().encode(entryVal);
                 } else {
-                    if (Map.class.isAssignableFrom(entryVal.getClass()) || Collection.class.isAssignableFrom(entryVal.getClass())) {
+                    if (Map.class.isAssignableFrom(entryVal.getClass())
+                            || Collection.class.isAssignableFrom(entryVal.getClass())) {
                         val = mapper.toMongoObject(entryVal, true);
                     } else {
                         val = mapper.toDBObject(entryVal, involvedObjects);
@@ -304,7 +376,8 @@ class EmbeddedMapper implements CustomMapper {
                                 }
                             }
                         } else {
-                            ((DBObject) val).removeField(mapper.getOptions().getDiscriminatorField());
+                            ((DBObject) val)
+                                    .removeField(mapper.getOptions().getDiscriminatorField());
                         }
                     }
                 }
@@ -318,5 +391,4 @@ class EmbeddedMapper implements CustomMapper {
             }
         }
     }
-
 }

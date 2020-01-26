@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia;
@@ -30,14 +28,11 @@ import com.mongodb.client.model.DBCollectionFindAndModifyOptions;
  * @since 1.3
  */
 public final class FindAndModifyOptions {
-    private DBCollectionFindAndModifyOptions options = new DBCollectionFindAndModifyOptions()
-        .returnNew(true);
+    private DBCollectionFindAndModifyOptions options =
+            new DBCollectionFindAndModifyOptions().returnNew(true);
 
-    /**
-     * Creates a new options instance.
-     */
-    public FindAndModifyOptions() {
-    }
+    /** Creates a new options instance. */
+    public FindAndModifyOptions() {}
 
     FindAndModifyOptions copy() {
         FindAndModifyOptions copy = new FindAndModifyOptions();
@@ -189,7 +184,8 @@ public final class FindAndModifyOptions {
     }
 
     /**
-     * Gets the maximum execution time on the server for this operation.  The default is 0, which places no limit on the execution time.
+     * Gets the maximum execution time on the server for this operation. The default is 0, which
+     * places no limit on the execution time.
      *
      * @param timeUnit the time unit to return the result in
      * @return the maximum execution time in the given time unit
@@ -203,7 +199,7 @@ public final class FindAndModifyOptions {
     /**
      * Sets the maximum execution time on the server for this operation.
      *
-     * @param maxTime  the max time
+     * @param maxTime the max time
      * @param timeUnit the time unit, which may not be null
      * @return this
      * @mongodb.driver.manual reference/method/cursor.maxTimeMS/#cursor.maxTimeMS Max Time

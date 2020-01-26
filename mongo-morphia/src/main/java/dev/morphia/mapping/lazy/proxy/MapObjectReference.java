@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.lazy.proxy;
-
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -23,10 +20,7 @@ import java.util.Map;
 import dev.morphia.Datastore;
 import dev.morphia.Key;
 
-
-/**
- * @author Uwe Schaefer, (us@thomas-daily.de)
- */
+/** @author Uwe Schaefer, (us@thomas-daily.de) */
 public class MapObjectReference extends AbstractReference implements ProxiedEntityReferenceMap {
 
     private static final long serialVersionUID = 1L;
@@ -35,26 +29,30 @@ public class MapObjectReference extends AbstractReference implements ProxiedEnti
     /**
      * Creates a MapObjectReference
      *
-     * @param datastore         the Datastore to use when fetching this reference
-     * @param mapToProxy        the map to proxy
+     * @param datastore the Datastore to use when fetching this reference
+     * @param mapToProxy the map to proxy
      * @param referenceObjClass the referenced objects' Class
-     * @param ignoreMissing     ignore missing referenced documents
+     * @param ignoreMissing ignore missing referenced documents
      */
-    public MapObjectReference(final Datastore datastore, final Map mapToProxy, final Class referenceObjClass, final boolean ignoreMissing) {
+    public MapObjectReference(
+            final Datastore datastore,
+            final Map mapToProxy,
+            final Class referenceObjClass,
+            final boolean ignoreMissing) {
 
         super(datastore, referenceObjClass, ignoreMissing);
         object = mapToProxy;
         keyMap = new LinkedHashMap<Object, Key<?>>();
     }
 
-    //CHECKSTYLE:OFF
+    // CHECKSTYLE:OFF
     @Override
     public Map<Object, Key<?>> __getReferenceMap() {
         return keyMap;
     }
-    //CHECKSTYLE:ON
+    // CHECKSTYLE:ON
 
-    //CHECKSTYLE:OFF
+    // CHECKSTYLE:OFF
     @Override
     public void __put(final Object key, final Key k) {
         keyMap.put(key, k);
@@ -94,5 +92,4 @@ public class MapObjectReference extends AbstractReference implements ProxiedEnti
             keyMap.put(e.getKey(), ds.getKey(e.getValue()));
         }
     }
-
 }

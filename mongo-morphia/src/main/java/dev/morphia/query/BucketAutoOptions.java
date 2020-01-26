@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -32,7 +30,6 @@ public class BucketAutoOptions {
 
     private Granularity granularity;
     private Map<String, Accumulator> accumulators = new HashMap<String, Accumulator>();
-
 
     /**
      * Converts a BucketAutoOptions to a DBObject for use by the Java driver.
@@ -79,8 +76,7 @@ public class BucketAutoOptions {
     }
 
     /**
-     * Defines an output for bucketauto stage, that consists of the fieldname and
-     * the accumulator
+     * Defines an output for bucketauto stage, that consists of the fieldname and the accumulator
      */
     public class OutputOperation {
 
@@ -96,8 +92,9 @@ public class BucketAutoOptions {
         }
 
         /**
-         * Returns an array of all unique values that results from applying an expression to each document
-         * in a group of documents that share the same group by key. Order of the elements in the output array is unspecified.
+         * Returns an array of all unique values that results from applying an expression to each
+         * document in a group of documents that share the same group by key. Order of the elements
+         * in the output array is unspecified.
          *
          * @param field the field to process
          * @return an Accumulator
@@ -109,8 +106,9 @@ public class BucketAutoOptions {
         }
 
         /**
-         * Returns the average value of the numeric values that result from applying a specified expression to each document in a group of
-         * documents that share the same group by key. $avg ignores non-numeric values.
+         * Returns the average value of the numeric values that result from applying a specified
+         * expression to each document in a group of documents that share the same group by key.
+         * $avg ignores non-numeric values.
          *
          * @param field the field to process
          * @return an Accumulator
@@ -123,9 +121,9 @@ public class BucketAutoOptions {
         }
 
         /**
-         * Calculates and returns the sum of all the numeric values that result from applying a specified expression to each document in a
-         * group
-         * of documents that share the same group by key. $sum ignores non-numeric values.
+         * Calculates and returns the sum of all the numeric values that result from applying a
+         * specified expression to each document in a group of documents that share the same group
+         * by key. $sum ignores non-numeric values.
          *
          * @param field the field to process
          * @return an Accumulator
@@ -135,23 +133,18 @@ public class BucketAutoOptions {
             accumulators.put(fieldName, new Accumulator("$sum", field));
             return BucketAutoOptions.this;
         }
-
-
     }
 
-    /**
-     *
-     * @return granurality for the current bucketauto stage
-     */
+    /** @return granurality for the current bucketauto stage */
     public Granularity getGranurality() {
         return granularity;
     }
 
     /**
-     * A value that specifies the preferred number series to use to ensure
-     * that the calculated boundary edges end on preferred round numbers or their powers of 10.
+     * A value that specifies the preferred number series to use to ensure that the calculated
+     * boundary edges end on preferred round numbers or their powers of 10.
      *
-     * Available only if the all groupBy values are numeric and none of them are NaN.
+     * <p>Available only if the all groupBy values are numeric and none of them are NaN.
      */
     public enum Granularity {
         R5("R5"),
@@ -175,18 +168,13 @@ public class BucketAutoOptions {
             this.granularity = granularity;
         }
 
-        /**
-         * @return granurality string value
-         */
+        /** @return granurality string value */
         public String getGranulality() {
             return granularity;
         }
     }
 
-    /**
-     *
-     * @return output accumulators per output field
-     */
+    /** @return output accumulators per output field */
     public Map<String, Accumulator> getAccumulators() {
         return accumulators;
     }

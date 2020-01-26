@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.logging.jdk;
@@ -37,17 +35,14 @@ public class FastestJDKLogger implements dev.morphia.logging.Logger {
 
     public void debug(final String msg, final Throwable t) {
         log(Level.FINE, msg, t);
-
     }
 
     public void error(final String msg) {
         log(Level.SEVERE, msg);
-
     }
 
     public void error(final String format, final Object... arg) {
         log(Level.SEVERE, format, arg);
-
     }
 
     public void error(final String msg, final Throwable t) {
@@ -129,5 +124,4 @@ public class FastestJDKLogger implements dev.morphia.logging.Logger {
             logger.logp(l, className, null, f, a);
         }
     }
-
 }

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -34,11 +32,8 @@ import com.mongodb.client.model.DBCollectionFindOptions;
 public class FindOptions {
     private DBCollectionFindOptions options = new DBCollectionFindOptions();
 
-    /**
-     * Creates an empty options instance.
-     */
-    public FindOptions() {
-    }
+    /** Creates an empty options instance. */
+    public FindOptions() {}
 
     private FindOptions(final DBCollectionFindOptions copy) {
         options = copy.copy();
@@ -46,6 +41,7 @@ public class FindOptions {
 
     /**
      * Makes a copy of these find options
+     *
      * @return the new copy
      */
     public FindOptions copy() {
@@ -53,7 +49,7 @@ public class FindOptions {
     }
 
     /**
-     * Gets the limit to apply.  The default is null.
+     * Gets the limit to apply. The default is null.
      *
      * @return the limit
      * @mongodb.driver.manual reference/method/cursor.limit/#cursor.limit Limit
@@ -75,7 +71,7 @@ public class FindOptions {
     }
 
     /**
-     * Gets the number of documents to skip.  The default is 0.
+     * Gets the number of documents to skip. The default is 0.
      *
      * @return the number of documents to skip, which may be null
      * @mongodb.driver.manual reference/method/cursor.skip/#cursor.skip Skip
@@ -97,7 +93,8 @@ public class FindOptions {
     }
 
     /**
-     * Gets the maximum execution time on the server for this operation.  The default is 0, which places no limit on the execution time.
+     * Gets the maximum execution time on the server for this operation. The default is 0, which
+     * places no limit on the execution time.
      *
      * @param timeUnit the time unit to return the result in
      * @return the maximum execution time in the given time unit
@@ -110,7 +107,7 @@ public class FindOptions {
     /**
      * Sets the maximum execution time on the server for this operation.
      *
-     * @param maxTime  the max time
+     * @param maxTime the max time
      * @param timeUnit the time unit, which may not be null
      * @return this
      * @mongodb.driver.manual reference/method/cursor.maxTimeMS/#cursor.maxTimeMS Max Time
@@ -121,16 +118,17 @@ public class FindOptions {
     }
 
     /**
-     * The maximum amount of time for the server to wait on new documents to satisfy a tailable cursor
-     * query. This only applies to a TAILABLE_AWAIT cursor. When the cursor is not a TAILABLE_AWAIT cursor,
-     * this option is ignored.
+     * The maximum amount of time for the server to wait on new documents to satisfy a tailable
+     * cursor query. This only applies to a TAILABLE_AWAIT cursor. When the cursor is not a
+     * TAILABLE_AWAIT cursor, this option is ignored.
      *
-     * On servers &gt;= 3.2, this option will be specified on the getMore command as "maxTimeMS". The default
-     * is no value: no "maxTimeMS" is sent to the server with the getMore command.
+     * <p>On servers &gt;= 3.2, this option will be specified on the getMore command as "maxTimeMS".
+     * The default is no value: no "maxTimeMS" is sent to the server with the getMore command.
      *
-     * On servers &lt; 3.2, this option is ignored, and indicates that the driver should respect the server's default value
+     * <p>On servers &lt; 3.2, this option is ignored, and indicates that the driver should respect
+     * the server's default value
      *
-     * A zero value will be ignored.
+     * <p>A zero value will be ignored.
      *
      * @param timeUnit the time unit to return the result in
      * @return the maximum await execution time in the given time unit
@@ -143,8 +141,8 @@ public class FindOptions {
     /**
      * Sets the maximum await execution time on the server for this operation.
      *
-     * @param maxAwaitTime  the max await time.  A zero value will be ignored, and indicates that the driver should respect the server's
-     *                      default value
+     * @param maxAwaitTime the max await time. A zero value will be ignored, and indicates that the
+     *     driver should respect the server's default value
      * @param timeUnit the time unit, which may not be null
      * @return this
      * @mongodb.driver.manual reference/method/cursor.maxTimeMS/#cursor.maxTimeMS Max Time
@@ -155,8 +153,8 @@ public class FindOptions {
     }
 
     /**
-     * Gets the number of documents to return per batch.  Default to 0, which indicates that the server chooses an appropriate batch
-     * size.
+     * Gets the number of documents to return per batch. Default to 0, which indicates that the
+     * server chooses an appropriate batch size.
      *
      * @return the batch size, which may be null
      * @mongodb.driver.manual reference/method/cursor.batchSize/#cursor.batchSize Batch Size
@@ -178,7 +176,8 @@ public class FindOptions {
     }
 
     /**
-     * Gets the query modifiers to apply to this operation.  The default is not to apply any modifiers.
+     * Gets the query modifiers to apply to this operation. The default is not to apply any
+     * modifiers.
      *
      * @return the query modifiers, which may be null
      * @mongodb.driver.manual reference/operator/query-modifier/ Query Modifiers
@@ -222,8 +221,8 @@ public class FindOptions {
     }
 
     /**
-     * Gets the sort criteria to apply to the query. The default is null, which means that the documents will be returned in an undefined
-     * order.
+     * Gets the sort criteria to apply to the query. The default is null, which means that the
+     * documents will be returned in an undefined order.
      *
      * @return a document describing the sort criteria
      * @mongodb.driver.manual reference/method/cursor.sort/ Sort
@@ -245,8 +244,8 @@ public class FindOptions {
     }
 
     /**
-     * The server normally times out idle cursors after an inactivity period (10 minutes)
-     * to prevent excess memory use.  If true, that timeout is disabled.
+     * The server normally times out idle cursors after an inactivity period (10 minutes) to prevent
+     * excess memory use. If true, that timeout is disabled.
      *
      * @return true if cursor timeout is disabled
      */
@@ -255,8 +254,8 @@ public class FindOptions {
     }
 
     /**
-     * The server normally times out idle cursors after an inactivity period (10 minutes)
-     * to prevent excess memory use. Set this option to prevent that.
+     * The server normally times out idle cursors after an inactivity period (10 minutes) to prevent
+     * excess memory use. Set this option to prevent that.
      *
      * @param noCursorTimeout true if cursor timeout is disabled
      * @return this
@@ -287,7 +286,8 @@ public class FindOptions {
     }
 
     /**
-     * Get partial results from a sharded cluster if one or more shards are unreachable (instead of throwing an error).
+     * Get partial results from a sharded cluster if one or more shards are unreachable (instead of
+     * throwing an error).
      *
      * @return if partial results for sharded clusters is enabled
      */
@@ -296,7 +296,8 @@ public class FindOptions {
     }
 
     /**
-     * Get partial results from a sharded cluster if one or more shards are unreachable (instead of throwing an error).
+     * Get partial results from a sharded cluster if one or more shards are unreachable (instead of
+     * throwing an error).
      *
      * @param partial if partial results for sharded clusters is enabled
      * @return this

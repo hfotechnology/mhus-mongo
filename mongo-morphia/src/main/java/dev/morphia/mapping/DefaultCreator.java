@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping;
-
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -34,10 +31,7 @@ import com.mongodb.DBObject;
 import dev.morphia.ObjectFactory;
 import dev.morphia.annotations.ConstructorArgs;
 
-
-/**
- * @author ScottHernandez
- */
+/** @author ScottHernandez */
 public class DefaultCreator implements ObjectFactory {
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultCreator.class);
@@ -46,11 +40,8 @@ public class DefaultCreator implements ObjectFactory {
 
     private MapperOptions options = null;
 
-    /**
-     * Creates a new DefaultCreator with no options
-     */
-    public DefaultCreator() {
-    }
+    /** Creates a new DefaultCreator with no options */
+    public DefaultCreator() {}
 
     /**
      * Creates a new DefaultCreator with options
@@ -73,11 +64,9 @@ public class DefaultCreator implements ObjectFactory {
 
     /**
      * @param clazz the Class of the type to create
-     * @param <T>   the type of the class
-     * @return the new instance
-     *  use {@link #createInstance(Class)} instead
+     * @param <T> the type of the class
+     * @return the new instance use {@link #createInstance(Class)} instead
      */
-    
     public <T> T createInst(final Class<T> clazz) {
         return createInstance(clazz);
     }
@@ -125,7 +114,8 @@ public class DefaultCreator implements ObjectFactory {
             if (argAnn == null) {
                 throw e;
             }
-            //TODO: now that we have a mapper, get the arg types that way by getting the fields by name. + Validate names
+            // TODO: now that we have a mapper, get the arg types that way by getting the fields by
+            // name. + Validate names
             final Object[] args = new Object[argAnn.value().length];
             final Class[] argTypes = new Class[argAnn.value().length];
             for (int i = 0; i < argAnn.value().length; i++) {
@@ -163,9 +153,7 @@ public class DefaultCreator implements ObjectFactory {
         return newInstance(mf != null ? mf.getCTor() : null, HashSet.class);
     }
 
-    /**
-     * @return the cache of classnames
-     */
+    /** @return the cache of classnames */
     public Map<String, Class> getClassNameCache() {
         HashMap<String, Class> copy = new HashMap<String, Class>();
         copy.putAll(classNameCache);
@@ -203,9 +191,7 @@ public class DefaultCreator implements ObjectFactory {
         return c;
     }
 
-    /**
-     * creates an instance of testType (if it isn't Object.class or null) or fallbackType
-     */
+    /** creates an instance of testType (if it isn't Object.class or null) or fallbackType */
     private <T> T newInstance(final Constructor<T> tryMe, final Class<T> fallbackType) {
         if (tryMe != null) {
             tryMe.setAccessible(true);
@@ -217,5 +203,4 @@ public class DefaultCreator implements ObjectFactory {
         }
         return createInstance(fallbackType);
     }
-
 }

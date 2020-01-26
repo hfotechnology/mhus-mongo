@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query.internal;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +27,7 @@ import dev.morphia.Datastore;
 import dev.morphia.mapping.Mapper;
 import dev.morphia.mapping.cache.EntityCache;
 
-
-/**
- * @param <T> the original type being iterated
- */
+/** @param <T> the original type being iterated */
 public class MorphiaCursor<T> implements MongoCursor<T> {
     private final Cursor wrapped;
     private final Mapper mapper;
@@ -44,16 +38,20 @@ public class MorphiaCursor<T> implements MongoCursor<T> {
     /**
      * Creates a MorphiaCursor
      *
-     * @param datastore  the Datastore to use when fetching this reference
-     * @param cursor     the Iterator to use
-     * @param mapper     the Mapper to use
-     * @param clazz      the original type being iterated
-     * @param cache      the EntityCache
+     * @param datastore the Datastore to use when fetching this reference
+     * @param cursor the Iterator to use
+     * @param mapper the Mapper to use
+     * @param clazz the original type being iterated
+     * @param cache the EntityCache
      */
-    public MorphiaCursor(final Datastore datastore, final Cursor cursor, final Mapper mapper, final Class<T> clazz,
-                         final EntityCache cache) {
+    public MorphiaCursor(
+            final Datastore datastore,
+            final Cursor cursor,
+            final Mapper mapper,
+            final Class<T> clazz,
+            final EntityCache cache) {
         wrapped = cursor;
-        if(wrapped == null) {
+        if (wrapped == null) {
             throw new IllegalArgumentException("The wrapped cursor can not be null");
         }
         this.mapper = mapper;
@@ -63,7 +61,9 @@ public class MorphiaCursor<T> implements MongoCursor<T> {
     }
 
     /**
-     * Converts this cursor to a List.  Care should be taken on large datasets as OutOfMemoryErrors are a risk.
+     * Converts this cursor to a List. Care should be taken on large datasets as OutOfMemoryErrors
+     * are a risk.
+     *
      * @return the list of Entities
      */
     public List<T> toList() {
@@ -78,9 +78,7 @@ public class MorphiaCursor<T> implements MongoCursor<T> {
         return results;
     }
 
-    /**
-     * Closes the underlying cursor.
-     */
+    /** Closes the underlying cursor. */
     public void close() {
         if (wrapped != null) {
             wrapped.close();

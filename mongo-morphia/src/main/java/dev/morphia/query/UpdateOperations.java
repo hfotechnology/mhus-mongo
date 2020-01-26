@@ -1,28 +1,23 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
 
-
 import java.util.List;
 
-
 /**
- * <p> A nicer interface to the update operations in monogodb. All these operations happen at the server and can cause the server and
- * client
- * version of the Entity to be different </p>
+ * A nicer interface to the update operations in monogodb. All these operations happen at the server
+ * and can cause the server and client version of the Entity to be different
  *
  * @param <T> The Java type used in the updates
  */
@@ -33,38 +28,37 @@ public interface UpdateOperations<T> {
      * @param field the field to update
      * @param value the value to add
      * @return this
-     * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
-     *  use {@link #addToSet(String, Object)} instead
+     * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet use {@link
+     *     #addToSet(String, Object)} instead
      */
-    
     UpdateOperations<T> add(String field, Object value);
 
     /**
      * adds the value to an array field
      *
-     * @param field   the field to update
-     * @param value   the value to add
-     * @param addDups if true, the value will be added even if it already exists in the array ($push)
+     * @param field the field to update
+     * @param value the value to add
+     * @param addDups if true, the value will be added even if it already exists in the array
+     *     ($push)
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
-     * @mongodb.driver.manual reference/operator/update/push/ $push
-     *  use {@link #push(String, Object)} if addDups is false or {@link #addToSet(String, Object)} instead
+     * @mongodb.driver.manual reference/operator/update/push/ $push use {@link #push(String,
+     *     Object)} if addDups is false or {@link #addToSet(String, Object)} instead
      */
-    
     UpdateOperations<T> add(String field, Object value, boolean addDups);
 
     /**
      * adds the values to an array field
      *
-     * @param field   the field to update
-     * @param values  the values to add
-     * @param addDups if true, the values will be added even if they already exists in the array ($push)
+     * @param field the field to update
+     * @param values the values to add
+     * @param addDups if true, the values will be added even if they already exists in the array
+     *     ($push)
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
-     * @mongodb.driver.manual reference/operator/update/push/ $push
-     *  use {@link #push(String, List)} if addDups is false or {@link #addToSet(String, List)}
+     * @mongodb.driver.manual reference/operator/update/push/ $push use {@link #push(String, List)}
+     *     if addDups is false or {@link #addToSet(String, List)}
      */
-    
     UpdateOperations<T> addAll(String field, List<?> values, boolean addDups);
 
     /**
@@ -80,7 +74,7 @@ public interface UpdateOperations<T> {
     /**
      * adds the values to an array field if they doesn't already exist in the array
      *
-     * @param field  the field to update
+     * @param field the field to update
      * @param values the values to add
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
@@ -90,7 +84,7 @@ public interface UpdateOperations<T> {
     /**
      * adds the values to an array field if they doesn't already exist in the array
      *
-     * @param field  the field to update
+     * @param field the field to update
      * @param values the values to add
      * @return this
      * @mongodb.driver.manual reference/operator/update/addToSet/ $addToSet
@@ -107,13 +101,12 @@ public interface UpdateOperations<T> {
     UpdateOperations<T> dec(String field);
 
     /**
-     * Decrements the numeric field by value (must be a positive Double,
-     * Float, Long, or Integer).
+     * Decrements the numeric field by value (must be a positive Double, Float, Long, or Integer).
      *
      * @param field the field to update
      * @param value the value to decrement by
-     * @throws IllegalArgumentException of the value is not an instance of
-     *         Double, Float,Long, or Integer
+     * @throws IllegalArgumentException of the value is not an instance of Double, Float,Long, or
+     *     Integer
      * @return this
      * @mongodb.driver.manual reference/operator/update/inc/ $inc
      */
@@ -156,20 +149,16 @@ public interface UpdateOperations<T> {
      * Enables isolation (so this update happens in one shot, without yielding)
      *
      * @return this
-     * @mongodb.driver.manual reference/operator/update/isolated/ $isolated
-     *  this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
+     * @mongodb.driver.manual reference/operator/update/isolated/ $isolated this functionality is
+     *     deprecated in mongodb 3.6 and has been removed from 4.0
      */
-    
     UpdateOperations<T> isolated();
 
     /**
      * @return true if this update is to be run in isolation
-     *
      * @mongodb.driver.manual reference/operator/update/isolated/ $isolated
-     * @since 1.3
-     *  this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
+     * @since 1.3 this functionality is deprecated in mongodb 3.6 and has been removed from 4.0
      */
-    
     boolean isIsolated();
 
     /**
@@ -205,8 +194,8 @@ public interface UpdateOperations<T> {
     /**
      * Adds new values to an array field at the given position
      *
-     * @param field   the field to updated
-     * @param value   the value to add
+     * @param field the field to updated
+     * @param value the value to add
      * @param options the options to apply to the push
      * @return this
      * @mongodb.driver.manual reference/operator/update/push/ $push
@@ -216,7 +205,7 @@ public interface UpdateOperations<T> {
     /**
      * Adds new values to an array field.
      *
-     * @param field  the field to updated
+     * @param field the field to updated
      * @param values the values to add
      * @return this
      * @mongodb.driver.manual reference/operator/update/push/ $push
@@ -226,8 +215,8 @@ public interface UpdateOperations<T> {
     /**
      * Adds new values to an array field at the given position
      *
-     * @param field   the field to updated
-     * @param values  the values to add
+     * @param field the field to updated
+     * @param values the values to add
      * @param options the options to apply to the push
      * @return this
      * @mongodb.driver.manual reference/operator/update/push/ $push
@@ -247,7 +236,7 @@ public interface UpdateOperations<T> {
     /**
      * removes the values from the array field
      *
-     * @param field  the field to update
+     * @param field the field to update
      * @param values the values to use
      * @return this
      * @mongodb.driver.manual reference/operator/update/pullAll/ $pullAll

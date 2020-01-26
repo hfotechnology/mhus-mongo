@@ -1,25 +1,21 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.geo;
 
 import java.util.List;
 
-/**
- * Enumerates all the GeoJson types that are currently supported by Morphia.
- */
+/** Enumerates all the GeoJson types that are currently supported by Morphia. */
 @SuppressWarnings("unchecked") // can't know, or define generics for, the Lists in the factory
 public enum GeoJsonType implements GeometryFactory {
     POINT("Point", Point.class) {
@@ -71,8 +67,8 @@ public enum GeoJsonType implements GeometryFactory {
      * Allows you to turn String values of types into the Enum that corresponds to this type.
      *
      * @param type a String, one of the values from <a href="http://docs.mongodb
-     *             .org/manual/applications/geospatial-indexes/#geojson-objects">this
-     *             list</a> of supported types
+     *     .org/manual/applications/geospatial-indexes/#geojson-objects">this list</a> of supported
+     *     types
      * @return the GeoJsonType that corresponds to this type String
      */
     public static GeoJsonType fromString(final String type) {
@@ -83,13 +79,15 @@ public enum GeoJsonType implements GeometryFactory {
                 }
             }
         }
-        throw new IllegalArgumentException(String.format("Cannot decode type into GeoJsonType. Type= '%s'", type));
+        throw new IllegalArgumentException(
+                String.format("Cannot decode type into GeoJsonType. Type= '%s'", type));
     }
 
     /**
-     * Returns the value that needs to be stored with the GeoJson values in the database to declare which GeoJson type the coordinates
-     * represent. See <a href="http://docs.mongodb.org/manual/applications/geospatial-indexes/#geojson-objects">the documentation</a> for a
-     * list of the GeoJson objects supported by MongoDB.
+     * Returns the value that needs to be stored with the GeoJson values in the database to declare
+     * which GeoJson type the coordinates represent. See <a
+     * href="http://docs.mongodb.org/manual/applications/geospatial-indexes/#geojson-objects">the
+     * documentation</a> for a list of the GeoJson objects supported by MongoDB.
      *
      * @return a String of the GeoJson type.
      */
@@ -98,7 +96,8 @@ public enum GeoJsonType implements GeometryFactory {
     }
 
     /**
-     * Returns a concrete class that implements Geometry, the class that represents this GeoJsonType.
+     * Returns a concrete class that implements Geometry, the class that represents this
+     * GeoJsonType.
      *
      * @return the Geometry class for this GeoJsonType
      */

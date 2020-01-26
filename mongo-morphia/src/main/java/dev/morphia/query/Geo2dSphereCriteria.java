@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
@@ -28,22 +26,28 @@ import dev.morphia.geo.GeometryQueryConverter;
 import dev.morphia.geo.NamedCoordinateReferenceSystemConverter;
 
 /**
- * Creates queries for GeoJson geo queries on MongoDB. These queries generally require MongoDB 2.4 and above, and usually work on 2d sphere
- * indexes.
+ * Creates queries for GeoJson geo queries on MongoDB. These queries generally require MongoDB 2.4
+ * and above, and usually work on 2d sphere indexes.
  */
 final class Geo2dSphereCriteria extends FieldCriteria {
     private Document options;
     private final Geometry geometry;
     private CoordinateReferenceSystem crs;
 
-    private Geo2dSphereCriteria(final QueryImpl<?> query, final String field, final FilterOperator operator,
-                                final Geometry geometry) {
+    private Geo2dSphereCriteria(
+            final QueryImpl<?> query,
+            final String field,
+            final FilterOperator operator,
+            final Geometry geometry) {
         super(query, field, operator, geometry);
         this.geometry = geometry;
     }
 
-    static Geo2dSphereCriteria geo(final QueryImpl<?> query, final String field, final FilterOperator operator,
-                                   final Geometry value) {
+    static Geo2dSphereCriteria geo(
+            final QueryImpl<?> query,
+            final String field,
+            final FilterOperator operator,
+            final Geometry value) {
         return new Geo2dSphereCriteria(query, field, operator, value);
     }
 
@@ -77,8 +81,10 @@ final class Geo2dSphereCriteria extends FieldCriteria {
     public DBObject toDBObject() {
         DBObject query;
         FilterOperator operator = getOperator();
-        GeometryQueryConverter geometryQueryConverter = new GeometryQueryConverter(getQuery().getDatastore().getMapper());
-        final DBObject geometryAsDBObject = (DBObject) geometryQueryConverter.encode(geometry, null);
+        GeometryQueryConverter geometryQueryConverter =
+                new GeometryQueryConverter(getQuery().getDatastore().getMapper());
+        final DBObject geometryAsDBObject =
+                (DBObject) geometryQueryConverter.encode(geometry, null);
 
         switch (operator) {
             case NEAR:
@@ -92,11 +98,13 @@ final class Geo2dSphereCriteria extends FieldCriteria {
             case INTERSECTS:
                 query = new BasicDBObject(operator.val(), geometryAsDBObject);
                 if (crs != null) {
-                    ((DBObject) geometryAsDBObject.get("$geometry")).put("crs", new NamedCoordinateReferenceSystemConverter().encode(crs));
+                    ((DBObject) geometryAsDBObject.get("$geometry"))
+                            .put("crs", new NamedCoordinateReferenceSystemConverter().encode(crs));
                 }
                 break;
             default:
-                throw new UnsupportedOperationException(String.format("Operator %s not supported for geo-query", operator.val()));
+                throw new UnsupportedOperationException(
+                        String.format("Operator %s not supported for geo-query", operator.val()));
         }
 
         return new BasicDBObject(getField(), query);

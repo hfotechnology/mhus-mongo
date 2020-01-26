@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.aggregation;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +22,7 @@ import java.util.List;
  *
  * @mongodb.driver.manual reference/operator/aggregation/project/ $project
  */
-public final class  Projection {
+public final class Projection {
 
     private final String target;
     private final String source;
@@ -38,7 +35,8 @@ public final class  Projection {
         this.source = "$" + source;
     }
 
-    private Projection(final String field, final Projection projection, final Projection... subsequent) {
+    private Projection(
+            final String field, final Projection projection, final Projection... subsequent) {
         this(field);
         this.projections = new ArrayList<Projection>();
         projections.add(projection);
@@ -61,30 +59,31 @@ public final class  Projection {
      * @param field the field
      * @return the projection
      */
-    public static  Projection projection(final String field) {
+    public static Projection projection(final String field) {
         return new Projection(field);
     }
 
     /**
      * Creates a projection on a field and renames it
      *
-     * @param field          the field
+     * @param field the field
      * @param projectedField the new field name
      * @return the projection
      */
-    public static  Projection projection(final String field, final String projectedField) {
+    public static Projection projection(final String field, final String projectedField) {
         return new Projection(field, projectedField);
     }
 
     /**
      * Creates a projection on a field with subsequent projects applied.
      *
-     * @param field      the field
+     * @param field the field
      * @param projection the project to apply
      * @param subsequent the other projections to apply
      * @return the projection
      */
-    public static  Projection projection(final String field, final Projection projection, final Projection... subsequent) {
+    public static Projection projection(
+            final String field, final Projection projection, final Projection... subsequent) {
         return new Projection(field, projection, subsequent);
     }
 
@@ -92,10 +91,10 @@ public final class  Projection {
      * Provides access to arbitrary expressions taking an array of arguments, such as $concat
      *
      * @param operator the operator for the projection
-     * @param args     the projection arguments
+     * @param args the projection arguments
      * @return the projection
      */
-    public static  Projection expression(final String operator, final Object... args) {
+    public static Projection expression(final String operator, final Object... args) {
         return new Projection(operator, args);
     }
 
@@ -105,7 +104,7 @@ public final class  Projection {
      * @param args the projection arguments
      * @return the projection
      */
-    public static  Projection list(final Object... args) {
+    public static Projection list(final Object... args) {
         return new Projection(null, args);
     }
 
@@ -116,7 +115,7 @@ public final class  Projection {
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/add $add
      */
-    public static  Projection add(final Object... args) {
+    public static Projection add(final Object... args) {
         return expression("$add", args);
     }
 
@@ -128,7 +127,7 @@ public final class  Projection {
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/subtract $subtract
      */
-    public static  Projection subtract(final Object arg1, final Object arg2) {
+    public static Projection subtract(final Object arg1, final Object arg2) {
         return expression("$subtract", arg1, arg2);
     }
 
@@ -139,7 +138,7 @@ public final class  Projection {
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/multiply $multiply
      */
-    public static  Projection multiply(final Object... args) {
+    public static Projection multiply(final Object... args) {
         return expression("$multiply", args);
     }
 
@@ -151,14 +150,15 @@ public final class  Projection {
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/divide $divide
      */
-    public static  Projection divide(final Object arg1, final Object arg2) {
+    public static Projection divide(final Object arg1, final Object arg2) {
         return expression("$divide", arg1, arg2);
     }
 
     /**
      * Counts and returns the total the number of items in an array
      *
-     * @param expression The argument for $size can be any expression as long as it resolves to an array.
+     * @param expression The argument for $size can be any expression as long as it resolves to an
+     *     array.
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/size $size
      */
@@ -174,41 +174,31 @@ public final class  Projection {
      * @return the projection
      * @mongodb.driver.manual reference/operator/aggregation/mod $mod
      */
-    public static  Projection mod(final Object arg1, final Object arg2) {
+    public static Projection mod(final Object arg1, final Object arg2) {
         return expression("$mod", arg1, arg2);
     }
 
-    /**
-     * @return the arguments for the projection
-     */
+    /** @return the arguments for the projection */
     public List<Object> getArguments() {
         return arguments;
     }
 
-    /**
-     * @return the projected field name
-     */
+    /** @return the projected field name */
     public String getSource() {
         return source;
     }
 
-    /**
-     * @return any projections applied to this field
-     */
+    /** @return any projections applied to this field */
     public List<Projection> getProjections() {
         return projections;
     }
 
-    /**
-     * @return the source field of the projection
-     */
+    /** @return the source field of the projection */
     public String getTarget() {
         return target;
     }
 
-    /**
-     * @return true if this field is suppressed from the output
-     */
+    /** @return true if this field is suppressed from the output */
     public boolean isSuppressed() {
         return suppressed;
     }
@@ -225,7 +215,8 @@ public final class  Projection {
 
     @Override
     public String toString() {
-        return String.format("Projection{projectedField='%s', sourceField='%s', projections=%s, suppressed=%s}",
-                             source, target, projections, suppressed);
+        return String.format(
+                "Projection{projectedField='%s', sourceField='%s', projections=%s, suppressed=%s}",
+                source, target, projections, suppressed);
     }
 }

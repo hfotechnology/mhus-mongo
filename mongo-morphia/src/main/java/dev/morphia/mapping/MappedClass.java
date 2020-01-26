@@ -1,20 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping;
-
 
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -35,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mongodb.DBObject;
 
-import de.mhus.lib.adb.DbMetadata;
 import de.mhus.lib.annotations.adb.DbIndex;
 import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.annotations.adb.DbPrimaryKey;
@@ -61,12 +57,7 @@ import dev.morphia.annotations.Version;
 import dev.morphia.mapping.validation.MappingValidator;
 import dev.morphia.utils.ReflectionUtils;
 
-
-/**
- * @morphia.internal
- * 
- */
-
+/** @morphia.internal */
 public class MappedClass {
     private static final Logger LOG = LoggerFactory.getLogger(MappedClass.class);
     /**
@@ -74,15 +65,16 @@ public class MappedClass {
      *
      * @see #addInterestingAnnotation
      */
-    private static final List<Class<? extends Annotation>> INTERESTING_ANNOTATIONS = new ArrayList<Class<? extends Annotation>>();
-    /**
-     * Annotations interesting for life-cycle events
-     */
-    private static final List<Class<? extends Annotation>> LIFECYCLE_ANNOTATIONS = asList(PrePersist.class,
-                                                                                          PreSave.class,
-                                                                                          PreLoad.class,
-                                                                                          PostPersist.class,
-                                                                                          PostLoad.class);
+    private static final List<Class<? extends Annotation>> INTERESTING_ANNOTATIONS =
+            new ArrayList<Class<? extends Annotation>>();
+    /** Annotations interesting for life-cycle events */
+    private static final List<Class<? extends Annotation>> LIFECYCLE_ANNOTATIONS =
+            asList(
+                    PrePersist.class,
+                    PreSave.class,
+                    PreLoad.class,
+                    PostPersist.class,
+                    PostLoad.class);
 
     static {
         INTERESTING_ANNOTATIONS.add(Embedded.class);
@@ -99,32 +91,21 @@ public class MappedClass {
         INTERESTING_ANNOTATIONS.add(DbIndex.class);
     }
 
-    /**
-     * Annotations we were interested in, and found.
-     */
+    /** Annotations we were interested in, and found. */
     private final Map<Class<? extends Annotation>, List<Annotation>> foundAnnotations =
-        new HashMap<Class<? extends Annotation>, List<Annotation>>();
-    /**
-     * Methods which are life-cycle events
-     */
+            new HashMap<Class<? extends Annotation>, List<Annotation>>();
+    /** Methods which are life-cycle events */
     private final Map<Class<? extends Annotation>, List<ClassMethodPair>> lifecycleMethods =
-        new HashMap<Class<? extends Annotation>, List<ClassMethodPair>>();
-    /**
-     * a list of the fields to map
-     */
+            new HashMap<Class<? extends Annotation>, List<ClassMethodPair>>();
+    /** a list of the fields to map */
     private final List<MappedField> persistenceFields = new ArrayList<MappedField>();
-    /**
-     * the type we are mapping to/from
-     */
+    /** the type we are mapping to/from */
     private final Class<?> clazz;
-    /**
-     * special fields representing the Key of the object
-     */
+    /** special fields representing the Key of the object */
     private java.lang.reflect.Field idField;
-    /**
-     * special annotations representing the type the object
-     */
+    /** special annotations representing the type the object */
     private Entity entityAn;
+
     private Embedded embeddedAn;
     private MapperOptions mapperOptions;
     private MappedClass superClass;
@@ -133,7 +114,7 @@ public class MappedClass {
     /**
      * Creates a MappedClass instance
      *
-     * @param clazz  the class to be mapped
+     * @param clazz the class to be mapped
      * @param mapper the Mapper to use
      */
     public MappedClass(final Class<?> clazz, final Mapper mapper) {
@@ -156,17 +137,13 @@ public class MappedClass {
      * This is an internal method subject to change without notice.
      *
      * @return the parent class of this type if there is one null otherwise
-     *
      * @since 1.3
      */
     public MappedClass getSuperClass() {
         return superClass;
     }
 
-
-    /**
-     * @return true if the MappedClass is an interface
-     */
+    /** @return true if the MappedClass is an interface */
     public boolean isInterface() {
         return clazz.isInterface();
     }
@@ -191,7 +168,9 @@ public class MappedClass {
         if (ReflectionUtils.isPropertyType(clazz)) {
             return true;
         }
-        if (clazz.isArray() || Map.class.isAssignableFrom(clazz) || Iterable.class.isAssignableFrom(clazz)) {
+        if (clazz.isArray()
+                || Map.class.isAssignableFrom(clazz)
+                || Iterable.class.isAssignableFrom(clazz)) {
             Class<?> subType;
             if (clazz.isArray()) {
                 subType = clazz.getComponentType();
@@ -199,12 +178,14 @@ public class MappedClass {
                 subType = ReflectionUtils.getParameterizedClass(clazz);
             }
 
-            //get component type, String.class from List<String>
-            if (subType != null && subType != Object.class && !ReflectionUtils.isPropertyType(subType)) {
+            // get component type, String.class from List<String>
+            if (subType != null
+                    && subType != Object.class
+                    && !ReflectionUtils.isPropertyType(subType)) {
                 return false;
             }
 
-            //either no componentType or it is an allowed type
+            // either no componentType or it is an allowed type
             return true;
         }
         return false;
@@ -223,7 +204,7 @@ public class MappedClass {
      * Adds the given Annotation to the internal list for the given Class.
      *
      * @param clazz the type to add
-     * @param ann   the annotation to add
+     * @param ann the annotation to add
      */
     public void addAnnotation(final Class<? extends Annotation> clazz, final Annotation ann) {
         if (ann == null || clazz == null) {
@@ -240,21 +221,25 @@ public class MappedClass {
     /**
      * Call the lifecycle methods
      *
-     * @param event  the lifecycle annotation
+     * @param event the lifecycle annotation
      * @param entity the entity to process
-     * @param dbObj  the dbObject to use
-     * @param mapper  the Mapper to use
+     * @param dbObj the dbObject to use
+     * @param mapper the Mapper to use
      * @return dbObj
      */
     @SuppressWarnings({"unchecked"})
-    public DBObject callLifecycleMethods(final Class<? extends Annotation> event, final Object entity, final DBObject dbObj,
-                                         final Mapper mapper) {
+    public DBObject callLifecycleMethods(
+            final Class<? extends Annotation> event,
+            final Object entity,
+            final DBObject dbObj,
+            final Mapper mapper) {
         final List<ClassMethodPair> methodPairs = getLifecycleMethods((Class<Annotation>) event);
         DBObject retDbObj = dbObj;
         try {
             Object tempObj;
             if (methodPairs != null) {
-                final HashMap<Class<?>, Object> toCall = new HashMap<Class<?>, Object>((int) (methodPairs.size() * 1.3));
+                final HashMap<Class<?>, Object> toCall =
+                        new HashMap<Class<?>, Object>((int) (methodPairs.size() * 1.3));
                 for (final ClassMethodPair cm : methodPairs) {
                     toCall.put(cm.clazz, null);
                 }
@@ -270,7 +255,10 @@ public class MappedClass {
                     method.setAccessible(true);
 
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug(format("Calling lifecycle method(@%s %s) on %s", event.getSimpleName(), method, inst));
+                        LOG.debug(
+                                format(
+                                        "Calling lifecycle method(@%s %s) on %s",
+                                        event.getSimpleName(), method, inst));
                     }
 
                     if (inst == null) {
@@ -328,7 +316,7 @@ public class MappedClass {
      * Looks for an annotation in the annotations found on a class while mapping
      *
      * @param clazz the class to search for
-     * @param <T>   the type of annotation to find
+     * @param <T> the type of annotation to find
      * @return the instance if it was found, if more than one was found, the last one added
      */
     @SuppressWarnings("unchecked")
@@ -336,33 +324,27 @@ public class MappedClass {
         return (List<T>) foundAnnotations.get(clazz);
     }
 
-    /**
-     * @return the clazz
-     */
+    /** @return the clazz */
     public Class<?> getClazz() {
         return clazz;
     }
 
-    /**
-     * @return the collName
-     */
+    /** @return the collName */
     public String getCollectionName() {
         if (entityAn == null || entityAn.value().equals(Mapper.IGNORED_FIELDNAME)) {
-            return mapperOptions.isUseLowerCaseCollectionNames() ? clazz.getSimpleName().toLowerCase() : clazz.getSimpleName();
+            return mapperOptions.isUseLowerCaseCollectionNames()
+                    ? clazz.getSimpleName().toLowerCase()
+                    : clazz.getSimpleName();
         }
         return entityAn.value();
     }
 
-    /**
-     * @return the embeddedAn
-     */
+    /** @return the embeddedAn */
     public Embedded getEmbeddedAnnotation() {
         return embeddedAn;
     }
 
-    /**
-     * @return the entityAn
-     */
+    /** @return the entityAn */
     public Entity getEntityAnnotation() {
         return entityAn;
     }
@@ -394,9 +376,7 @@ public class MappedClass {
         return found == null || found.isEmpty() ? null : found.get(0);
     }
 
-    /**
-     * @return the idField
-     */
+    /** @return the idField */
     public java.lang.reflect.Field getIdField() {
         return idField;
     }
@@ -439,32 +419,24 @@ public class MappedClass {
         return null;
     }
 
-    /**
-     * @return the ID field for the class
-     */
+    /** @return the ID field for the class */
     public MappedField getMappedIdField() {
         List<MappedField> fields = getFieldsAnnotatedWith(DbPrimaryKey.class);
         return fields.isEmpty() ? null : fields.get(0);
     }
 
-    /**
-     * @return the ID field for the class
-     */
+    /** @return the ID field for the class */
     public MappedField getMappedVersionField() {
         List<MappedField> fields = getFieldsAnnotatedWith(Version.class);
         return fields.isEmpty() ? null : fields.get(0);
     }
 
-    /**
-     * @return the persistenceFields
-     */
+    /** @return the persistenceFields */
     public List<MappedField> getPersistenceFields() {
         return persistenceFields;
     }
 
-    /**
-     * @return the relevantAnnotations
-     */
+    /** @return the relevantAnnotations */
     public Map<Class<? extends Annotation>, List<Annotation>> getRelevantAnnotations() {
         return foundAnnotations;
     }
@@ -486,7 +458,6 @@ public class MappedClass {
         final MappedClass that = (MappedClass) o;
 
         return clazz.equals(that.clazz);
-
     }
 
     boolean isSubType(final MappedClass mc) {
@@ -495,12 +466,15 @@ public class MappedClass {
 
     @Override
     public String toString() {
-        return "MappedClass - kind:" + getCollectionName() + " for " + getClazz().getName() + " fields:" + persistenceFields;
+        return "MappedClass - kind:"
+                + getCollectionName()
+                + " for "
+                + getClazz().getName()
+                + " fields:"
+                + persistenceFields;
     }
 
-    /**
-     * Update mappings based on fields/annotations.
-     */
+    /** Update mappings based on fields/annotations. */
     // TODO: Remove this and make these fields dynamic or auto-set some other way
     public void update() {
         embeddedAn = (Embedded) getAnnotation(Embedded.class);
@@ -514,6 +488,7 @@ public class MappedClass {
 
     /**
      * Validates this MappedClass
+     *
      * @param mapper the Mapper to use for validation
      */
     public void validate(final Mapper mapper) {
@@ -523,13 +498,12 @@ public class MappedClass {
     protected void basicValidate() {
         final boolean isStatic = Modifier.isStatic(clazz.getModifiers());
         if (!isStatic && clazz.isMemberClass()) {
-            throw new MappingException("Cannot use non-static inner class: " + clazz + ". Please make static.");
+            throw new MappingException(
+                    "Cannot use non-static inner class: " + clazz + ". Please make static.");
         }
     }
 
-    /**
-     * Discovers interesting (that we care about) things about the class.
-     */
+    /** Discovers interesting (that we care about) things about the class. */
     protected void discover(final Mapper mapper) {
         for (final Class<? extends Annotation> c : INTERESTING_ANNOTATIONS) {
             addAnnotation(c);
@@ -560,10 +534,11 @@ public class MappedClass {
                 }
             }
         }
-        
+
         update();
 
-        for (final java.lang.reflect.Field field : ReflectionUtils.getDeclaredAndInheritedFields(clazz, true)) {
+        for (final java.lang.reflect.Field field :
+                ReflectionUtils.getDeclaredAndInheritedFields(clazz, true)) {
             field.setAccessible(true);
             final int fieldMods = field.getModifiers();
             if (!isIgnorable(field, fieldMods, mapper)) {
@@ -571,35 +546,40 @@ public class MappedClass {
                     persistenceFields.add(new MappedField(field, clazz, mapper));
                     update();
                 } else if (field.isAnnotationPresent(Property.class)
-                           || field.isAnnotationPresent(Reference.class)
-                           || field.isAnnotationPresent(Embedded.class)
-                           || field.isAnnotationPresent(Serialized.class)
-                           || isSupportedType(field.getType())
-                           || ReflectionUtils.implementsInterface(field.getType(), Serializable.class)) {
+                        || field.isAnnotationPresent(Reference.class)
+                        || field.isAnnotationPresent(Embedded.class)
+                        || field.isAnnotationPresent(Serialized.class)
+                        || isSupportedType(field.getType())
+                        || ReflectionUtils.implementsInterface(
+                                field.getType(), Serializable.class)) {
                     persistenceFields.add(new MappedField(field, clazz, mapper));
                 } else {
                     if (mapper.getOptions().getDefaultMapper() != null) {
                         persistenceFields.add(new MappedField(field, clazz, mapper));
                     } else if (LOG.isWarnEnabled()) {
-                        LOG.warn(format("Ignoring (will not persist) field: %s.%s [type:%s]", clazz.getName(), field.getName(),
-                                           field.getType().getName()));
+                        LOG.warn(
+                                format(
+                                        "Ignoring (will not persist) field: %s.%s [type:%s]",
+                                        clazz.getName(),
+                                        field.getName(),
+                                        field.getType().getName()));
                     }
                 }
             }
         }
     }
 
-    /**
-     * Adds the annotation, if it exists on the field.
-     */
+    /** Adds the annotation, if it exists on the field. */
     private void addAnnotation(final Class<? extends Annotation> clazz) {
-        final List<? extends Annotation> annotations = ReflectionUtils.getAnnotations(getClazz(), clazz);
+        final List<? extends Annotation> annotations =
+                ReflectionUtils.getAnnotations(getClazz(), clazz);
         for (final Annotation ann : annotations) {
             addAnnotation(clazz, ann);
         }
     }
 
-    private void addLifecycleEventMethod(final Class<? extends Annotation> lceClazz, final Method m, final Class<?> clazz) {
+    private void addLifecycleEventMethod(
+            final Class<? extends Annotation> lceClazz, final Method m, final Class<?> clazz) {
         final ClassMethodPair cm = new ClassMethodPair(clazz, m);
         if (lifecycleMethods.containsKey(lceClazz)) {
             lifecycleMethods.get(lceClazz).add(cm);
@@ -610,8 +590,11 @@ public class MappedClass {
         }
     }
 
-    private void callGlobalInterceptors(final Class<? extends Annotation> event, final Object entity, final DBObject dbObj,
-                                        final Mapper mapper) {
+    private void callGlobalInterceptors(
+            final Class<? extends Annotation> event,
+            final Object entity,
+            final DBObject dbObj,
+            final Mapper mapper) {
         for (final EntityInterceptor ei : mapper.getInterceptors()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling interceptor method " + event.getSimpleName() + " on " + ei);
@@ -645,11 +628,11 @@ public class MappedClass {
         }
 
         return o;
-
     }
 
-    private boolean isIgnorable(final java.lang.reflect.Field field, final int fieldMods, final Mapper mapper) {
-        
+    private boolean isIgnorable(
+            final java.lang.reflect.Field field, final int fieldMods, final Mapper mapper) {
+
         // Ignore all if not has a annotation
         boolean found = false;
         for (Class<? extends Annotation> anno : INTERESTING_ANNOTATIONS)
@@ -658,11 +641,11 @@ public class MappedClass {
                 break;
             }
         if (!found) return true;
-        
+
         return field.isAnnotationPresent(Transient.class)
-               || Modifier.isTransient(fieldMods)
-               || field.isSynthetic() && Modifier.isTransient(fieldMods)
-               || mapper.getOptions().isIgnoreFinals() && Modifier.isFinal(fieldMods);
+                || Modifier.isTransient(fieldMods)
+                || field.isSynthetic() && Modifier.isTransient(fieldMods)
+                || mapper.getOptions().isIgnoreFinals() && Modifier.isFinal(fieldMods);
     }
 
     private static class ClassMethodPair {
@@ -674,5 +657,4 @@ public class MappedClass {
             method = m;
         }
     }
-
 }

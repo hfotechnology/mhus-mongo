@@ -1,27 +1,23 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.cache;
 
-
 import dev.morphia.Key;
 
 /**
- * A primarily internal class used by MorphiaIterator to track entities loaded from mongo to prevent multiple loads of objects when keys
- * are
- * seen multiple times in a query result.
+ * A primarily internal class used by MorphiaIterator to track entities loaded from mongo to prevent
+ * multiple loads of objects when keys are seen multiple times in a query result.
  */
 public interface EntityCache {
     /**
@@ -32,15 +28,13 @@ public interface EntityCache {
      */
     Boolean exists(Key<?> k);
 
-    /**
-     * Clears the cache
-     */
+    /** Clears the cache */
     void flush();
 
     /**
      * Returns the entity for a Key
      *
-     * @param k   the Key to search for
+     * @param k the Key to search for
      * @param <T> the type of the entity
      * @return the entity
      */
@@ -49,7 +43,7 @@ public interface EntityCache {
     /**
      * Returns a proxy for the entity for a Key
      *
-     * @param k   the Key to search for
+     * @param k the Key to search for
      * @param <T> the type of the entity
      * @return the proxy
      */
@@ -58,7 +52,7 @@ public interface EntityCache {
     /**
      * Notifies the cache of the existence of a Key
      *
-     * @param k      the Key
+     * @param k the Key
      * @param exists true if the Key represents an existing entity
      */
     void notifyExists(Key<?> k, boolean exists);
@@ -66,8 +60,8 @@ public interface EntityCache {
     /**
      * Adds an entity to the cache
      *
-     * @param k   the Key of the entity
-     * @param t   the entity
+     * @param k the Key of the entity
+     * @param t the entity
      * @param <T> the type of the entity
      */
     <T> void putEntity(Key<T> k, T t);
@@ -75,14 +69,12 @@ public interface EntityCache {
     /**
      * Adds a proxy to the cache
      *
-     * @param k   the Key of the entity
-     * @param t   the proxy
+     * @param k the Key of the entity
+     * @param t the proxy
      * @param <T> the type of the entity
      */
     <T> void putProxy(Key<T> k, T t);
 
-    /**
-     * @return the stats for this cache
-     */
+    /** @return the stats for this cache */
     EntityCacheStatistics stats();
 }

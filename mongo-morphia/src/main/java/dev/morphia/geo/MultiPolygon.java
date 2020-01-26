@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.geo;
@@ -22,11 +20,10 @@ import java.util.List;
 import com.mongodb.client.model.geojson.PolygonCoordinates;
 
 /**
- * This class represents a set of polygons, which will saved into MongoDB as per the <a href="http://geojson.org/geojson-spec
- * .html#id7">GeoJSON
- * specification</a>.
- * <p/>
- * The factory for creating a MultiPolygon is the {@code GeoJson.multiPolygon} method.
+ * This class represents a set of polygons, which will saved into MongoDB as per the <a
+ * href="http://geojson.org/geojson-spec .html#id7">GeoJSON specification</a>.
+ *
+ * <p>The factory for creating a MultiPolygon is the {@code GeoJson.multiPolygon} method.
  *
  * @see dev.morphia.geo.GeoJson#multiPolygon(Polygon...)
  */
@@ -77,9 +74,7 @@ public class MultiPolygon implements Geometry {
 
     @Override
     public String toString() {
-        return "MultiPolygon{"
-               + "coordinates=" + coordinates
-               + '}';
+        return "MultiPolygon{" + "coordinates=" + coordinates + '}';
     }
 
     @Override
@@ -88,11 +83,13 @@ public class MultiPolygon implements Geometry {
     }
 
     @Override
-    public com.mongodb.client.model.geojson.MultiPolygon convert(final CoordinateReferenceSystem crs) {
+    public com.mongodb.client.model.geojson.MultiPolygon convert(
+            final CoordinateReferenceSystem crs) {
         List<PolygonCoordinates> coords = new ArrayList<PolygonCoordinates>();
         for (final Polygon list : coordinates) {
             coords.add(list.convert(crs).getCoordinates());
         }
-        return new com.mongodb.client.model.geojson.MultiPolygon(crs != null ? crs.convert() : null, coords);
+        return new com.mongodb.client.model.geojson.MultiPolygon(
+                crs != null ? crs.convert() : null, coords);
     }
 }

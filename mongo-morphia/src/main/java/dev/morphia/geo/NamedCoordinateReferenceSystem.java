@@ -1,44 +1,37 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.geo;
 
 import static java.lang.String.format;
 
-/**
- * A GeoJSON named Coordinate Reference System.
- */
+/** A GeoJSON named Coordinate Reference System. */
 public final class NamedCoordinateReferenceSystem extends CoordinateReferenceSystem {
 
-    /**
-     * The EPSG:4326 Coordinate Reference System.
-     */
+    /** The EPSG:4326 Coordinate Reference System. */
     public static final NamedCoordinateReferenceSystem EPSG_4326 =
-        new NamedCoordinateReferenceSystem("EPSG:4326");
+            new NamedCoordinateReferenceSystem("EPSG:4326");
 
-    /**
-     * The urn:ogc:def:crs:OGC:1.3:CRS84 Coordinate Reference System
-     */
+    /** The urn:ogc:def:crs:OGC:1.3:CRS84 Coordinate Reference System */
     public static final NamedCoordinateReferenceSystem CRS_84 =
-        new NamedCoordinateReferenceSystem("urn:ogc:def:crs:OGC:1.3:CRS84");
+            new NamedCoordinateReferenceSystem("urn:ogc:def:crs:OGC:1.3:CRS84");
 
     /**
-     * A custom MongoDB EPSG:4326 Coordinate Reference System that uses a strict counter-clockwise winding order.
+     * A custom MongoDB EPSG:4326 Coordinate Reference System that uses a strict counter-clockwise
+     * winding order.
      */
     public static final NamedCoordinateReferenceSystem EPSG_4326_STRICT_WINDING =
-        new NamedCoordinateReferenceSystem("urn:x-mongodb:crs:strictwinding:EPSG:4326");
+            new NamedCoordinateReferenceSystem("urn:x-mongodb:crs:strictwinding:EPSG:4326");
 
     private final String name;
 
@@ -49,7 +42,6 @@ public final class NamedCoordinateReferenceSystem extends CoordinateReferenceSys
      */
     private NamedCoordinateReferenceSystem(final String name) {
         this.name = name;
-
     }
 
     /**
@@ -83,7 +75,6 @@ public final class NamedCoordinateReferenceSystem extends CoordinateReferenceSys
         NamedCoordinateReferenceSystem that = (NamedCoordinateReferenceSystem) o;
 
         return name.equals(that.name);
-
     }
 
     @Override

@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.mapping.validation;
@@ -53,10 +51,7 @@ import dev.morphia.mapping.validation.fieldrules.MisplacedProperty;
 import dev.morphia.mapping.validation.fieldrules.ReferenceToUnidentifiable;
 import dev.morphia.mapping.validation.fieldrules.VersionMisuse;
 
-
-/**
- * @author Uwe Schaefer, (us@thomas-daily.de)
- */
+/** @author Uwe Schaefer, (us@thomas-daily.de) */
 public class MappingValidator {
 
     private static final Logger LOG = LoggerFactory.getLogger(MappingValidator.class);
@@ -65,7 +60,8 @@ public class MappingValidator {
     /**
      * Creates a mapping validator
      *
-     * @param objectFactory the object factory to be used when creating throw away instances to use in validation
+     * @param objectFactory the object factory to be used when creating throw away instances to use
+     *     in validation
      */
     public MappingValidator(final ObjectFactory objectFactory) {
         creator = objectFactory;
@@ -77,7 +73,6 @@ public class MappingValidator {
      * @param mappedClass the MappedClass to validate
      * @param mapper the Mapper to use for validation
      */
-    
     public void validate(final Mapper mapper, final MappedClass mappedClass) {
         validate(mapper, singletonList(mappedClass));
     }
@@ -89,13 +84,16 @@ public class MappingValidator {
      * @param mapper the Mapper to use for validation
      */
     public void validate(final Mapper mapper, final List<MappedClass> classes) {
-        final Set<ConstraintViolation> ve = new TreeSet<ConstraintViolation>(new Comparator<ConstraintViolation>() {
+        final Set<ConstraintViolation> ve =
+                new TreeSet<ConstraintViolation>(
+                        new Comparator<ConstraintViolation>() {
 
-            @Override
-            public int compare(final ConstraintViolation o1, final ConstraintViolation o2) {
-                return o1.getLevel().ordinal() > o2.getLevel().ordinal() ? -1 : 1;
-            }
-        });
+                            @Override
+                            public int compare(
+                                    final ConstraintViolation o1, final ConstraintViolation o2) {
+                                return o1.getLevel().ordinal() > o2.getLevel().ordinal() ? -1 : 1;
+                            }
+                        });
 
         final List<ClassConstraint> rules = getConstraints();
         for (final MappedClass c : classes) {
@@ -190,7 +188,6 @@ public class MappingValidator {
             final LogLine logLine = (LogLine) o;
 
             return v.equals(logLine.v);
-
         }
 
         void log(final Logger logger) {
@@ -208,8 +205,10 @@ public class MappingValidator {
                     logger.debug(v.render());
                     break;
                 default:
-                    throw new IllegalStateException(format("Cannot log %s of Level %s", ConstraintViolation.class.getSimpleName(),
-                                                           v.getLevel()));
+                    throw new IllegalStateException(
+                            format(
+                                    "Cannot log %s of Level %s",
+                                    ConstraintViolation.class.getSimpleName(), v.getLevel()));
             }
         }
     }

@@ -1,21 +1,17 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package dev.morphia.annotations;
-
 
 import static com.mongodb.client.model.ValidationAction.ERROR;
 import static com.mongodb.client.model.ValidationLevel.STRICT;
@@ -30,7 +26,6 @@ import java.lang.annotation.Target;
 import com.mongodb.client.model.ValidationAction;
 import com.mongodb.client.model.ValidationLevel;
 
-
 /**
  * Defines the document validation logic for a collection.
  *
@@ -42,23 +37,23 @@ import com.mongodb.client.model.ValidationLevel;
 @Target({ElementType.TYPE})
 public @interface Validation {
     /**
-     * @return the query used to validate documents in a collection.  This query is not validated so care must be taken to ensure
-     * document field names and types are correct.
-     *
+     * @return the query used to validate documents in a collection. This query is not validated so
+     *     care must be taken to ensure document field names and types are correct.
      * @mongodb.driver.manual core/document-validation/
      */
     String value();
 
     /**
-     * @return how strictly MongoDB should apply the validation rules to existing documents during an insert or update.
+     * @return how strictly MongoDB should apply the validation rules to existing documents during
+     *     an insert or update.
      * @see ValidationLevel
      */
     ValidationLevel level() default STRICT;
 
     /**
-     * @return how strictly MongoDB should apply the validation rules to existing documents during an insert or update.
+     * @return how strictly MongoDB should apply the validation rules to existing documents during
+     *     an insert or update.
      * @see ValidationAction
      */
     ValidationAction action() default ERROR;
-
 }

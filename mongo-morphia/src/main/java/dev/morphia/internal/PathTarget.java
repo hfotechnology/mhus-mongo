@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.internal;
@@ -58,7 +56,11 @@ public class PathTarget {
         this(mapper, mapper.getMappedClass(clazz), field, true);
     }
 
-    public <T> PathTarget(final Mapper mapper, final Class<T> clazz, final String field, final boolean validateNames) {
+    public <T> PathTarget(
+            final Mapper mapper,
+            final Class<T> clazz,
+            final String field,
+            final boolean validateNames) {
         this(mapper, mapper.getMappedClass(clazz), field, validateNames);
     }
 
@@ -69,7 +71,8 @@ public class PathTarget {
      * @param root root
      * @param path path
      */
-    public PathTarget(final Mapper mapper, final MappedClass root, final String path, boolean validateNames) {
+    public PathTarget(
+            final Mapper mapper, final MappedClass root, final String path, boolean validateNames) {
         segments = asList(path.split("\\."));
         this.root = root;
         this.mapper = mapper;
@@ -82,7 +85,8 @@ public class PathTarget {
     }
 
     /**
-     * Returns the translated path for this context.  If validation is disabled, that path could be the same as the initial value.
+     * Returns the translated path for this context. If validation is disabled, that path could be
+     * the same as the initial value.
      *
      * @return the translated path
      */
@@ -94,7 +98,8 @@ public class PathTarget {
     }
 
     /**
-     * Returns the MappedField found at the end of a path.  May be null if the path is invalid and validation is disabled.
+     * Returns the MappedField found at the end of a path. May be null if the path is invalid and
+     * validation is disabled.
      *
      * @return the field
      */
@@ -116,7 +121,7 @@ public class PathTarget {
         while (context != null && hasNext()) {
             String segment = next();
 
-            if ("$".equals(segment) || segment.matches("[0-9]+")) {  // array operator
+            if ("$".equals(segment) || segment.matches("[0-9]+")) { // array operator
                 if (!hasNext()) {
                     break;
                 }
@@ -130,7 +135,7 @@ public class PathTarget {
                 }
                 translate(field.getNameToStore());
                 if (field.isMap() && hasNext()) {
-                    next();  // consume the map key segment
+                    next(); // consume the map key segment
                 }
             } else {
                 if (validateNames) {
@@ -143,8 +148,10 @@ public class PathTarget {
     }
 
     private void failValidation() {
-        throw new ValidationException(format("Could not resolve path '%s' against '%s'.", join(segments, '.'),
-                                             root.getClazz().getName()));
+        throw new ValidationException(
+                format(
+                        "Could not resolve path '%s' against '%s'.",
+                        join(segments, '.'), root.getClazz().getName()));
     }
 
     private void translate(final String nameToStore) {
@@ -165,13 +172,17 @@ public class PathTarget {
         }
 
         if (mf != null) {
-            context = mapper.getMappedClass(mf.getSubClass() != null ? mf.getSubClass() : mf.getConcreteType());
+            context =
+                    mapper.getMappedClass(
+                            mf.getSubClass() != null ? mf.getSubClass() : mf.getConcreteType());
         }
         return mf;
     }
 
     @Override
     public String toString() {
-        return String.format("PathTarget{root=%s, segments=%s, target=%s}", root.getClazz().getSimpleName(), segments, target);
+        return String.format(
+                "PathTarget{root=%s, segments=%s, target=%s}",
+                root.getClazz().getSimpleName(), segments, target);
     }
 }

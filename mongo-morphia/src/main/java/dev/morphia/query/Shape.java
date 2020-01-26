@@ -1,28 +1,23 @@
 /**
  * Copyright (c) 2008-2015 MongoDB, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package dev.morphia.query;
-
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-/**
- * This encapsulates the data necessary to define a shape for queries.
- */
+/** This encapsulates the data necessary to define a shape for queries. */
 public class Shape {
     private final String geometry;
     private final Point[] points;
@@ -33,8 +28,8 @@ public class Shape {
     }
 
     /**
-     * Specifies a rectangle for a geospatial $geoWithin query to return documents that are within the bounds of the rectangle,
-     * according to their point-based location data.
+     * Specifies a rectangle for a geospatial $geoWithin query to return documents that are within
+     * the bounds of the rectangle, according to their point-based location data.
      *
      * @param bottomLeft the bottom left bound
      * @param upperRight the upper right bound
@@ -83,16 +78,12 @@ public class Shape {
         return new Shape("$polygon", points);
     }
 
-    /**
-     * @return the geometry of the shape
-     */
+    /** @return the geometry of the shape */
     public String getGeometry() {
         return geometry;
     }
 
-    /**
-     * @return the points of the shape
-     */
+    /** @return the points of the shape */
     public Point[] getPoints() {
         return copy(points);
     }
@@ -117,9 +108,7 @@ public class Shape {
         return copy;
     }
 
-    /**
-     * Defines a Point
-     */
+    /** Defines a Point */
     public static class Point {
         private final double longitude;
         private final double latitude;
@@ -128,7 +117,7 @@ public class Shape {
          * Creates a point using longitude and latitude values
          *
          * @param longitude the longitude
-         * @param latitude  the latitude
+         * @param latitude the latitude
          */
         public Point(final double longitude, final double latitude) {
             this.latitude = latitude;
