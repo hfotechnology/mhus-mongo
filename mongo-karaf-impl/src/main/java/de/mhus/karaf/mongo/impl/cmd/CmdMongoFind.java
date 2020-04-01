@@ -29,7 +29,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import de.mhus.db.osgi.api.xdb.XdbUtil;
+import de.mhus.db.karaf.xdb.adb.XdbKarafUtil;
 import de.mhus.karaf.mongo.api.MongoUtil;
 import de.mhus.lib.mongo.MoUtil;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
@@ -65,8 +65,8 @@ public class CmdMongoFind implements Action {
     @Override
     public Object execute() throws Exception {
 
-        dsName = XdbUtil.getDatasourceName(session, dsName);
-        dbName = XdbUtil.getServiceName(session, dbName);
+        dsName = XdbKarafUtil.getDatasourceName(session, dsName);
+        dbName = XdbKarafUtil.getServiceName(session, dbName);
 
         MongoDataSource ds = MongoUtil.getDatasource(dsName);
         MongoClient con = ds.getConnection();

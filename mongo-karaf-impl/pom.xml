@@ -82,6 +82,11 @@
             <groupId>de.mhus.db</groupId>
             <artifactId>db-osgi-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>de.mhus.db</groupId>
+            <artifactId>db-karaf</artifactId>
+            <version>${mhus-db.version}</version>
+        </dependency>
     <dependency>
         <groupId>org.mongodb</groupId>
         <artifactId>mongo-java-driver</artifactId>
