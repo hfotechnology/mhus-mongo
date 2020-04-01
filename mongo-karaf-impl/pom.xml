@@ -74,10 +74,14 @@
   		<groupId>de.mhus.lib</groupId>
   		<artifactId>lib-annotations</artifactId>
   	</dependency>
-    <dependency>
-        <groupId>de.mhus.lib</groupId>
-        <artifactId>lib-persistence</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>de.mhus.db</groupId>
+            <artifactId>db-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.mhus.db</groupId>
+            <artifactId>db-osgi-api</artifactId>
+        </dependency>
     <dependency>
         <groupId>org.mongodb</groupId>
         <artifactId>mongo-java-driver</artifactId>
