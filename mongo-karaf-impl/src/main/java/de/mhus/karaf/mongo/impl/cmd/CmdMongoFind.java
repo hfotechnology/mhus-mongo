@@ -29,10 +29,10 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import de.mhus.db.osgi.api.xdb.XdbUtil;
 import de.mhus.karaf.mongo.api.MongoUtil;
 import de.mhus.lib.mongo.MoUtil;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
-import de.mhus.osgi.api.xdb.XdbUtil;
 
 @Command(scope = "mongo", name = "find", description = "Execute mongo find query")
 @Service

@@ -22,6 +22,7 @@ import java.util.TreeSet;
 
 import org.osgi.service.component.annotations.Component;
 
+import de.mhus.db.osgi.api.xdb.XdbApi;
 import de.mhus.karaf.mongo.api.MoManagerService;
 import de.mhus.karaf.mongo.api.MongoUtil;
 import de.mhus.lib.adb.DbCollection;
@@ -38,7 +39,6 @@ import de.mhus.lib.errors.NotFoundException;
 import de.mhus.lib.errors.NotSupportedException;
 import de.mhus.lib.xdb.XdbService;
 import de.mhus.lib.xdb.XdbType;
-import de.mhus.osgi.api.xdb.XdbApi;
 import dev.morphia.annotations.Id;
 
 @Component(property = "xdb.type=mo")
