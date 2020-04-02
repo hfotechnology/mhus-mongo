@@ -193,6 +193,11 @@ public class MoXdbApiImpl implements XdbApi {
         public void save(Persistable object) throws MException {
             service.getManager().saveObject(null, null, object);
         }
+
+        @Override
+        public <I> I adaptTo(Class<? extends I> ifc) {
+            return null;
+        }
     }
 
     private static class Type<T> implements XdbType<T> {
@@ -418,5 +423,11 @@ public class MoXdbApiImpl implements XdbApi {
         public Table toTableAndClose(int maxSize) {
             return null;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <I> I adaptTo(Class<? extends I> ifc) {
+        return (I) this;
     }
 }
