@@ -27,7 +27,6 @@ import de.mhus.karaf.mongo.api.MoManagerService;
 import de.mhus.karaf.mongo.api.MongoUtil;
 import de.mhus.lib.adb.DbCollection;
 import de.mhus.lib.adb.DbComfortableObject;
-import de.mhus.lib.adb.Persistable;
 import de.mhus.lib.adb.query.AQuery;
 import de.mhus.lib.core.pojo.PojoAttribute;
 import de.mhus.lib.core.pojo.PojoModel;
@@ -62,7 +61,7 @@ public class MoXdbApiImpl implements XdbApi {
 
                 String name = typeName.toLowerCase();
                 Class<?> type = null;
-                for (Class<? extends Persistable> s : service.getManager().getManagedTypes())
+                for (Class<? extends Object> s : service.getManager().getManagedTypes())
                     if (s.getSimpleName().toLowerCase().equals(name)) {
                         type = s;
                         break;
@@ -102,7 +101,7 @@ public class MoXdbApiImpl implements XdbApi {
         @Override
         public List<String> getTypeNames() {
             LinkedList<String> out = new LinkedList<>();
-            for (Class<? extends Persistable> s : service.getManager().getManagedTypes())
+            for (Class<? extends Object> s : service.getManager().getManagedTypes())
                 out.add(s.getSimpleName());
             return out;
         }
@@ -111,7 +110,7 @@ public class MoXdbApiImpl implements XdbApi {
         public <T> XdbType<T> getType(String name) throws NotFoundException {
             name = name.toLowerCase();
             Class<?> type = null;
-            for (Class<? extends Persistable> s : service.getManager().getManagedTypes())
+            for (Class<? extends Object> s : service.getManager().getManagedTypes())
                 if (s.getSimpleName().toLowerCase().equals(name)) {
                     type = s;
                     break;
@@ -125,7 +124,7 @@ public class MoXdbApiImpl implements XdbApi {
         @Override
         public <T> XdbType<T> getType(Class<T> type) throws NotFoundException {
             Class<?> out = null;
-            for (Class<? extends Persistable> s : service.getManager().getManagedTypes())
+            for (Class<? extends Object> s : service.getManager().getManagedTypes())
                 if (s.getName().equals(type.getName())) {
                     out = s;
                     break;
@@ -157,7 +156,7 @@ public class MoXdbApiImpl implements XdbApi {
         }
 
         @Override
-        public <T extends Persistable> T inject(T object) {
+        public <T extends Object> T inject(T object) {
             if (object == null) return null;
             if (object instanceof DbComfortableObject)
                 ((DbComfortableObject) object).doInit(service.getManager(), null, false);
@@ -185,12 +184,12 @@ public class MoXdbApiImpl implements XdbApi {
         }
 
         @Override
-        public void delete(Persistable object) throws MException {
+        public void delete(Object object) throws MException {
             service.getManager().deleteObject(null, null, object);
         }
 
         @Override
-        public void save(Persistable object) throws MException {
+        public void save(Object object) throws MException {
             service.getManager().saveObject(null, null, object);
         }
 
