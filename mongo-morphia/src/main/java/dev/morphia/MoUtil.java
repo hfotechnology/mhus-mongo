@@ -16,8 +16,8 @@ package dev.morphia;
 import java.util.UUID;
 
 import org.bson.types.ObjectId;
-import org.codehaus.jackson.map.ObjectMapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 
 @SuppressWarnings("deprecation")

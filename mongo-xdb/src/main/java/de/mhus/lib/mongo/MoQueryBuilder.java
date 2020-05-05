@@ -18,9 +18,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.mhus.lib.adb.query.AAnd;
 import de.mhus.lib.adb.query.ACompare;
@@ -227,7 +227,7 @@ public class MoQueryBuilder extends MObject {
 
     private <T> void add(Query<T> q, ObjectNode j, Map<String, Object> parameterValues)
             throws IOException {
-        for (Iterator<Entry<String, JsonNode>> ki = j.getFields(); ki.hasNext(); ) {
+        for (Iterator<Entry<String, JsonNode>> ki = j.fields(); ki.hasNext(); ) {
             Entry<String, JsonNode> ke = ki.next();
             String k = ke.getKey();
             JsonNode v = ke.getValue();
@@ -236,7 +236,7 @@ public class MoQueryBuilder extends MObject {
                 Criteria[] criteria = new Criteria[a.size()];
                 for (int i = 0; i < criteria.length; i++) { // [{"name":"Max"},{"name":"Sabine"}]
                     ObjectNode obj = (ObjectNode) a.get(i); // {"name":"Max"}
-                    Entry<String, JsonNode> objf = obj.getFields().next(); // "name":"Max"
+                    Entry<String, JsonNode> objf = obj.fields().next(); // "name":"Max"
                     FieldEnd<?> c = q.criteria(objf.getKey());
                     criteria[i] =
                             (Criteria) setValue(c, objf.getKey(), objf.getValue(), parameterValues);
@@ -247,7 +247,7 @@ public class MoQueryBuilder extends MObject {
                 Criteria[] criteria = new Criteria[a.size()];
                 for (int i = 0; i < criteria.length; i++) { // [{"name":"Max"},{"name":"Sabine"}]
                     ObjectNode obj = (ObjectNode) a.get(i); // {"name":"Max"}
-                    Entry<String, JsonNode> objf = obj.getFields().next(); // "name":"Max"
+                    Entry<String, JsonNode> objf = obj.fields().next(); // "name":"Max"
                     FieldEnd<?> c = q.criteria(objf.getKey());
                     criteria[i] =
                             (Criteria) setValue(c, objf.getKey(), objf.getValue(), parameterValues);
@@ -270,7 +270,7 @@ public class MoQueryBuilder extends MObject {
             throws IOException {
         if (v.isObject()) {
             ObjectNode exp = (ObjectNode) v;
-            Entry<String, JsonNode> e = exp.getFields().next();
+            Entry<String, JsonNode> e = exp.fields().next();
             String c = e.getKey();
             String vv = e.getValue().asText();
             if (parameterValues != null)
