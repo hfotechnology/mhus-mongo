@@ -20,7 +20,7 @@ import org.apache.karaf.shell.api.action.lifecycle.Service;
 
 import de.mhus.lib.core.console.ConsoleTable;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
-import de.mhus.osgi.api.services.MOsgi;
+import de.mhus.osgi.api.MOsgi;
 
 @Command(scope = "mongo", name = "datasources", description = "List Mongo Datasources")
 @Service

@@ -29,7 +29,7 @@ import de.mhus.lib.errors.NotFoundException;
 import de.mhus.lib.mongo.MoManager;
 import de.mhus.lib.mongo.MoQueryBuilder;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
-import de.mhus.osgi.api.services.MOsgi;
+import de.mhus.osgi.api.MOsgi;
 import dev.morphia.query.Query;
 
 public class MongoUtil {
