@@ -21,9 +21,9 @@ xdb:create test TestPerson name=Sabine
 xdb:create test TestPerson name=Mickey
 xdb:create test TestPerson name=Donald
 
-xdb:select test TestPerson
+xdb:rawselect test TestPerson
  
-xdb:select test TestPerson '"$or":[{"name":"Max"},{"name":"Donald"}],"$order":"name"'
+xdb:rawselect test TestPerson '"$or":[{"name":"Max"},{"name":"Donald"}],"$order":"name"'
 
 
 xdb:create test TestBook name=A meta.isbn=1234567

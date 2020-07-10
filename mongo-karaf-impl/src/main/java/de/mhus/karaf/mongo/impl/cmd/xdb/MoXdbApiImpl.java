@@ -27,6 +27,7 @@ import de.mhus.karaf.mongo.api.MoManagerService;
 import de.mhus.karaf.mongo.api.MongoUtil;
 import de.mhus.lib.adb.DbCollection;
 import de.mhus.lib.adb.DbComfortableObject;
+import de.mhus.lib.adb.QueryParser;
 import de.mhus.lib.adb.query.AQuery;
 import de.mhus.lib.core.pojo.PojoAttribute;
 import de.mhus.lib.core.pojo.PojoModel;
@@ -196,6 +197,13 @@ public class MoXdbApiImpl implements XdbApi {
         @Override
         public <I> I adaptTo(Class<? extends I> ifc) {
             return null;
+        }
+
+        @Override
+        public QueryParser createParser() {
+            ParserMongo parser = new ParserMongo();
+            parser.init(service.getManager());
+            return parser;
         }
     }
 
