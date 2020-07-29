@@ -257,7 +257,7 @@ public class MoXdbApiImpl implements XdbApi {
         @Override
         public void set(Object object, String name, Object v) throws MException {
             try {
-                model.getAttribute(name).set(object, v);
+                model.getAttribute(name).set(object, v, false);
             } catch (IOException e) {
                 throw new MException(e);
             }

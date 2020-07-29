@@ -151,7 +151,7 @@ public class MoManager extends MJmx implements MoHandler {
             PojoModel model = getModelFor(obj.getClass());
             for (PojoAttribute<Object> f : model) {
                 Object v = f.get(clone);
-                f.set(obj, v);
+                f.set(obj, v, false);
             }
         } catch (IOException e) {
             throw new MException(e);
@@ -171,7 +171,7 @@ public class MoManager extends MJmx implements MoHandler {
         for (PojoAttribute<?> f : model)
             if (f.getAnnotation(DbPrimaryKey.class) != null) {
                 try {
-                    f.set(obj, null);
+                    f.set(obj, null, false);
                 } catch (IOException e) {
                     throw new MException(f, e);
                 }
