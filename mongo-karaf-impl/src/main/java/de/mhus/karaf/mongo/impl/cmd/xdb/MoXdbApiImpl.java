@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import org.mongodb.morphia.annotations.Id;
 import org.osgi.service.component.annotations.Component;
 
 import de.mhus.db.osgi.api.xdb.XdbApi;
@@ -39,7 +40,6 @@ import de.mhus.lib.errors.NotFoundException;
 import de.mhus.lib.errors.NotSupportedException;
 import de.mhus.lib.xdb.XdbService;
 import de.mhus.lib.xdb.XdbType;
-import dev.morphia.annotations.Id;
 
 @Component(property = "xdb.type=mo")
 public class MoXdbApiImpl implements XdbApi {

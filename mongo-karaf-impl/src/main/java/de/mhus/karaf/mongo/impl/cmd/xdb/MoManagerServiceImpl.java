@@ -15,6 +15,8 @@ package de.mhus.karaf.mongo.impl.cmd.xdb;
 
 import java.util.List;
 
+import org.mongodb.morphia.mapping.DefaultCreator;
+import org.mongodb.morphia.mapping.Mapper;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.wiring.BundleWiring;
@@ -30,8 +32,6 @@ import de.mhus.lib.errors.NotFoundException;
 import de.mhus.lib.mongo.MoManager;
 import de.mhus.lib.mongo.MoSchema;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
-import dev.morphia.mapping.DefaultCreator;
-import dev.morphia.mapping.Mapper;
 
 // @Component(immediate=true,provide=MoManagerService.class)
 public abstract class MoManagerServiceImpl extends MJmx

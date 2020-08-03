@@ -13,13 +13,14 @@
  */
 package de.mhus.lib.mongo.test;
 
+import org.mongodb.morphia.annotations.Id;
+
 import de.mhus.lib.adb.DbMetadata;
-import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.errors.MException;
 
 public class MoMetadata extends DbMetadata {
 
-    @DbPersistent private String name;
+    @Id private String name;
 
     public MoMetadata() {}
 

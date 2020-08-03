@@ -18,6 +18,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.mongodb.morphia.query.Criteria;
+import org.mongodb.morphia.query.FieldEnd;
+import org.mongodb.morphia.query.Query;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -41,9 +45,6 @@ import de.mhus.lib.core.parser.StringCompiler;
 import de.mhus.lib.core.util.MObject;
 import de.mhus.lib.errors.MException;
 import de.mhus.lib.errors.NotSupportedException;
-import dev.morphia.query.Criteria;
-import dev.morphia.query.FieldEnd;
-import dev.morphia.query.Query;
 
 public class MoQueryBuilder extends MObject {
 

@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.mongodb.morphia.query.Query;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.mhus.lib.adb.query.AQuery;
@@ -30,7 +32,6 @@ import de.mhus.lib.mongo.MoManager;
 import de.mhus.lib.mongo.MoQueryBuilder;
 import de.mhus.lib.mongo.xdb.MongoDataSource;
 import de.mhus.osgi.api.MOsgi;
-import dev.morphia.query.Query;
 
 public class MongoUtil {
 

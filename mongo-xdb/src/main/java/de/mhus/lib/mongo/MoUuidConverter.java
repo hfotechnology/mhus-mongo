@@ -16,10 +16,9 @@ package de.mhus.lib.mongo;
 import java.util.UUID;
 
 import org.bson.types.ObjectId;
-
-import dev.morphia.converters.SimpleValueConverter;
-import dev.morphia.converters.TypeConverter;
-import dev.morphia.mapping.MappedField;
+import org.mongodb.morphia.converters.SimpleValueConverter;
+import org.mongodb.morphia.converters.TypeConverter;
+import org.mongodb.morphia.mapping.MappedField;
 
 public class MoUuidConverter extends TypeConverter implements SimpleValueConverter {
 

@@ -18,17 +18,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Field;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.Indexes;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Reference;
+
 import de.mhus.lib.adb.Persistable;
-import de.mhus.lib.annotations.adb.DbPersistent;
-import de.mhus.lib.annotations.adb.DbPrimaryKey;
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Field;
-import dev.morphia.annotations.Index;
-import dev.morphia.annotations.Indexes;
-import dev.morphia.annotations.Reference;
 
 @Entity("employees")
-@Indexes(@Index(value = "salary", fields = @Field("salary")))
+@Indexes(@Index(fields = @Field("salary")))
 public class Employee implements Persistable {
 
     public Employee() {}
@@ -58,13 +59,13 @@ public class Employee implements Persistable {
         this.manager = manager;
     }
 
-    public List<Employee> getDirectReports() {
-        return directReports;
-    }
-
-    public void setDirectReports(List<Employee> directReports) {
-        this.directReports = directReports;
-    }
+//    public List<Employee> getDirectReports() {
+//        return directReports;
+//    }
+//
+//    public void setDirectReports(List<Employee> directReports) {
+//        this.directReports = directReports;
+//    }
 
     public Double getSalary() {
         return salary;
@@ -74,12 +75,12 @@ public class Employee implements Persistable {
         this.salary = salary;
     }
 
-    @DbPrimaryKey private UUID id;
-    @DbPersistent private String name;
+    @Id @Property private UUID id;
+    @Property private String name;
     @Reference private Employee manager;
-    @Reference private List<Employee> directReports = new LinkedList<Employee>();
-    @DbPersistent private Double salary;
-    @DbPersistent private HashMap<String, String> values = new HashMap<>();
+//    @Reference private List<Employee> directReports = new LinkedList<Employee>();
+    @Property private Double salary;
+    @Property private HashMap<String, String> values = new HashMap<>();
 
     @Override
     public String toString() {
