@@ -32,7 +32,6 @@ import de.mhus.lib.mongo.MoUtil;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mongodb.morphia.query.MorphiaIterator;
 import org.mongodb.morphia.query.Query;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -140,8 +139,8 @@ public class MongoTest {
         final Employee pepe = new Employee("Pepé Le Pew", 25000.0);
         manager.saveObject(null, null, pepe);
 
-//        elmer.getDirectReports().add(daffy);
-//        elmer.getDirectReports().add(pepe);
+        //        elmer.getDirectReports().add(daffy);
+        //        elmer.getDirectReports().add(pepe);
 
         manager.saveObject(null, null, elmer);
 
@@ -168,12 +167,12 @@ public class MongoTest {
         MoMetadata asterix = manager.inject(new MoMetadata("Asterix"));
         asterix.save();
 
-        //assertNotNull(asterix.getId());
+        // assertNotNull(asterix.getId());
 
         MoMetadata obelix = manager.inject(new MoMetadata("Obelix"));
         obelix.save();
 
-        //assertNotNull(obelix.getId());
+        // assertNotNull(obelix.getId());
     }
 
     @Test

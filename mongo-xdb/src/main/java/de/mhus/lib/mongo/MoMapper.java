@@ -40,93 +40,94 @@ public class MoMapper extends Mapper {
         //        addInterceptor(new MoEntityInterceptor());
     }
 
-//    @Override
-//    protected Class<? extends Annotation> getFieldAnnotation(final MappedField mf) {
-//        Class<? extends Annotation> res = super.getFieldAnnotation(mf);
-//        if (res == null) {
-//            {
-//                DbPrimaryKey ann = mf.getAnnotation(DbPrimaryKey.class);
-//                if (ann != null) return Property.class;
-//            }
-//            {
-//                DbPersistent ann = mf.getAnnotation(DbPersistent.class);
-//                if (ann != null) return Property.class;
-//            }
-//            {
-//                Embedded ann = mf.getAnnotation(Embedded.class);
-//                if (ann != null) return dev.morphia.annotations.Embedded.class;
-//            }
-//        }
-//        return res;
-//    }
+    //    @Override
+    //    protected Class<? extends Annotation> getFieldAnnotation(final MappedField mf) {
+    //        Class<? extends Annotation> res = super.getFieldAnnotation(mf);
+    //        if (res == null) {
+    //            {
+    //                DbPrimaryKey ann = mf.getAnnotation(DbPrimaryKey.class);
+    //                if (ann != null) return Property.class;
+    //            }
+    //            {
+    //                DbPersistent ann = mf.getAnnotation(DbPersistent.class);
+    //                if (ann != null) return Property.class;
+    //            }
+    //            {
+    //                Embedded ann = mf.getAnnotation(Embedded.class);
+    //                if (ann != null) return dev.morphia.annotations.Embedded.class;
+    //            }
+    //        }
+    //        return res;
+    //    }
 
-//    @Override
-//    protected void readMappedField(
-//            final Datastore datastore,
-//            final MappedField mf,
-//            final Object entity,
-//            final EntityCache cache,
-//            final DBObject dbObject) {
-//        CustomMapper mapper;
-//        if (mf.hasAnnotation(Property.class)
-//                || mf.hasAnnotation(DbPrimaryKey.class)
-//                || mf.hasAnnotation(DbPersistent.class)
-//                || mf.hasAnnotation(Serialized.class)
-//                || mf.isTypeMongoCompatible()
-//                || getConverters().hasSimpleValueConverter(mf)) {
-//            mapper = opts.getValueMapper();
-//        } else if (mf.hasAnnotation(Embedded.class)
-//                || mf.hasAnnotation(dev.morphia.annotations.Embedded.class)) {
-//            mapper = opts.getEmbeddedMapper();
-//        } else if (mf.hasAnnotation(Reference.class)
-//                || MorphiaReference.class == mf.getConcreteType()) {
-//            mapper = opts.getReferenceMapper();
-//        } else {
-//            mapper = opts.getDefaultMapper();
-//        }
-//        mapper.fromDBObject(datastore, dbObject, mf, entity, cache, this);
-//    }
+    //    @Override
+    //    protected void readMappedField(
+    //            final Datastore datastore,
+    //            final MappedField mf,
+    //            final Object entity,
+    //            final EntityCache cache,
+    //            final DBObject dbObject) {
+    //        CustomMapper mapper;
+    //        if (mf.hasAnnotation(Property.class)
+    //                || mf.hasAnnotation(DbPrimaryKey.class)
+    //                || mf.hasAnnotation(DbPersistent.class)
+    //                || mf.hasAnnotation(Serialized.class)
+    //                || mf.isTypeMongoCompatible()
+    //                || getConverters().hasSimpleValueConverter(mf)) {
+    //            mapper = opts.getValueMapper();
+    //        } else if (mf.hasAnnotation(Embedded.class)
+    //                || mf.hasAnnotation(dev.morphia.annotations.Embedded.class)) {
+    //            mapper = opts.getEmbeddedMapper();
+    //        } else if (mf.hasAnnotation(Reference.class)
+    //                || MorphiaReference.class == mf.getConcreteType()) {
+    //            mapper = opts.getReferenceMapper();
+    //        } else {
+    //            mapper = opts.getDefaultMapper();
+    //        }
+    //        mapper.fromDBObject(datastore, dbObject, mf, entity, cache, this);
+    //    }
 
-//    @Override
-//    protected void writeMappedField(
-//            final DBObject dbObject,
-//            final MappedField mf,
-//            final Object entity,
-//            final Map<Object, DBObject> involvedObjects) {
-//
-//        // skip not saved fields.
-//        if (mf.hasAnnotation(NotSaved.class)) {
-//            return;
-//        }
-//
-//        // get the annotation from the field.
-//        Class<? extends Annotation> annType = getFieldAnnotation(mf);
-//
-//        if (Property.class.equals(annType)
-//                || DbPrimaryKey.class.equals(annType)
-//                || DbPersistent.class.equals(annType)
-//                || Serialized.class.equals(annType)
-//                || mf.isTypeMongoCompatible()
-//                || (getConverters().hasSimpleValueConverter(mf)
-//                        || (getConverters().hasSimpleValueConverter(mf.getFieldValue(entity))))) {
-//            opts.getValueMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
-//        } else if (Reference.class.equals(annType)
-//                || MorphiaReference.class == mf.getConcreteType()) {
-//            opts.getReferenceMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
-//        } else if (Embedded.class.equals(annType)
-//                || dev.morphia.annotations.Embedded.class.equals(annType)) {
-//            opts.getEmbeddedMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
-//        } else {
-//            if (LOG.isDebugEnabled()) {
-//                LOG.debug(
-//                        "No annotation was found, using default mapper "
-//                                + opts.getDefaultMapper()
-//                                + " for "
-//                                + mf);
-//            }
-//            opts.getDefaultMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
-//        }
-//    }
+    //    @Override
+    //    protected void writeMappedField(
+    //            final DBObject dbObject,
+    //            final MappedField mf,
+    //            final Object entity,
+    //            final Map<Object, DBObject> involvedObjects) {
+    //
+    //        // skip not saved fields.
+    //        if (mf.hasAnnotation(NotSaved.class)) {
+    //            return;
+    //        }
+    //
+    //        // get the annotation from the field.
+    //        Class<? extends Annotation> annType = getFieldAnnotation(mf);
+    //
+    //        if (Property.class.equals(annType)
+    //                || DbPrimaryKey.class.equals(annType)
+    //                || DbPersistent.class.equals(annType)
+    //                || Serialized.class.equals(annType)
+    //                || mf.isTypeMongoCompatible()
+    //                || (getConverters().hasSimpleValueConverter(mf)
+    //                        ||
+    // (getConverters().hasSimpleValueConverter(mf.getFieldValue(entity))))) {
+    //            opts.getValueMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
+    //        } else if (Reference.class.equals(annType)
+    //                || MorphiaReference.class == mf.getConcreteType()) {
+    //            opts.getReferenceMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
+    //        } else if (Embedded.class.equals(annType)
+    //                || dev.morphia.annotations.Embedded.class.equals(annType)) {
+    //            opts.getEmbeddedMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
+    //        } else {
+    //            if (LOG.isDebugEnabled()) {
+    //                LOG.debug(
+    //                        "No annotation was found, using default mapper "
+    //                                + opts.getDefaultMapper()
+    //                                + " for "
+    //                                + mf);
+    //            }
+    //            opts.getDefaultMapper().toDBObject(entity, mf, dbObject, involvedObjects, this);
+    //        }
+    //    }
 
     //    @Override
     //    public MappedClass addMappedClass(final Class c) {
