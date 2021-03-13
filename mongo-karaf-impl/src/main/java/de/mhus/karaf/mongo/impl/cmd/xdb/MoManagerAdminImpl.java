@@ -29,19 +29,19 @@ import de.mhus.karaf.mongo.api.MoManagerAdmin;
 import de.mhus.karaf.mongo.api.MoManagerService;
 import de.mhus.lib.core.MLog;
 import de.mhus.lib.errors.NotFoundException;
-import de.mhus.osgi.api.util.MServiceTracker;
+import de.mhus.osgi.api.util.AbstractServiceTracker;
 
 @Component(immediate = true)
 public class MoManagerAdminImpl extends MLog implements MoManagerAdmin {
 
-    private MServiceTracker<MoManagerService> tracker;
+    private AbstractServiceTracker<MoManagerService> tracker;
     private LinkedList<MoManagerService> services = new LinkedList<>();
     private HashMap<String, MoManagerService> servicesByName = new HashMap<>();
 
     @Activate
     public void doActivate(ComponentContext ctx) {
         tracker =
-                new MServiceTracker<MoManagerService>(MoManagerService.class) {
+                new AbstractServiceTracker<MoManagerService>(MoManagerService.class) {
 
                     @Override
                     protected void removeService(
