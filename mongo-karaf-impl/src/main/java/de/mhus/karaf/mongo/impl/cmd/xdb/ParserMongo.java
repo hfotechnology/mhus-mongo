@@ -19,6 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.mhus.lib.adb.QueryParser;
+import de.mhus.lib.basics.RC;
 import de.mhus.lib.errors.MRuntimeException;
 import de.mhus.lib.mongo.MoManager;
 import net.sf.jsqlparser.expression.AllComparisonExpression;
@@ -210,13 +211,13 @@ public class ParserMongo
 
     @Override
     public void visit(Table tableName) {
-        if (entityName != null) throw new MRuntimeException("only one table is supported");
+        if (entityName != null) throw new MRuntimeException(RC.ERROR, "only one table is supported");
         entityName = tableName.getFullyQualifiedName().toLowerCase();
         if (manager != null) {
             try {
                 entity = manager.getManagedType(entityName);
             } catch (Exception e) {
-                throw new MRuntimeException(entityName, e);
+                throw new MRuntimeException(RC.STATUS.ERROR,  entityName, e);
             }
         }
     }

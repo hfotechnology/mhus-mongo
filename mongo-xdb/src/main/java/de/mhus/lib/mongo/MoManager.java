@@ -48,6 +48,7 @@ import de.mhus.lib.adb.Persistable;
 import de.mhus.lib.annotations.adb.DbPersistent;
 import de.mhus.lib.annotations.adb.DbPrimaryKey;
 import de.mhus.lib.annotations.pojo.Embedded;
+import de.mhus.lib.basics.RC;
 import de.mhus.lib.core.MSystem;
 import de.mhus.lib.core.jmx.MJmx;
 import de.mhus.lib.core.pojo.AttributesStrategy;
@@ -139,7 +140,7 @@ public class MoManager extends MJmx implements MoHandler {
                 if (!MSystem.equals(v1, v2)) return true;
             }
         } catch (IOException e) {
-            throw new MException(e);
+            throw new MException(RC.ERROR, e);
         }
         return false;
     }
@@ -156,7 +157,7 @@ public class MoManager extends MJmx implements MoHandler {
                 f.set(obj, v, false);
             }
         } catch (IOException e) {
-            throw new MException(e);
+            throw new MException(RC.ERROR, e);
         }
     }
 
@@ -175,7 +176,7 @@ public class MoManager extends MJmx implements MoHandler {
                 try {
                     f.set(obj, null, false);
                 } catch (IOException e) {
-                    throw new MException(f, e);
+                    throw new MException(RC.STATUS.ERROR, f, e);
                 }
                 break;
             }

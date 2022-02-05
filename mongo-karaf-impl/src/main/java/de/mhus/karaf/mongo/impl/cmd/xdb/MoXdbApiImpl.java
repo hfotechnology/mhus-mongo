@@ -32,6 +32,7 @@ import de.mhus.lib.adb.DbCollection;
 import de.mhus.lib.adb.DbComfortableObject;
 import de.mhus.lib.adb.QueryParser;
 import de.mhus.lib.adb.query.AQuery;
+import de.mhus.lib.basics.RC;
 import de.mhus.lib.core.pojo.PojoAttribute;
 import de.mhus.lib.core.pojo.PojoModel;
 import de.mhus.lib.core.pojo.PojoModelFactory;
@@ -229,7 +230,7 @@ public class MoXdbApiImpl implements XdbApi {
                         MongoUtil.createQuery(service.getManager(), type, search, parameterValues)
                                 .iterator());
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -238,7 +239,7 @@ public class MoXdbApiImpl implements XdbApi {
             try {
                 return new Result<T>(MongoUtil.createQuery(service.getManager(), query).iterator());
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -261,7 +262,7 @@ public class MoXdbApiImpl implements XdbApi {
             try {
                 model.getAttribute(name).set(object, v, false);
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -271,7 +272,7 @@ public class MoXdbApiImpl implements XdbApi {
             try {
                 return (F) model.getAttribute(name).get(object);
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -292,7 +293,7 @@ public class MoXdbApiImpl implements XdbApi {
             try {
                 return service.getManager().getId(object);
             } catch (Exception e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -304,7 +305,7 @@ public class MoXdbApiImpl implements XdbApi {
                                 MongoUtil.createQuery(
                                         service.getManager(), type, search, parameterValues));
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -314,7 +315,7 @@ public class MoXdbApiImpl implements XdbApi {
                 return service.getManager()
                         .getCount(MongoUtil.createQuery(service.getManager(), query).iterator());
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
 
@@ -379,7 +380,7 @@ public class MoXdbApiImpl implements XdbApi {
                 return new Result<T>(
                         MongoUtil.createQuery(service.getManager(), type, "", null).iterator());
             } catch (IOException e) {
-                throw new MException(e);
+                throw new MException(RC.ERROR, e);
             }
         }
     }
