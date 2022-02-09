@@ -57,7 +57,7 @@ public class MoManagerAdminImpl extends MLog implements MoManagerAdmin {
                         try {
                             MoManagerAdminImpl.this.addService(service);
                         } catch (Exception e) {
-                            log().e(reference, e);
+                            log().e("add service failed", reference, e);
                         }
                     }
                 };
